@@ -1,14 +1,8 @@
-
-// import getAllUtilities from "@/lib/getAllUtilities";
-import { Box, Grid, Paper, ThemeProvider, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 
-
-export default function Utilities({utility}) {
-
-  // const result = await getAllUtilities();
-  // console.log(result)
+export default function Utilities({ utility }) {
   return (
     <Grid container spacing={{ xs: 2, sm: 4 }}>
       {utility.map((data) => (

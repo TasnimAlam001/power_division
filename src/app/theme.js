@@ -14,6 +14,7 @@ const webTheme = createTheme({
   },
 
   palette: {
+    mode: "light",
     
     primary: {
       main: "#3382EF",

@@ -1,13 +1,12 @@
 "use client";
-import useAllData from "@/app/Hooks/uasAllData";
-import Utilities from "@/app/dashboard/utilities/page";
 import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
+import useAllData from "@/app/Hooks/useAllData";
+import Utilities from "@/app/dashboard/utilities/page";
+import AllCharts from "../allCharts/page";
+import Date from "../date/page";
 
 const DashboardComponent = () => {
   const utility = useAllData();
-
-  console.log("from dashboard", utility);
 
   return (
     <Box>
@@ -18,11 +17,15 @@ const DashboardComponent = () => {
           All Utilities
         </Typography>
 
-        {/* <Date /> */}
+        <Date />
       </Stack>
 
-      <Box my={6}><Utilities utility={utility} /></Box>
-      <Box>{/* <AllCharts></AllCharts> */}</Box>
+      <Box my={6}>
+        <Utilities utility={utility} />
+      </Box>
+      <Box>
+        <AllCharts />
+      </Box>
     </Box>
   );
 };

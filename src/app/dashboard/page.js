@@ -1,18 +1,17 @@
-
-import { Button, ThemeProvider, Typography } from "@mui/material";
-// import {signOut} from "next-auth/react"
+import { ThemeProvider } from "@mui/material";
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
 import DashboardComponent from "@/components/DashboardComponent/DashboardComponent";
 import webTheme from "../theme";
 
 export default async function Dashboard() {
-  const authData = await auth();
-
+  
+  //Getting session from auth
+  const session = await auth();
   console.log("----------------------")
-  console.log("authData: ", authData)
+  console.log("session: ", session)
   console.log("----------------------")
-  if(!authData) redirect("/api/auth/signin");
+  if(!session) redirect("/api/auth/signin");
 
   return (
     <main>

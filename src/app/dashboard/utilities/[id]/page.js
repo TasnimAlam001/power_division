@@ -1,42 +1,16 @@
 // "use client";
-// import ColumnCharts from "@/app/dashboard/components/columnCharts/page";
-// import UtilityBarChart from "@/app/dashboard/components/utilityBarChart/page";
-// import UtilityPie from "@/app/dashboard/components/utilityPie/page";
-// import UtilityPie2 from "@/app/dashboard/components/utilityPie2/page";
-// import theme from "@/app/theme";
+
+import theme from "@/app/theme";
+import ColumnCharts from "@/components/columnCharts/page";
+import UtilityBarChart from "@/components/utilityBarChart/page";
+import UtilityPie from "@/components/utilityPie/page";
+import UtilityPie2 from "@/components/utilityPie2/page";
+
 
 import { Box, Grid, Stack, ThemeProvider, Typography } from "@mui/material";
 import React from "react";
 import getUtility from "../../../../../lib/getUtility";
 
-const seriesA = {
-  data: [
-    2, 3, 1, 4, 5, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1,
-    2, 4, 5, 1, 5, 1,
-  ],
-  label: "Series A",
-};
-const seriesB = {
-  data: [
-    3, 1, 4, 2, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1,
-    2, 4, 5, 1, 5, 1,
-  ],
-  label: "Series B",
-};
-const seriesC = {
-  data: [
-    3, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1,
-    2, 4, 5, 1, 5, 1,
-  ],
-  label: "Series C",
-};
-const seriesD = {
-  data: [
-    3, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1, 2, 4, 5, 1,
-    2, 4, 5, 1, 5, 1,
-  ],
-  label: "Series D",
-};
 
 export default async function UtilityPage({ params }) {
   const { id } = params;
@@ -53,7 +27,7 @@ export default async function UtilityPage({ params }) {
         Dhaka Electric Supply Company Limited : {id}
       </Typography>
 
-      {/* <Box mt={6}>
+      <Box mt={6}>
         <UtilityBarChart></UtilityBarChart>
       </Box>
       <Box mt={6}>
@@ -75,7 +49,7 @@ export default async function UtilityPage({ params }) {
             </Stack>
           </Grid>
         </Grid>
-      </Box> */}
+      </Box>
     </Box>
   );
 }

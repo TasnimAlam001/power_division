@@ -1,0 +1,47 @@
+
+ [
+      {
+        "id":1,
+        "name": "Company A",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/4/45/Logo_of_NESCO.png",
+        "total_complaints": 1530,
+        "timestamp": "10:30 AM, Feb 6th, 2024"
+      },
+      {
+        "id":2,
+        "name": "Company B",
+        "logo": "https://www.kuet.ac.bd/eict2021/wp-content/uploads/2021/11/WZPDCL-Logo.png",
+        "total_complaints": 1070,
+        "timestamp": "11:45 AM, Feb 6th, 2024"
+      },
+      {
+        "id":3,
+        "name": "Company C",
+        "logo": "https://1.bp.blogspot.com/-Bx6twAhAeYg/XY8yGBqEOZI/AAAAAAAAD6g/b_H6x2x0rWYdNS63MvMzNJirC9XdSKv8wCEwYBhgL/s1600/BREB%2BLogo.png",
+        "total_complaints": 5080,
+        "timestamp": "12:15 PM, Feb 6th, 2024"
+      },
+      {
+        "id":4,
+        "name": "Company D",
+        "logo": "https://i.pinimg.com/originals/e7/e5/ec/e7e5ec4b4e5589a26d60ba3ac259fe91.png",
+        "total_complaints": 6200,
+        "timestamp": "1:00 PM, Feb 6th, 2024"
+      },
+      {
+        "id":5,
+        "name": "Company E",
+        "logo": "https://images.prothomalo.com/prothomalo-english%2Fimport%2Fmedia%2F2017%2F10%2F02%2F61cd0b5fd7355056cdce2bc248933ffb-DESCO-LOGO_no_back.jpg?rect=0%2C14%2C800%2C420&w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&overlay=&overlay_position=bottom&overlay_width_pct=1",
+        "total_complaints": 1350,
+        "timestamp": "2:30 PM, Feb 6th, 2024"
+      },
+      {
+        "id":6,
+        "name": "Company F",
+        "logo": "https://iconape.com/wp-content/files/sl/257493/svg/257493.svg",
+        "total_complaints": 1020,
+        "timestamp": "3:45 PM, Feb 6th, 2024"
+      }
+    ]
+  
+  
