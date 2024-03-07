@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "./useAxiousSecure";
 
@@ -11,7 +11,7 @@ const useAllData = () => {
       try {
         const response = await axiosSecure("/dashboard");
         const utilities = response.data.data.companyListWithTickets;
-        setUtility(utilities)
+        setUtility(utilities);
       } catch (error) {
         console.log(error);
       }
@@ -24,9 +24,6 @@ const useAllData = () => {
 };
 
 export default useAllData;
-
-
-
 
 // "use client"
 // import { useEffect, useState } from "react";

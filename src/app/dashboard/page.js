@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
-import DashboardComponent from "@/components/DashboardComponent/DashboardComponent";
+import DashboardComponent from "@/components/DashboardComponent/page";
 import webTheme from "../theme";
 
 export default async function Dashboard() {

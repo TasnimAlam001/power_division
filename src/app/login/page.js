@@ -82,163 +82,157 @@ export default function Login() {
   };
 
   return (
-    <Box>
-      <ThemeProvider theme={webTheme}>
-        <Box sx={{ mt: 4 }}>
-          <Grid container spacing={6} sx={{ ml: { md: 10 } }}>
-            <Grid item xs={12} md={4}>
-              <Stack sx={{ px: 2 }} direction="column" spacing={3}>
-                <Stack
-                  direction="column"
-                  alignItems="center"
-                  sx={{ alignSelf: "center" }}
-                >
-                  <Image
-                    width={60}
-                    height={60}
-                    src="/logo2.png"
-                    spacing={2}
-                    alt="ministry of power logo"
-                  />
-                  <Typography sx={{ mt: 1 }} variant="body1">
-                    বিদ্যুৎ জ্বালানি ও খনিজ সম্পদ মন্ত্রণালয়
-                  </Typography>
-                </Stack>
-                <Box>
-                  <Typography fontWeight={300} variant="subtitle2">
-                    Welcome back!
-                  </Typography>
-                  <Typography fontWeight={700} variant="h6" sx={{ mb: 4 }}>
-                    Login to your account.
-                  </Typography>
-                </Box>
-                <form id="loginForm" onSubmit={handleSubmit(onSubmit)}>
-                  <Box sx={{ width: "100%" }}>
-                    <FormControl variant="outlined">
-                      <InputLabel htmlFor="component-simple">Email</InputLabel>
-                      <OutlinedInput
-                        sx={{ width: { xs: 280, sm: 350 } }}
-                        id="component-outlined"
-                        // placeholder="Inter your Email"
-                        label="Email"
-                        value={email}
-                        {...register("email", { required: true })}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </FormControl>
-
-                    <br />
-                    {errors.email && (
-                      <span style={{ color: red[500] }}>Email is required</span>
-                    )}
-                  </Box>
-                  <Box sx={{ mt: 3, mb: 2 }}>
-                    {/* Password field */}
-                    <FormControl variant="outlined">
-                      <InputLabel htmlFor="outlined-adornment-password">
-                        Password
-                      </InputLabel>
-                      <OutlinedInput
-                        id="outlined-adornment-password"
-                        sx={{ width: { xs: 280, sm: 350 } }}
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        {...register("password", { required: true })}
-                        onChange={(e) => {
-                          setPassword(e.target.value);
-                          if (e.key === "Enter") {
-                            e.preventDefault();
-                            handleSubmit(onSubmit)();
-                          }
-                        }}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              onMouseDown={handleMouseDownPassword}
-                              edge="end"
-                            >
-                              {showPassword ? (
-                                <VisibilityOff />
-                              ) : (
-                                <Visibility />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="Password"
-                      />
-                    </FormControl>
-
-                    <br />
-                    {errors.password && (
-                      <span style={{ color: red[500] }}>
-                        Password is required
-                      </span>
-                    )}
-                  </Box>
-                  {/* <FormControlLabel
-        value="end"
-        control={<Checkbox size="small" />}
-        label="Remember me"
-        labelPlacement="end"
-      /> */}
-                  <Stack
-                    sx={{ width: { xs: 280, sm: 350 } }}
-                    // width={350}
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Typography variant="subtitle2">
-                      <Checkbox size="small" /> Remember me
-                    </Typography>
-                    <Typography
-                      fontWeight={550}
-                      variant="subtitle2"
-                      sx={{ color: green[900] }}
-                    >
-                      Forget Password?
-                    </Typography>
-                  </Stack>
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    sx={{
-                      width: { xs: 280, sm: 350 },
-                      backgroundColor: green[900],
-                      "&:hover": {
-                        backgroundColor: green[800],
-                      },
-                    }}
-                    // onClick={handleSignIn}
-                  >
-                    Sign In
-                  </Button>
-                </form>
-                <ToastContainer />
-                <Typography variant="caption" sx={{ textAlign: "center" }}>
-                  Don`t have an account?{" "}
-                  <span style={{ color: green[900], fontWeight: 600 }}>
-                    Sign up
-                  </span>
+    <ThemeProvider theme={webTheme}>
+      <Stack alignItems="center" justifyContent="center" sx={{ mt: 4 }}>
+        <Grid container spacing={6} sx={{ ml: { md: 10 }, display: "flex", justifyContent: "center", alignItems: "center"  }}>
+          <Grid item xs={12} md={3}>
+            <Stack sx={{ px: 2 }} direction="column" spacing={3}>
+              <Stack
+                direction="column"
+                alignItems="center"
+                sx={{ alignSelf: "center" }}
+              >
+                <Image
+                  width={60}
+                  height={60}
+                  src="/logo2.png"
+                  spacing={2}
+                  alt="ministry of power logo"
+                />
+                <Typography sx={{ mt: 1 }} variant="body1">
+                  বিদ্যুৎ জ্বালানি ও খনিজ সম্পদ মন্ত্রণালয়
                 </Typography>
               </Stack>
-              <Typography sx={{ fontSize: 12, mt: 8, textAlign: "center" }}>
-                © 2023, All Rights Reserved. Developed By{" "}
-                <span style={{ color: "#00ACF3" }}>
-                  Digicon Technologies ltd.
+              <Box>
+                <Typography fontWeight={300} variant="subtitle2">
+                  Welcome back!
+                </Typography>
+                <Typography fontWeight={700} variant="h6" sx={{ mb: 4 }}>
+                  Login to your account.
+                </Typography>
+              </Box>
+              <form id="loginForm" onSubmit={handleSubmit(onSubmit)}>
+                <Box sx={{ width: "100%" }}>
+                  <FormControl variant="outlined">
+                    <InputLabel htmlFor="component-simple">Email</InputLabel>
+                    <OutlinedInput
+                      sx={{ width: { xs: 280, sm: 350 } }}
+                      id="component-outlined"
+                      // placeholder="Inter your Email"
+                      label="Email"
+                      value={email}
+                      {...register("email", { required: true })}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </FormControl>
+
+                  <br />
+                  {errors.email && (
+                    <span style={{ color: red[500] }}>Email is required</span>
+                  )}
+                </Box>
+                <Box sx={{ mt: 3, mb: 2 }}>
+                  {/* Password field */}
+                  <FormControl variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      sx={{ width: { xs: 280, sm: 350 } }}
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      {...register("password", { required: true })}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          handleSubmit(onSubmit)();
+                        }
+                      }}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                  </FormControl>
+
+                  <br />
+                  {errors.password && (
+                    <span style={{ color: red[500] }}>
+                      Password is required
+                    </span>
+                  )}
+                </Box>
+                {/* <FormControlLabel
+                        value="end"
+                        control={<Checkbox size="small" />}
+                        label="Remember me"
+                        labelPlacement="end"
+                               /> */}
+                <Stack
+                  sx={{ width: { xs: 280, sm: 350 } }}
+                  // width={350}
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Typography variant="subtitle2">
+                    <Checkbox size="small" /> Remember me
+                  </Typography>
+                  <Typography
+                    fontWeight={550}
+                    variant="subtitle2"
+                    sx={{ color: green[900] }}
+                  >
+                    Forget Password?
+                  </Typography>
+                </Stack>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    width: { xs: 280, sm: 350 },
+                    backgroundColor: green[900],
+                    "&:hover": {
+                      backgroundColor: green[800],
+                    },
+                  }}
+                  // onClick={handleSignIn}
+                >
+                  Sign In
+                </Button>
+              </form>
+              <ToastContainer />
+              <Typography variant="caption" sx={{ textAlign: "center" }}>
+                Don`t have an account?{" "}
+                <span style={{ color: green[900], fontWeight: 600 }}>
+                  Sign up
                 </span>
               </Typography>
-            </Grid>
-            <Grid sx={{ display: { xs: "none", md: "block" } }} item xs={8}>
-              {/* Login SVG */}
-              <LoginSVG />
-            </Grid>
+            </Stack>
+            <Typography sx={{ fontSize: 12, mt: 8, textAlign: "center" }}>
+              © 2023, All Rights Reserved. Developed By{" "}
+              <span style={{ color: "#00ACF3" }}>
+                Digicon Technologies ltd.
+              </span>
+            </Typography>
           </Grid>
-        </Box>
-      </ThemeProvider>
-    </Box>
+          <Grid sx={{ display: { xs: "none", md: "block" } }} item xs={8}>
+            {/* Login SVG */}
+            <LoginSVG />
+          </Grid>
+        </Grid>
+      </Stack>
+    </ThemeProvider>
   );
 }

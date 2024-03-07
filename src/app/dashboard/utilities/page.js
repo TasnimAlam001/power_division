@@ -1,8 +1,11 @@
+"use client"
+import useAllData from "@/app/Hooks/useAllData";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 
-export default function Utilities({ utility }) {
+export default function Utilities() {
+  const utility = useAllData();
   return (
     <Grid container spacing={{ xs: 2, sm: 4 }}>
       {utility.map((data) => (

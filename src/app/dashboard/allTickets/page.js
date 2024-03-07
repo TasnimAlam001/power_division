@@ -11,7 +11,7 @@ const columns = [
   {
     field: "ticket_id",
     headerName: "Ticket ID",
-    // width: 90,
+    minWidth: 150,
     renderCell: (params) => <TicketId {...{ params }} />,
     type: "actions",
   },

@@ -1,6 +1,6 @@
 const LoginSVG = () => ( <svg
     width="960"
-    height="1080"
+    height="700"
     viewBox="0 0 960 1080"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
