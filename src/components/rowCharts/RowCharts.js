@@ -16,40 +16,43 @@ import styled from "@emotion/styled";
 import theme from "@/app/theme";
 import webTheme from "@/app/theme";
 
-const dataset = [
-  {
-    name: "Recharge Related",
-    ticketCount: 530,
-  },
-  {
-    name: "Voltage Related",
-    ticketCount: 400,
-  },
-  {
-    name: "Fuse Releted",
-    ticketCount: 320,
-  },
-  {
-    name: "Transformer Releted",
-    ticketCount: 300,
-  },
-  {
-    name: "Shutdown Releted",
-    ticketCount: 220,
-  },
-  {
-    name: "Load Releted",
-    ticketCount: 130,
-  },
-  {
-    name: "Query BPDB Releted",
-    ticketCount: 30,
-  },
-];
+// const dataset = [
+//   {
+//     name: "Recharge Related",
+//     ticketCount: 530,
+//   },
+//   {
+//     name: "Voltage Related",
+//     ticketCount: 400,
+//   },
+//   {
+//     name: "Fuse Releted",
+//     ticketCount: 320,
+//   },
+//   {
+//     name: "Transformer Releted",
+//     ticketCount: 300,
+//   },
+//   {
+//     name: "Shutdown Releted",
+//     ticketCount: 220,
+//   },
+//   {
+//     name: "Load Releted",
+//     ticketCount: 130,
+//   },
+//   {
+//     name: "Query BPDB Releted",
+//     ticketCount: 30,
+//   },
+// ];
 
 // const valueFormatter = (value) => `${value}mm`;
 
-export default function ColumnCharts() {
+export default function RowCharts(params) {
+  let { dashboardData } = params;
+  const { longPendingComplainCategoryAndCount } = dashboardData;
+  const dataset = longPendingComplainCategoryAndCount;
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
@@ -104,7 +107,7 @@ export default function ColumnCharts() {
                       },
                     },
                   ]}
-                  series={[{ dataKey: "ticketCount", color: "#CEB900" }]}
+                  series={[{ dataKey: "count", color: "#CEB900" }]}
                   layout="horizontal"
                   xAxis={[
                     {

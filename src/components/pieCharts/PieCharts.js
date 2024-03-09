@@ -18,23 +18,25 @@ import { useEffect, useState } from "react";
 import AxiosSecure from "@/app/Hooks/useAxiousSecure";
 import axios from "axios";
 
-
-
 export default function PieChars(params) {
-  let {dashboardData} = params;
-  let {totalTicketCount,openTicketCount,processingTicketCount,closeTicketCount,reopenTicketCount} =  dashboardData;
+
+  //---------------------- Getting and setting the data
+  let { dashboardData } = params;
+  let {
+    totalTicketCount,
+    openTicketCount,
+    processingTicketCount,
+    closeTicketCount,
+    reopenTicketCount,
+  } = dashboardData;
 
   let data = [
-         { label: "Opened", value: openTicketCount, color: "#04984A" },
-       { label: "Processing", value: processingTicketCount, color: "#10C6FF" },
-       { label: "Solved", value: closeTicketCount, color: "#3382EF" },
-       { label: "Reopened", value: reopenTicketCount, color: "#00BBC7" }
-       ];
+    { label: "Opened", value: openTicketCount, color: "#04984A" },
+    { label: "Processing", value: processingTicketCount, color: "#10C6FF" },
+    { label: "Solved", value: closeTicketCount, color: "#3382EF" },
+    { label: "Reopened", value: reopenTicketCount, color: "#00BBC7" },
+  ];
 
-
-
-
-  
   //-------------------Making percentage of value
 
   const getArcLabel = (params) => {
@@ -64,7 +66,6 @@ export default function PieChars(params) {
   const boxHeight = isMediumScreen ? (isSmallScreen ? 560 : 560) : 460;
   const markFont = isMediumScreen ? 12 : 15;
 
-
   return (
     <ThemeProvider theme={webTheme}>
       <div>
@@ -76,7 +77,7 @@ export default function PieChars(params) {
           >
             <CardContent>
               <Typography variant="h5">Total Tickets</Typography>
-             <PieChart
+              <PieChart
                 margin={{
                   top: isMediumScreen ? 105 : 10,
                   left: isMediumScreen ? 90 : 5,
@@ -148,7 +149,7 @@ export default function PieChars(params) {
               sx={{ fontWeight: 550, color: "#048943" }}
               className=" bg-slate-200 text-green-700 align-bottom font-bold py-2 text-center"
             >
-              Total Tickets : { totalTicketCount}
+              Total Tickets : {totalTicketCount}
             </Typography>
           </Stack>
         </Card>

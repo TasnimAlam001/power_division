@@ -1,7 +1,7 @@
 // "use client";
 
 import theme from "@/app/theme";
-import ColumnCharts from "@/components/columnCharts/page";
+
 import UtilityBarChart from "@/components/utilityBarChart/page";
 import UtilityPie from "@/components/utilityPie/page";
 import UtilityPie2 from "@/components/utilityPie2/page";
@@ -10,6 +10,7 @@ import UtilityPie2 from "@/components/utilityPie2/page";
 import { Box, Grid, Stack, ThemeProvider, Typography } from "@mui/material";
 import React from "react";
 import getUtility from "../../../../../lib/getUtility";
+// import RowCharts from "@/components/rowCharts/rowCharts";
 
 
 export default async function UtilityPage({ params }) {
@@ -33,7 +34,7 @@ export default async function UtilityPage({ params }) {
       <Box mt={6}>
         <Grid container spacing={2}>
           <Grid item xs={12} lg={7}>
-            <ColumnCharts></ColumnCharts>
+            {/* <RowCharts/> */}
           </Grid>
           <Grid item xs={12} lg={5}>
             <Stack justifyContent="space-between" sx={{display: "flex", flexDirection: {xs: "column", md: "row", lg: "column"}}} spacing={{xs:3, md:0, lg:3 } }>

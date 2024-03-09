@@ -49,18 +49,21 @@ const data = [
   },
 ];
 
-const openedData = data.map((item) => item.uv);
-const xLabels = data.map((item) => item.name);
+export default function AreaCharts(params) {
+  //---------------------- Getting and setting the data
+  let { dashboardData } = params;
+  const { longPendingComplainCompanyWiseCount } = dashboardData;
 
-export default function AreaCharts() {
+  const openedData = longPendingComplainCompanyWiseCount.map(
+    (item) => item.count
+  );
+  const xLabels = longPendingComplainCompanyWiseCount.map((item) => item.company_short_name);
+
+  //-----------------------Responsive breakpoints
+
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
-
-  // const width = isSmallScreen ? 350 : 500;
-  // const height = isSmallScreen ? 300 : 340;
-  // const boxHeight = isSmallScreen ? 400 : 460;
-  // const value = isSmallScreen ? 10 : 1;
 
   const width = isSmallScreen
     ? 250
@@ -71,7 +74,7 @@ export default function AreaCharts() {
     : 529;
   const height = isMediumScreen ? (isSmallScreen ? 280 : 310) : 400;
   const boxHeight = isMediumScreen ? (isSmallScreen ? 399 : 460) : 460;
-  const fontS = isMediumScreen ? 10 : 15;
+  const fontS = isMediumScreen ? 8 : 11;
 
   return (
     <ThemeProvider theme={webTheme}>

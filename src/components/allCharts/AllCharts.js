@@ -1,12 +1,13 @@
 "use client";
 import { Grid, ThemeProvider, createTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import PieChars from "../pieCharts/page";
-import BarCharts from "../barCharts/page";
-import AreaCharts from "../areaCharts/page";
-import ColumnCharts from "../columnCharts/page";
 import webTheme from "@/app/theme";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
+import BarCharts from "../barCharts/BarCharts";
+import PieChars from "../pieCharts/PieCharts";
+import AreaCharts from "../areaCharts/AreaCharts";
+import RowCharts from "../rowCharts/rowCharts";
+
 
 export default function AllCharts() {
   const [axiosSecure] = useAxiosSecure();
@@ -29,24 +30,25 @@ export default function AllCharts() {
   return (
     <ThemeProvider theme={webTheme}>
       <Grid container spacing={3}>
-        
-        <Grid item xs={12} lg={5}>
-          {loading ? (
-            "loading..............."
-          ) : (
-            <PieChars dashboardData={dashboardData} />
-          )}
-        </Grid>
+        {loading ? (
+          "Loading ...."
+        ) : (
+          <>
+            <Grid item xs={12} lg={5}>
+              <PieChars dashboardData={dashboardData} />
+            </Grid>
 
-        {/* <Grid item xs={12} lg={7}>
-            <BarCharts/>
-        </Grid>
-        <Grid item xs={12} lg={5}>
-            <AreaCharts/>
-        </Grid>
-        <Grid item xs={12} lg={7}>
-            <ColumnCharts/>
-        </Grid> */}
+            <Grid item xs={12} lg={7}>
+              <BarCharts dashboardData={dashboardData} />
+            </Grid>
+            <Grid item xs={12} lg={5}>
+              <AreaCharts dashboardData={dashboardData} />
+            </Grid>
+            <Grid item xs={12} lg={7}>
+              <RowCharts dashboardData={dashboardData} />
+            </Grid>
+          </>
+        )}
       </Grid>
     </ThemeProvider>
   );
