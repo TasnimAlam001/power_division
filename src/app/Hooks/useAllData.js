@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import AxiosSecure from "./AxiousSecure";
+import AxiosSecure from "./useAxiousSecure";
 // import useAxiosSecure from "./AxiousSecure";
 
 const useAllData = () => {

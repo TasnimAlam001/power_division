@@ -15,61 +15,21 @@ import webTheme from "@/app/theme";
 import { useTheme } from "@emotion/react";
 import useAllData from "@/app/Hooks/useAllData";
 import { useEffect, useState } from "react";
-import AxiosSecure from "@/app/Hooks/AxiousSecure";
+import AxiosSecure from "@/app/Hooks/useAxiousSecure";
 import axios from "axios";
 
 
 
-export default function PieChars() {
+export default function PieChars(params) {
+  let {dashboardData} = params;
+  let {totalTicketCount,openTicketCount,processingTicketCount,closeTicketCount,reopenTicketCount} =  dashboardData;
 
-
-  const [ticket,setTicket] = useState([]);
-  const [loading,setLoading] = useState(false);
-  const [data,setData] = useState([
-      { label: "Opened", value: 0, color: "#04984A" },
-      {
-        label: "Processing",
-        value: 0,
-        color: "#10C6FF",
-      },
-      { label: "Solved", value: 0, color: "#3382EF" },
-      { label: "Reopened", value: 0, color: "#00BBC7" },
-    ]);
-
-
-  useEffect(()=>{
-    const token = localStorage.getItem("access-token");
-    setLoading(true)
-    axios.get("http://172.17.0.87:16999/api/web-app/dashboard", {
-      headers:{
-        Authorization: `Bearer ${token}`
-      }
-    }).then((res)=>{
-      console.log(res)
-      setLoading(false)
-      
-      setTicket(res.data.data)
-
-      let {totalTicketCount,openTicketCount,processingTicketCount,closeTicketCount,reopenTicketCount} =  res.data.data;
-
-      setData(prevData => [
-        { label: "Opened", value: openTicketCount, color: "#04984A" },
-        { label: "Processing", value: processingTicketCount, color: "#10C6FF" },
-        { label: "Solved", value: closeTicketCount, color: "#3382EF" },
-        { label: "Reopened", value: reopenTicketCount, color: "#00BBC7" }
-      ]);
-      
-
-
-
-    }).catch((e)=>{
-      console.log(e)
-      setLoading(false)
-    })
-
-
-  },[]);
-
+  let data = [
+         { label: "Opened", value: openTicketCount, color: "#04984A" },
+       { label: "Processing", value: processingTicketCount, color: "#10C6FF" },
+       { label: "Solved", value: closeTicketCount, color: "#3382EF" },
+       { label: "Reopened", value: reopenTicketCount, color: "#00BBC7" }
+       ];
 
 
 
@@ -78,11 +38,11 @@ export default function PieChars() {
   //-------------------Making percentage of value
 
   const getArcLabel = (params) => {
-    console.warn(params)
+    // console.warn(params)
     if (params.value == 0) {
       return " ";
     } else {
-      const percent = params.value / 100;
+      const percent = params.value / totalTicketCount;
       return `${(percent * 100).toFixed(0)}%`;
     }
   };
@@ -116,7 +76,7 @@ export default function PieChars() {
           >
             <CardContent>
               <Typography variant="h5">Total Tickets</Typography>
-              {loading?'':<PieChart
+             <PieChart
                 margin={{
                   top: isMediumScreen ? 105 : 10,
                   left: isMediumScreen ? 90 : 5,
@@ -153,7 +113,7 @@ export default function PieChars() {
                     fontSize: 13,
                   },
                 }}
-              />}
+              />
 
               <Divider sx={{ pt: 4 }} />
               <Grid container columnSpacing={1} sx={{ mt: 4, pl: 3 }}>
@@ -188,7 +148,7 @@ export default function PieChars() {
               sx={{ fontWeight: 550, color: "#048943" }}
               className=" bg-slate-200 text-green-700 align-bottom font-bold py-2 text-center"
             >
-              Total Tickets : { loading?0:ticket.totalTicketCount}
+              Total Tickets : { totalTicketCount}
             </Typography>
           </Stack>
         </Card>

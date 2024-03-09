@@ -1,15 +1,15 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 
 const axiosSecure = axios.create({
   baseURL: "http://172.17.0.87:16999/api/web-app",
 });
-const AxiosSecure = () => {
+const useAxiosSecure = () => {
   const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     axiosSecure.interceptors.request.use((config) => {
       const token = localStorage.getItem("access-token");
       if (token) {
@@ -35,4 +35,4 @@ const AxiosSecure = () => {
   return [axiosSecure];
 };
 
-export default AxiosSecure;
+export default useAxiosSecure;
