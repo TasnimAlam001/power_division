@@ -21,8 +21,13 @@ const webTheme = createTheme({
     },
     success: {
       main: "#04984A",
-      light: "#dbf2d5",
+      light: "#bbdefb",
       dark: "#1b5e20",
+    },
+    info: {
+      main: "#2196f3",
+      light: "#dbf2d5",
+      dark: "#2962ff",
     },
   },
 

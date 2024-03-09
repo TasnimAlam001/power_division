@@ -1,15 +1,24 @@
 "use client"
+
 import useAllData from "@/app/Hooks/useAllData";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Utilities() {
-  const utility = useAllData();
+  const [utility, setUtility]=useState(null);
+  const data = useAllData();
+   useEffect(()=>{
+    const utility = data?.companyListWithTickets;
+    setUtility(utility)
+   },[data])
+
+  
   return (
     <Grid container spacing={{ xs: 2, sm: 4 }}>
-      {utility.map((data) => (
+      {utility?.map((data) => (
         <Grid item xs={12} sm={6} lg={4} xl={2} key={data.id}>
+          
           <Paper
             elevation={2}
             sx={{

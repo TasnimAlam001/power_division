@@ -25,15 +25,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 
 import { loginAction } from "@/components/loginAction/loginAction";
-import useAxiosSecure from "../Hooks/useAxiousSecure";
+// import useAxiosSecure from "../Hooks/AxiousSecure";
 import webTheme from "../theme";
 import LoginSVG from "@/components/LoginSVG/LoginSVG";
+import AxiosSecure from "../Hooks/AxiousSecure";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [axiosSecure] = useAxiosSecure();
+  const [axiosSecure] = AxiosSecure();
 
   const {
     register,

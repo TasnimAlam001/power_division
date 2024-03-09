@@ -6,10 +6,10 @@ import { useEffect, useLayoutEffect } from "react";
 const axiosSecure = axios.create({
   baseURL: "http://172.17.0.87:16999/api/web-app",
 });
-const useAxiosSecure = () => {
+const AxiosSecure = () => {
   const router = useRouter();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {
       const token = localStorage.getItem("access-token");
       if (token) {
@@ -35,4 +35,4 @@ const useAxiosSecure = () => {
   return [axiosSecure];
 };
 
-export default useAxiosSecure;
+export default AxiosSecure;

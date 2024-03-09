@@ -1,7 +1,7 @@
 
 import { Box, Stack, Typography } from "@mui/material";
 import Utilities from "@/app/dashboard/utilities/page";
-import AllCharts from "../allCharts/page";
+import AllCharts from "../allCharts/AllCharts";
 import Date from "../date/page";
 import { Suspense } from "react";
 
@@ -22,7 +22,7 @@ const DashboardComponent =  () => {
       </Stack>
       <Suspense>
 
-      <Box  my={6}>
+      <Box my={6}>
         <Utilities/>
       </Box>
       </Suspense>

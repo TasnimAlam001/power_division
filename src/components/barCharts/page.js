@@ -1,4 +1,4 @@
-"use client";
+
 import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import {
@@ -10,9 +10,13 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import theme from "@/app/theme";
+
 import { axisClasses } from "@mui/x-charts";
 import webTheme from "@/app/theme";
+import useAllData from "@/app/Hooks/useAllData";
+import { useTheme } from "@emotion/react";
+import BarChartComp from "../helpers/BarChartComp";
+
 
 const chartSetting = {
   yAxis: [
@@ -23,71 +27,40 @@ const chartSetting = {
 
   sx: {
     [`.${axisClasses.left} .${axisClasses.label}`]: {
-      transform: "translate(-20px, 0)",
+      transform: "translate(-30px, 0)",
     },
   },
 };
-const data = [
-  {
-    name: "BPDB",
-    Solved: 1000,
-    Opened: 800,
-  },
-  {
-    name: "BREB",
-    Solved: 2700,
-    Opened: 1600,
-  },
-  {
-    name: "DESCO",
-    Solved: 300,
-    Opened: 200,
-  },
-  {
-    name: "DPDC",
-    Solved: 1400,
-    Opened: 1650,
-  },
-  {
-    name: "WZPDCL",
-    Solved: 1400,
-    Opened: 1000,
-  },
-  {
-    name: "NESCO",
-    Solved: 490,
-    Opened: 800,
-  },
-];
 
-const solvedData = data.map((item) => item.Solved);
-const openedData = data.map((item) => item.Opened);
-const xLabels = data.map((item) => item.name);
 
-export default function BarCharts() {
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
+export default async function BarCharts() {
+  // const theme = useTheme();
+  // const isSmallScreen = useMediaQuery(webTheme.breakpoints.down("sm"));
+  // const isMediumScreen = useMediaQuery(webTheme.breakpoints.down("md"));
+  // const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
 
-  // const width = isSmallScreen ? 360 : 600;
-  // const height = isSmallScreen ? 330 : 400;
-  const width = isSmallScreen
-    ? 215
-    : isMediumScreen
-    ? 315
-    : isLgScreen
-    ? 580
-    : 520;
-  const height = isMediumScreen ? (isSmallScreen ? 290 : 330) : 400;
-  const boxHeight = isMediumScreen ? (isSmallScreen ? 410 : 460) : 460;
-  const fontS = isSmallScreen ? 9 : 12;
+  // // const width = isSmallScreen ? 360 : 600;
+  // // const height = isSmallScreen ? 330 : 400;
+  // const width = isSmallScreen
+  //   ? 215
+  //   : isMediumScreen
+  //   ? 315
+  //   : isLgScreen
+  //   ? 580
+  //   : 520;
+  // const height = isMediumScreen ? (isSmallScreen ? 290 : 330) : 400;
+  // const boxHeight = isMediumScreen ? (isSmallScreen ? 410 : 460) : 460;
+  // const fontS = isSmallScreen ? 9 : 12;
   // const boxHeight = isSmallScreen ? 400 : 460;
+
+
+
   return (
     <ThemeProvider theme={webTheme}>
       <Box sx={{ position: "relative" }}>
         <Card>
           <Stack
-            sx={{ height: boxHeight }}
+            sx={{ height: 460 }}
             direction="column"
             justifyContent="space-between"
           >
@@ -96,52 +69,7 @@ export default function BarCharts() {
                 Utility Wise Tickets ( Opened and Solved)
               </Typography>
               <Stack sx={{ mt: 3 }} direction="row" alignItems="center">
-                <BarChart
-                  margin={{
-                    top: 60,
-                    bottom: 90,
-                    right: 0,
-                    left: 20,
-                  }}
-                  width={width}
-                  height={height}
-                  series={[
-                    {
-                      data: openedData,
-                      label: "Opened",
-                      id: "openedId",
-                      color: "#04984A",
-                    },
-                    {
-                      data: solvedData,
-                      label: "Solved",
-                      id: "solvedId",
-                      color: "#3382EF",
-                    },
-                  ]}
-                  slotProps={{
-                    legend: {
-                      itemMarkHeight: 9,
-                      itemMarkWidth: 9,
-                      labelStyle: {
-                        fontSize: 15,
-                      },
-                    },
-                  }}
-                  xAxis={[
-                    {
-                      data: xLabels,
-
-                      scaleType: "band",
-                      tickLabelStyle: {
-                        angle: isMediumScreen ? 90 : 0,
-                        textAnchor: "start",
-                        fontSize: fontS,
-                      },
-                    },
-                  ]}
-                  {...chartSetting}
-                />
+              <BarChartComp/>
               </Stack>
             </CardContent>
           </Stack>

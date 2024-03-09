@@ -1,16 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-import useAxiosSecure from "./useAxiousSecure";
+import AxiosSecure from "./AxiousSecure";
+// import useAxiosSecure from "./AxiousSecure";
 
 const useAllData = () => {
-  const [axiosSecure] = useAxiosSecure();
-  const [utility, setUtility] = useState([]);
+  const [axiosSecure] = AxiosSecure();
+  const [utility, setUtility] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axiosSecure("/dashboard");
-        const utilities = response.data.data.companyListWithTickets;
+        const utilities = response.data.data;
         setUtility(utilities);
       } catch (error) {
         console.log(error);
@@ -24,6 +25,11 @@ const useAllData = () => {
 };
 
 export default useAllData;
+
+
+
+
+// -------------------------------------- tasnim ---------------------------------------
 
 // "use client"
 // import { useEffect, useState } from "react";
