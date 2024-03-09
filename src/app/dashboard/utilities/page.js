@@ -15,9 +15,9 @@ export default function Utilities() {
 
   
   return (
-    <Grid container spacing={{ xs: 2, sm: 4 }}>
+    <Grid container spacing={{ xs: 2, sm: 3 }}>
       {utility?.map((data) => (
-        <Grid item xs={12} sm={6} lg={4} xl={2} key={data.id}>
+        <Grid item xs={12} sm={6} lg={4} xl={2}  key={data.id}>
           
           <Paper
             elevation={2}
@@ -25,12 +25,15 @@ export default function Utilities() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent:"space-between",
+              height:"251px",
+              width: "206px",
 
               borderRadius: "0.5rem",
             }}
           >
             <Link href={`/dashboard/utilities/${data.id}`}>
-              <Box height={100} px={2} pt={2} pb={2}>
+              <Box height={115} px={2} py={2} >
                 <img
                   height="100%"
                   width="100%"
@@ -55,7 +58,7 @@ export default function Utilities() {
               py={0.5}
               sx={{
                 fontSize: 10,
-                backgroundColor: "success.light",
+                backgroundColor: "#04984A1A",
                 width: "100%",
                 fontWeight: 550,
                 textAlign: "center",

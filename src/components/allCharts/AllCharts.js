@@ -6,7 +6,7 @@ import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import BarCharts from "../barCharts/BarCharts";
 import PieChars from "../pieCharts/PieCharts";
 import AreaCharts from "../areaCharts/AreaCharts";
-import RowCharts from "../rowCharts/rowCharts";
+import RowCharts from "../rowCharts/RowCharts";
 
 
 export default function AllCharts() {
