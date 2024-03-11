@@ -25,11 +25,7 @@ import {
 import SettingsOverscanIcon from "@mui/icons-material/SettingsOverscan";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import {
-  createTheme,
-  styled,
-  useTheme,
-} from "@mui/material/styles";
+import { createTheme, styled, useTheme } from "@mui/material/styles";
 import {
   FaMapMarkerAlt,
   FaSearch,
@@ -46,20 +42,19 @@ import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import Link from "next/link";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useRouter } from "next/navigation";
-import { signIn, signOut} from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Profile from "../profile/profile";
-
 
 const data = [
   { id: 1, icon: <FaUser />, label: "Executive", route: "executive" },
-  {
-    id: 2,
-    icon: <RiLightbulbFlashFill />,
-    label: "Utilities",
-    route: "utility",
-  },
-  { id: 3, icon: <FaMapMarkerAlt />, label: "Zone", route: "zone" },
-  { id: 4, icon: <TbBulbFilled />, label: "S & D List", route: "executive" },
+  // {
+  //   id: 2,
+  //   icon: <RiLightbulbFlashFill />,
+  //   label: "Utilities",
+  //   route: "utility",
+  // },
+  // { id: 3, icon: <FaMapMarkerAlt />, label: "Zone", route: "zone" },
+  // { id: 4, icon: <TbBulbFilled />, label: "S & D List", route: "executive" },
   { id: 5, icon: <FaUsers />, label: "Users", route: "executive" },
   { id: 6, icon: <GiWallet />, label: "All Tickets", route: "allTickets" },
 ];
@@ -113,7 +108,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 const drawerWidth = 200;
 
-export default  function Navbar() {
+export default function Navbar() {
   const router = useRouter();
   const theme = useTheme();
   const [isLogin, setIsLogin] = React.useState(false);
@@ -143,15 +138,13 @@ export default  function Navbar() {
     }
   }, []);
 
-
   const handleLogOut = async () => {
     try {
       await localStorage.removeItem("access-token");
-      await signOut({ redirect: false }); 
+      await signOut({ redirect: false });
       await router.push("/login", { scroll: true });
     } catch (error) {
       console.error("Error logging out:", error);
-      
     }
   };
 
@@ -202,39 +195,56 @@ export default  function Navbar() {
       </Link>
       <Toolbar />
 
-      <List sx={{ pl: 2 }}>
-        {data.map((item) => (
-          <Link key={item.label} href={`/dashboard/${item.route}`}>
-            <ListItemButton sx={{ py: 0, minHeight: 38 }}>
-              <ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>
+      <List
+        sx={{
+          pl: 2,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
+        <Box>
+          {data.map((item) => (
+            <Link key={item.label} href={`/dashboard/${item.route}`}>
+              <ListItemButton sx={{ py: 0, minHeight: 38 }}>
+                <ListItemIcon sx={{ color: "inherit" }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText
+                  sx={{ ml: -2 }}
+                  primary={item.label}
+                  primaryTypographyProps={{
+                    fontSize: 13,
+                    fontWeight: "medium",
+                  }}
+                />
+              </ListItemButton>
+            </Link>
+          ))}
+        </Box>
+        {/* <Box>
+          {isLogin ? (
+            <ListItemButton
+              onClick={handleLogOut}
+              sx={{ py: 0, minHeight: 38 }}
+            >
+              <ListItemIcon sx={{ color: "inherit" }}>
+                <FaSignOutAlt />
+              </ListItemIcon>
               <ListItemText
                 sx={{ ml: -2 }}
-                primary={item.label}
+                primary="Log out"
                 primaryTypographyProps={{
                   fontSize: 13,
                   fontWeight: "medium",
                 }}
               />
             </ListItemButton>
-          </Link>
-        ))}
-        {isLogin?(
-          <ListItemButton onClick={handleLogOut} sx={{ py: 0, minHeight: 38 }}>
-            <ListItemIcon sx={{ color: "inherit" }}>
-              <FaSignOutAlt />
-            </ListItemIcon>
-            <ListItemText
-              sx={{ ml: -2 }}
-              primary="Log out"
-              primaryTypographyProps={{
-                fontSize: 13,
-                fontWeight: "medium",
-              }}
-            />
-          </ListItemButton>
-        ) : (
-          
-            <ListItemButton onClick={()=>signIn()} sx={{ py: 0, minHeight: 38 }}>
+          ) : (
+            <ListItemButton
+              onClick={() => signIn()}
+              sx={{ py: 0, minHeight: 38 }}
+            >
               <ListItemIcon sx={{ color: "inherit" }}>
                 <FaSignOutAlt />
               </ListItemIcon>
@@ -247,8 +257,8 @@ export default  function Navbar() {
                 }}
               />
             </ListItemButton>
-        
-        )}
+          )}
+        </Box> */}
       </List>
     </div>
   );
@@ -338,9 +348,7 @@ export default  function Navbar() {
                   <MaterialUISwitch onClick={() => setDark(!dark)} />
                 </Typography>
 
-                {
-                  isLogin? <Profile/> : <Button>SignIn</Button>
-                }
+                {isLogin ? <Profile /> : <Button>SignIn</Button>}
               </Stack>
             </Stack>
           </Toolbar>

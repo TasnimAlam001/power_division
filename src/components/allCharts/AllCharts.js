@@ -7,6 +7,7 @@ import BarCharts from "../barCharts/BarCharts";
 import PieChars from "../pieCharts/PieCharts";
 import AreaCharts from "../areaCharts/AreaCharts";
 import RowCharts from "../rowCharts/RowCharts";
+import HomeSkeleton from "../homeSkeleton/HomeSkeleton"
 
 
 export default function AllCharts() {
@@ -31,7 +32,9 @@ export default function AllCharts() {
     <ThemeProvider theme={webTheme}>
       <Grid container spacing={3}>
         {loading ? (
-          "Loading ...."
+          <>
+          <HomeSkeleton/>
+          </>
         ) : (
           <>
             <Grid item xs={12} lg={5}>
