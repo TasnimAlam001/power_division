@@ -1,8 +1,7 @@
-import * as React from "react";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
-import { Box, Grid, ThemeProvider } from "@mui/material";
-import webTheme from "@/app/theme";
+import { Box, Grid} from "@mui/material";
+
 
 export default function Variants() {
   return (

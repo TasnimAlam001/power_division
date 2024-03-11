@@ -88,8 +88,8 @@ export default function UtilityBarChart({ ticketData }) {
                   scaleType: "band",
 
                   tickLabelStyle: {
-                    angle: 90,
-                    textAnchor: "start",
+                    angle: -45,
+                    textAnchor: "end",
                   },
                   categoryGapRatio: dates.length < 10 ? 0.9 : undefined,
                 },

@@ -1,17 +1,15 @@
 "use client";
-
-import theme from "@/app/theme";
-
-import UtilityBarChart from "@/components/utilityBarChart/page";
-import UtilityPie from "@/components/utilityPie/page";
-import UtilityPie2 from "@/components/utilityPie2/page";
-
-import { Box, Grid, Stack, ThemeProvider, Typography } from "@mui/material";
-import getUtility from "../../../../../lib/getUtility";
-import CompanyData from "@/app/Hooks/CompanyData";
+import UtilityMonthlyBarCharts from "../../../../components/utilityMonthlyBarChart/UtilityMonthlyBarChart"
+import UtilityPageSkeleton from "../../../../components/Skeletons/UtilityPageSkeleton"
+import { Box, Grid, Stack,Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
-// import RowCharts from "@/components/rowCharts/rowCharts";
+import UtilityPie from "@/components/utilityPie/UtilityPie";
+import UtilityPie2 from "@/components/utilityPie2/UtilityPie2";
+import UtilityComplainBarChart from "@/components/utilityComplainBarChart/UtilityComplainBarChart";
+
+
+
 
 export default  function UtilityPage({ params }) {
   const [axiosSecure] = useAxiosSecure();
@@ -19,7 +17,6 @@ export default  function UtilityPage({ params }) {
   const [loading, setLoading] = useState(true);
   const { id } = params;
 
-// const [companyData, loading] = CompanyData(id);
   useEffect(() => {
     setLoading(true);
     axiosSecure(`/companyDashboard/${id}`)
@@ -28,7 +25,7 @@ export default  function UtilityPage({ params }) {
         setLoading(false);
       })
       .catch((e) => {
-        console.log("error hoisee fetching a", e);
+        console.log(e);
         setLoading(false);
       });
   }, []);
@@ -42,7 +39,7 @@ export default  function UtilityPage({ params }) {
     <Box>
       {loading ? (
         <>
-          <Typography>Loading...</Typography>
+          <UtilityPageSkeleton/>
         </>
       ) : (
         <>
@@ -55,14 +52,14 @@ export default  function UtilityPage({ params }) {
             </Typography>
 
             <Box mt={6}>
-              <UtilityBarChart
+              <UtilityMonthlyBarCharts
                 ticketData={companyData?.last30DaysTicketStatusWiseCount}
               />
             </Box>
             <Box mt={6}>
               <Grid container spacing={2}>
                 <Grid item xs={12} lg={7}>
-                  {/* <RowCharts/> */}
+                  <UtilityComplainBarChart companyWiseCategoryWiseComplain={companyData?.companyWiseCategoryWiseComplain}/>
                 </Grid>
                 <Grid item xs={12} lg={5}>
                   <Stack
@@ -74,10 +71,10 @@ export default  function UtilityPage({ params }) {
                     spacing={{ xs: 3, md: 0, lg: 3 }}
                   >
                     <Grid item>
-                      <UtilityPie></UtilityPie>
+                      <UtilityPie companyData={companyData}/>
                     </Grid>
                     <Grid item>
-                      <UtilityPie2></UtilityPie2>
+                      <UtilityPie2 previous2MonthTicketCount={companyData?.previous2MonthTicketCount}/>
                     </Grid>
                   </Stack>
                 </Grid>

@@ -14,9 +14,10 @@ import { PieChart, pieArcLabelClasses } from "@mui/x-charts";
 import theme from "@/app/theme";
 
 const data = [
-  { label: "December", value: 273, color: "#04984A" },
-  { label: "January", value: 236, color: "#10C6FF" },
-  
+  { label: "Opened", value: 273, color: "#04984A" },
+  { label: "Processing", value: 236, color: "#10C6FF" },
+  { label: "Solved", value: 374, color: "#3382EF" },
+  { label: "Reopened", value: 310, color: "#00BBC7" },
 ];
 
 const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);
@@ -26,7 +27,38 @@ const getArcLabel = (params) => {
   return `${(percent * 100).toFixed(0)}%`;
 };
 
-export default function UtilityPie2() {
+export default function UtilityPie({companyData}) {
+
+  let {
+    totalTicketCount,
+    openTicketCount,
+    processingTicketCount,
+    closeTicketCount,
+    reopenTicketCount,
+  } = companyData;
+
+  
+  let data = [
+    { label: "Opened", value: openTicketCount, color: "#04984A" },
+    { label: "Processing", value: processingTicketCount, color: "#10C6FF" },
+    { label: "Solved", value: closeTicketCount, color: "#3382EF" },
+    { label: "Reopened", value: reopenTicketCount, color: "#00BBC7" },
+  ];
+
+  //-------------------Making percentage of value
+
+  const getArcLabel = (params) => {
+    // console.warn(params)
+    if (params.value == 0) {
+      return " ";
+    } else {
+      const percent = params.value / totalTicketCount;
+      return `${(percent * 100).toFixed(0)}%`;
+    }
+  };
+
+
+
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
@@ -54,7 +86,7 @@ export default function UtilityPie2() {
           justifyContent="space-between"
         >
           <CardContent>
-            <Typography variant="h6">Previous 2 Month Ticket Comparison</Typography>
+            <Typography variant="h6">Monthly Tickets</Typography>
             <PieChart
               margin={{
                 top: isMediumScreen ? 105 : 10,

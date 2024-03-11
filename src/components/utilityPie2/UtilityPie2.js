@@ -3,31 +3,27 @@ import * as React from "react";
 import {
   Card,
   CardContent,
-  Divider,
-  Grid,
   Stack,
   Typography,
   useMediaQuery,
-  Box,
 } from "@mui/material";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts";
 import theme from "@/app/theme";
 
-const data = [
-  { label: "Opened", value: 273, color: "#04984A" },
-  { label: "Processing", value: 236, color: "#10C6FF" },
-  { label: "Solved", value: 374, color: "#3382EF" },
-  { label: "Reopened", value: 310, color: "#00BBC7" },
-];
+// const data = [
+//   { label: "December", value: 273, color: "#04984A" },
+//   { label: "January", value: 236, color: "#10C6FF" },
+  
+// ];
 
-const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);
+// const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);
 
-const getArcLabel = (params) => {
-  const percent = params.value / TOTAL;
-  return `${(percent * 100).toFixed(0)}%`;
-};
+// const getArcLabel = (params) => {
+//   const percent = params.value / TOTAL;
+//   return `${(percent * 100).toFixed(0)}%`;
+// };
 
-export default function UtilityPie() {
+export default function UtilityPie2({previous2MonthTicketCount}) {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
@@ -46,6 +42,35 @@ export default function UtilityPie() {
   // const markH = isMediumScreen ? 4: 15;
   const markFont = isMediumScreen ? 12 : 15;
 
+
+
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  // Generate data array for the pie chart
+  const data = previous2MonthTicketCount.map(({ month, count }) => ({
+    label: monthNames[month - 1], // Subtract 1 to convert month number to array index
+    value: count,
+  }));
+
+  // Calculate total count
+  const total = data.reduce((acc, { value }) => acc + value, 0);
+
+  // Function to get arc label
+  const getArcLabel = ({ value }) => `${((value / total) * 100).toFixed(0)}%`;
   return (
     <div>
       <Card>
@@ -55,7 +80,7 @@ export default function UtilityPie() {
           justifyContent="space-between"
         >
           <CardContent>
-            <Typography variant="h6">Monthly Tickets</Typography>
+            <Typography variant="h6">Previous 2 Month Ticket Comparison</Typography>
             <PieChart
               margin={{
                 top: isMediumScreen ? 105 : 10,
