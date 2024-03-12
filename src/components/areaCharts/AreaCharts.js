@@ -22,32 +22,6 @@ const chartSetting = {
     },
   ],
 };
-const data = [
-  {
-    name: "BPDP",
-    uv: 300,
-  },
-  {
-    name: "BREB",
-    uv: 330,
-  },
-  {
-    name: "DESCO",
-    uv: 210,
-  },
-  {
-    name: "DPDC",
-    uv: 390,
-  },
-  {
-    name: "WZPDCL",
-    uv: 395,
-  },
-  {
-    name: "NESCO",
-    uv: 520,
-  },
-];
 
 export default function AreaCharts(params) {
   //---------------------- Getting and setting the data

@@ -301,7 +301,7 @@ export default function Navbar() {
                   sx={{ mr: 2, display: { md: "none" } }}
                 />
 
-                <TextField
+                {/* <TextField
                   sx={{ ml: 4, display: { xs: "none", md: "block" } }}
                   placeholder="Search.."
                   size="small"
@@ -313,7 +313,7 @@ export default function Navbar() {
                       </InputAdornment>
                     ),
                   }}
-                />
+                /> */}
               </Stack>
 
               <Stack
