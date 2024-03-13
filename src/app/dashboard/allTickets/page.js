@@ -30,15 +30,18 @@ export default function DataTable() {
       });
   }, []);
 
-
+  console.log("aaaaaaaaaaaaaaaaaaaaaa", ticketData)
+  const id = ticketData.id;
   const columns = [
     {
-      field: "ticket_id",
+      field: "id",
       headerName: "Ticket ID",
-      minWidth: 150,
-      renderCell: (params) => <TicketId {...{ ticketData }} />,
+      minWidth: 100,
+      align: "left",
+      renderCell: (params) => <TicketId {...{params}}/>,
       type: "actions",
     },
+    
     {
       field: "status",
       headerName: "Status",

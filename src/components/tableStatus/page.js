@@ -17,7 +17,7 @@ export default function TableStatusColumn({ params }) {
         newStatus = "Processing"
     }else if (status === "3") {
         backgroundColor = orange[300];
-        newStatus = "Close"
+        newStatus = "Closed"
     } else {
         backgroundColor = deepOrange[300];
         newStatus = "Reopened"
