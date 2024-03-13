@@ -156,7 +156,8 @@ export default function CompanyId({ params }) {
                   {ticketDetailsData.submitted_at}
                 </Typography>
                 <Typography sx={{mt:2}}>
-                  Created By <Box component="span" sx={{ bgcolor: grey[200], px: 2, py: 0.5, borderRadius: 2}}> {ticketDetailsData.user_name}</Box>
+                  Created By <Box component="span" sx={{ bgcolor: grey[200], px: 2, py: 0.5, borderRadius: 2, textTransform: "uppercase"}}> 
+                  {ticketDetailsData.user_name}</Box>
                 </Typography>
               </Box>
             </Grid>
@@ -184,8 +185,8 @@ export default function CompanyId({ params }) {
                           : "POSTPAID"}
                       </TableCell>
                     </TableRow>
-                    <TableRow>
-                      <TableCell>Area</TableCell>
+                    <TableRow >
+                      <TableCell sx={{width:'40%'}}> Area</TableCell>
                       <TableCell>
                         {ticketDetailsData.company_zone_name}
                       </TableCell>
@@ -203,7 +204,7 @@ export default function CompanyId({ params }) {
           </Grid>
           <Grid container spacing={3}>
             {/* -----------------------------------Other Details----------------------------- */}
-            <Grid item xs={6}>
+            <Grid item xs={7}>
               <TableContainer sx={{ border: 1, color: grey[200] }}>
                 <Table sx={{ maxWidth: "100%" }}>
                   <TableHead>
@@ -255,7 +256,7 @@ export default function CompanyId({ params }) {
               </TableContainer>
             </Grid>
             {/* -----------------------------------Log----------------------------- */}
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               <TableContainer sx={{ border: 1, color: grey[200] }}>
                 <Table sx={{ maxWidth: "100%" }}>
                   <TableHead>

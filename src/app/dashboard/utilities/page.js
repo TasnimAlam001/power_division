@@ -83,7 +83,7 @@ export default function Utilities({ dashboardData }) {
                   width: "100%",
                   fontWeight: 550,
                   textAlign: "center",
-                  color: "black",
+                  
 
                   borderBottomLeftRadius: 6,
                   borderBottomRightRadius: 6,

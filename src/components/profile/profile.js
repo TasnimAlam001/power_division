@@ -17,8 +17,11 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Badge, Stack } from "@mui/material";
 import CircleNotificationsOutlinedIcon from "@mui/icons-material/CircleNotificationsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [arrow, setArrow] = React.useState(false);
 
@@ -30,6 +33,16 @@ export default function Profile() {
   const handleClose = () => {
     setAnchorEl(null);
     setArrow(false);
+  };
+
+  const handleLogOut = async () => {
+    try {
+      await localStorage.removeItem("access-token");
+      await signOut({ redirect: false });
+      await router.push("/login", { scroll: true });
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
   return (
     <div>
@@ -147,7 +160,7 @@ export default function Profile() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

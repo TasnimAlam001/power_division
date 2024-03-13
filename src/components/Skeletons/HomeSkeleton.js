@@ -7,7 +7,7 @@ export default function Variants() {
   return (
    
       <Stack spacing={1}>
-        <Grid container spacing={{ xs: 2, sm: 3 }}>
+        <Grid container spacing={{ xs: 2, sm: 2 }}>
           <Grid item xs={12} sm={6} lg={4} xl={2}>
             <Skeleton animation="wave" variant="rounded" width={172}
               height={240}
@@ -54,7 +54,7 @@ export default function Variants() {
             />
           </Grid>
         </Grid>
-        <Box  sx={{ display: { xs: "none", lg: "block" } , pl:3}}>
+        <Box  sx={{ display: { xs: "none", lg: "block" } , pl:2}}>
         <Grid container spacing={3}>
           <Grid item xs={5}>
 

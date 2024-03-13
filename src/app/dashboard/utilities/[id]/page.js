@@ -45,7 +45,7 @@ export default  function UtilityPage({ params }) {
         <>
           <Box>
             <Box sx={{ width: 200 }}>
-              <img width="100%" src={companyData.company.logo} />
+              <img style={{maxHeight:"200px"}} src={companyData.company.logo} />
             </Box>
             <Typography variant="h6" color="success.main">
               {companyData.company.name}
@@ -88,9 +88,10 @@ export default  function UtilityPage({ params }) {
 }
 
 // export async function generateStaticParams(){
-//   const posts = await useAllData();
+//   const res = await fetch("http://172.17.0.87:16999/api/web-app//dashboard")
+//   const utilities = res.data.data;
 
-//   return posts.map((post)=>({
-//       id:post.id.toString(),
+//   return utilities.map((utility)=>({
+//       id:utility.id.toString(),
 //   }))
 // }
