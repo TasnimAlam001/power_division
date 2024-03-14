@@ -1,24 +1,19 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+
 import {
   AppBar,
-  Badge,
   Box,
   Button,
   CssBaseline,
   Divider,
   Drawer,
-  FormControlLabel,
   IconButton,
-  InputAdornment,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Stack,
   Switch,
-  TextField,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -26,23 +21,18 @@ import SettingsOverscanIcon from "@mui/icons-material/SettingsOverscan";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { createTheme, styled, useTheme } from "@mui/material/styles";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import React, { useEffect, useMemo, useState } from "react";
 import {
-  FaMapMarkerAlt,
-  FaSearch,
-  FaSignOutAlt,
   FaUser,
   FaUsers,
 } from "react-icons/fa";
-import { RiLightbulbFlashFill } from "react-icons/ri";
-import { TbBulbFilled } from "react-icons/tb";
 import { GiWallet } from "react-icons/gi";
 import Image from "next/image";
-// import logo from "@/public/logo2.png";
-import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import Link from "next/link";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useRouter } from "next/navigation";
-import { signIn, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Profile from "../profile/profile";
 
 const data = [
@@ -114,9 +104,9 @@ export default function Navbar() {
   const [isLogin, setIsLogin] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
   // const session =  auth();
   // const [cUrl, setCUrl] = React.useState();
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
 
   // const {data: session} = useSession();
   // console.log("session data: ",session)
@@ -138,15 +128,15 @@ export default function Navbar() {
     }
   }, []);
 
-  const handleLogOut = async () => {
-    try {
-      await localStorage.removeItem("access-token");
-      await signOut({ redirect: false });
-      await router.push("/login", { scroll: true });
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
-  };
+  // const handleLogOut = async () => {
+  //   try {
+  //     await localStorage.removeItem("access-token");
+  //     await signOut({ redirect: false });
+  //     await router.push("/login", { scroll: true });
+  //   } catch (error) {
+  //     console.error("Error logging out:", error);
+  //   }
+  // };
 
   const [dark, setDark] = useState(prefersDarkMode);
   const darkTheme = useMemo(

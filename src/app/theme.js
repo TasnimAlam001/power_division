@@ -18,6 +18,7 @@ const webTheme = createTheme({
     
     primary: {
       main: "#3382EF",
+      light:'#e3f2fd',
     },
     success: {
       main: "#04984A",
@@ -29,6 +30,11 @@ const webTheme = createTheme({
       light: "#dbf2d5",
       dark: "#2962ff",
     },
+    text:{
+      main:"#000000",
+      light: "#eeeeee",
+    }
+
   },
 
 });

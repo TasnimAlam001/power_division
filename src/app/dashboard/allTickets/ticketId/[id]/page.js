@@ -49,7 +49,7 @@ export default function CompanyId({ params }) {
         >
           <Typography>Ticket Details | ID #{ticketDetailsData.id}</Typography>
           <Typography
-            sx={{ bgcolor: "primary.light", px: 2, py: 0.5, borderRadius: 2 }}
+            sx={{ bgcolor: "primary.light", px: 2, py: 0.5, borderRadius: 2,  color: "black" }}
           >
             {(() => {
               const status = Number(ticketDetailsData.status);
@@ -77,7 +77,7 @@ export default function CompanyId({ params }) {
                   <TableHead>
                     <TableRow>
                       <TableCell
-                        sx={{ bgcolor: blue[50] }}
+                        sx={{ bgcolor: "primary.light" , color: "black"}}
                         align="center"
                         colSpan={2}
                       >
@@ -113,7 +113,7 @@ export default function CompanyId({ params }) {
                   <TableHead>
                     <TableRow>
                       <TableCell
-                        sx={{ bgcolor: blue[50] }}
+                        sx={{ bgcolor: "primary.light" , color: "black"}}
                         align="center"
                         colSpan={2}
                       >
@@ -146,7 +146,7 @@ export default function CompanyId({ params }) {
               <Box sx={{pt:1}}> 
                 <Typography >
                   Source{" "}
-                  <Box component="span" sx={{ bgcolor: "primary.light", px: 2, py: 0.5, borderRadius: 2 , mr:2}}>
+                  <Box component="span" sx={{ bgcolor: "primary.light", px: 2, py: 0.5, borderRadius: 2 , mr:2, color: "black"}}>
 
                     {ticketDetailsData.platform}
                   </Box>
@@ -156,7 +156,7 @@ export default function CompanyId({ params }) {
                   {ticketDetailsData.submitted_at}
                 </Typography>
                 <Typography sx={{mt:2}}>
-                  Created By <Box component="span" sx={{ bgcolor: grey[200], px: 2, py: 0.5, borderRadius: 2, textTransform: "uppercase"}}> 
+                  Created By <Box component="span" sx={{ bgcolor: grey[200], px: 2, py: 0.5, borderRadius: 2, textTransform: "uppercase", color: "black"}}> 
                   {ticketDetailsData.user_name}</Box>
                 </Typography>
               </Box>
@@ -168,7 +168,7 @@ export default function CompanyId({ params }) {
                   <TableHead>
                     <TableRow>
                       <TableCell
-                        sx={{ bgcolor: blue[50] }}
+                        sx={{ bgcolor: "primary.light" , color: "black"}}
                         align="center"
                         colSpan={2}
                       >
@@ -210,7 +210,7 @@ export default function CompanyId({ params }) {
                   <TableHead>
                     <TableRow>
                       <TableCell
-                        sx={{ bgcolor: blue[50] }}
+                        sx={{ bgcolor: "primary.light" , color: "black"}}
                         align="center"
                         colSpan={2}
                       >
@@ -262,7 +262,7 @@ export default function CompanyId({ params }) {
                   <TableHead>
                     <TableRow>
                       <TableCell
-                        sx={{ bgcolor: blue[50] }}
+                        sx={{ bgcolor: "primary.light" , color: "black"}}
                         align="center"
                         colSpan={3}
                       >

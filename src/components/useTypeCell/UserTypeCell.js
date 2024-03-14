@@ -3,7 +3,6 @@ import { deepOrange, green, orange, red } from '@mui/material/colors'
 import React from 'react'
 
 export default function UserTypeCell({ params }) {
-    // console.log("status page", params.formattedValue)
     const type = params.formattedValue;
 
     let color;
