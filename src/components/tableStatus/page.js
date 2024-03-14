@@ -6,25 +6,25 @@ export default function TableStatusColumn({ params }) {
     // console.log("status page", params.formattedValue)
     const status = params.formattedValue;
 
-    let backgroundColor;
+    let color;
     let newStatus = "";
 
     if (status === "1") {
-        backgroundColor = green[500];
+        color = green[500];
         newStatus = "Opened"
     } else if (status === "2") {
-        backgroundColor = green[200];
+        color = green[200];
         newStatus = "Processing"
     }else if (status === "3") {
-        backgroundColor = orange[300];
+        color = orange[300];
         newStatus = "Closed"
     } else {
-        backgroundColor = deepOrange[300];
+        color = deepOrange[300];
         newStatus = "Reopened"
     }
 
     return (
-        <Box sx={{ p: 1, backgroundColor: backgroundColor, borderRadius: "10px" }}>
+        <Box sx={{ p: 0.5, color: color,}}>
             {newStatus}
         </Box>
     )

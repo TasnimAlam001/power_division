@@ -24,7 +24,7 @@ export default function UserTypeCell({ params }) {
     }
 
     return (
-        <Box sx={{ p: 1,  borderRadius: "10px", border: 1 , color: color}}>
+        <Box sx={{ p: 0.5,  borderRadius: "10px",  color: color, fontWeight:500}}>
             {type}
         </Box>
     )
