@@ -105,11 +105,10 @@ export default function BarCharts(params) {
                   xAxis={[
                     {
                       data: xLabels,
-
+                      align:"start",
                       scaleType: "band",
                       tickLabelStyle: {
-                        angle: isMediumScreen ? 90 : 0,
-                        textAnchor: "start",
+                        angle: isMediumScreen ? 90 : 0,                        
                         fontSize: fontS,
                       },
                     },

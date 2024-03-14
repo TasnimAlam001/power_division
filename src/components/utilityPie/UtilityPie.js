@@ -86,7 +86,7 @@ export default function UtilityPie({companyData}) {
           justifyContent="space-between"
         >
           <CardContent>
-            <Typography variant="h6">Monthly Tickets</Typography>
+            <Typography variant="h6">Total Tickets</Typography>
             <PieChart
               margin={{
                 top: isMediumScreen ? 105 : 10,

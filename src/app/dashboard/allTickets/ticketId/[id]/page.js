@@ -45,11 +45,13 @@ export default function CompanyId({ params }) {
             justifyContent: "space-between",
             py: 3,
             px: 1,
+            
+            flexDirection: {xs: "column", md: "row"}
           }}
         >
           <Typography>Ticket Details | ID #{ticketDetailsData.id}</Typography>
           <Typography
-            sx={{ bgcolor: "primary.light", px: 2, py: 0.5, borderRadius: 2,  color: "black" }}
+            sx={{ bgcolor: "primary.light", px: 1, py: 0.5, borderRadius: 2,  color: "black" , textAlign:"center",mt: {xs:3, md:0},}}
           >
             {(() => {
               const status = Number(ticketDetailsData.status);
@@ -71,7 +73,7 @@ export default function CompanyId({ params }) {
         <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
           <Grid container spacing={3}>
             {/* -----------------------------------Customer info----------------------------- */}
-            <Grid item xs={3}>
+            <Grid item xs={12} md={4} lg={3} >
               <TableContainer sx={{ border: 1, color: grey[200] }}>
                 <Table sx={{ maxWidth: "100%" }}>
                   <TableHead>
@@ -107,7 +109,7 @@ export default function CompanyId({ params }) {
               </TableContainer>
             </Grid>
             {/* -----------------------------------Warp Up----------------------------- */}
-            <Grid item xs={6}>
+            <Grid item xs={12} md={4} lg={6}>
               <TableContainer sx={{ border: 1, color: grey[200] }}>
                 <Table sx={{ maxWidth: "100%" }}>
                   <TableHead>
@@ -162,7 +164,7 @@ export default function CompanyId({ params }) {
               </Box>
             </Grid>
             {/* -----------------------------------Customer info-2----------------------------- */}
-            <Grid item xs={3}>
+            <Grid item xs={12} md={4} lg={3}>
               <TableContainer sx={{ border: 1, color: grey[200] }}>
                 <Table sx={{ maxWidth: "100%" }}>
                   <TableHead>
@@ -204,7 +206,7 @@ export default function CompanyId({ params }) {
           </Grid>
           <Grid container spacing={3}>
             {/* -----------------------------------Other Details----------------------------- */}
-            <Grid item xs={7}>
+            <Grid item xs={12} md={7}>
               <TableContainer sx={{ border: 1, color: grey[200] }}>
                 <Table sx={{ maxWidth: "100%" }}>
                   <TableHead>
@@ -256,7 +258,7 @@ export default function CompanyId({ params }) {
               </TableContainer>
             </Grid>
             {/* -----------------------------------Log----------------------------- */}
-            <Grid item xs={5}>
+            <Grid item xs={12} md={5}>
               <TableContainer sx={{ border: 1, color: grey[200] }}>
                 <Table sx={{ maxWidth: "100%" }}>
                   <TableHead>

@@ -63,7 +63,7 @@ export default function UtilityComplainBarChart({
           >
             <CardContent>
               <Typography variant="h6">
-                Utility Wise Tickets ( Opened and Solved)
+              Category Wise Complains
               </Typography>
               <Stack sx={{ mt: 3 }} direction="row" alignItems="center">
                 <BarChart
