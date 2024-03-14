@@ -50,7 +50,7 @@ export default function Login() {
     try {
       const res = await axiosSecure.post("login", { email, password });
       let r = await loginAction(data);
-      console.log("response of", r);
+      // console.log("response of", r);
 
       if (res.data.message === "Login Successful") {
         const token = res.data.data.token;

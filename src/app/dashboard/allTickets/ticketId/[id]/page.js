@@ -34,7 +34,7 @@ export default function CompanyId({ params }) {
       });
   }, []);
 
-  console.log(ticketDetailsData);
+  // console.log(ticketDetailsData);
 
   return (
     <Box>

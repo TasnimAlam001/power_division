@@ -30,10 +30,10 @@ export default  function UtilityPage({ params }) {
       });
   }, []);
 
-  console.log(
-    companyData,
-    ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
-  );
+  // console.log(
+  //   companyData,
+  //   ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
+  // );
 
   return (
     <Box>

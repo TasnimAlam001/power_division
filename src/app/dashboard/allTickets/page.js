@@ -1,15 +1,27 @@
 "use client";
 import * as React from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbar,
+  GridToolbarContainer,
+  GridToolbarExport,
+  GridToolbarFilterButton,
+} from "@mui/x-data-grid";
 import TicketId from "./ticketId/page";
 import TableStatusColumn from "@/components/tableStatus/page";
 import TimeDateFormate from "@/components/TicketColumn/TimeDateFormate";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import TicketBackdrop from "@/components/Skeletons/TicketBackdrop";
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  InputAdornment,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Date from "@/components/date/page";
-
-
+import { FaSearch } from "react-icons/fa";
 
 export default function DataTable() {
   const [axiosSecure] = useAxiosSecure();
@@ -36,10 +48,10 @@ export default function DataTable() {
       headerName: "Ticket ID",
       minWidth: 90,
       align: "left",
-      renderCell: (params) => <TicketId {...{params}}/>,
-      type: "actions",
+      renderCell: (params) => <TicketId {...{ params }} />,
+      
     },
-    
+
     {
       field: "status",
       headerName: "Status",
@@ -75,10 +87,22 @@ export default function DataTable() {
     },
   ];
 
+  function CustomToolbar() {
   return (
-    <Paper sx={{ height: 750 }}>
-      <Stack direction="row" justifyContent="space-between" sx={{pl:3, pt:3, pr:3}}>
-        <Typography variant="h6" sx={{ color: "success.main"}}>
+    <GridToolbarContainer>
+      <GridToolbarExport />
+    </GridToolbarContainer>
+  );
+}
+
+  return (
+    <Paper sx={{ height: 780 }}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        sx={{ pl: 3, pt: 3, pr: 3 }}
+      >
+        <Typography variant="h6" sx={{ color: "success.main" }}>
           {" "}
           Ticket List
         </Typography>
@@ -90,7 +114,7 @@ export default function DataTable() {
         </>
       ) : (
         <>
-          <Box sx={{ height: 670, width: "100%", overflow: "auto", p: 4 }}>
+          <Box sx={{ height: 710, width: "100%", overflow: "auto", p: 2 }}>
             <DataGrid
               rows={rows}
               columns={columns}
@@ -99,10 +123,13 @@ export default function DataTable() {
                   paginationModel: { page: 0, pageSize: 10 },
                 },
               }}
+              disableColumnFilter
+              disableColumnSelector
+              disableDensitySelector
+              disableRowSelectionOnClick 
               pageSizeOptions={[10, 20]}
-              slots={{
-                toolbar: GridToolbar,
-              }}
+              slots={{ toolbar: GridToolbar }}
+              slotProps={{ toolbar: { showQuickFilter: true } }}
               checkboxSelection
             />
           </Box>

@@ -3,7 +3,7 @@ import { BarChart, axisClasses } from "@mui/x-charts";
 import React from "react";
 
 export default function UtilityBarChart({ ticketData }) {
-  console.log("........................", ticketData);
+  // console.log("........................", ticketData);
 
   const dates = Object.keys(ticketData);
   const openedCounts = dates.map((date) => {
@@ -19,8 +19,8 @@ export default function UtilityBarChart({ ticketData }) {
     return ticketData[date]["reopened"] || 0;
   });
 
-  console.log("Dates:", dates);
-  console.log("Opened Counts:", openedCounts);
+  // console.log("Dates:", dates);
+  // console.log("Opened Counts:", openedCounts);
 
   const chartSetting = {
     yAxis: [
