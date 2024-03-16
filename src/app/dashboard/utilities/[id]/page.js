@@ -7,12 +7,18 @@ import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import UtilityPie from "@/components/utilityPie/UtilityPie";
 import UtilityPie2 from "@/components/utilityPie2/UtilityPie2";
 import UtilityComplainBarChart from "@/components/utilityComplainBarChart/UtilityComplainBarChart";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export default function UtilityPage({ params }) {
   const [axiosSecure] = useAxiosSecure();
   const [companyData, setCompanyData] = useState([]);
   const [loading, setLoading] = useState(true);
   const { id } = params;
+
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -33,7 +39,7 @@ export default function UtilityPage({ params }) {
   // );
 
   return (
-    <Box sx={{mt:2}}>
+    <Box sx={{ mt: 2 }}>
       {loading ? (
         <>
           <UtilityPageSkeleton />
@@ -41,8 +47,17 @@ export default function UtilityPage({ params }) {
       ) : (
         <>
           <Box>
-            <Box sx={{display: "flex", flexDirection: "column" , alignItems:"center"}}>
-              <Box >
+            <Box
+              data-aos="zoom-in-up"
+              data-aos-offset="300"
+              data-aos-duration="800"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Box>
                 <img
                   style={{ maxHeight: "120px" }}
                   src={companyData.company.logo}
@@ -51,8 +66,7 @@ export default function UtilityPage({ params }) {
               <Typography
                 variant="h5"
                 color="success.main"
-                sx={{fontWeight:700, mt:1}}
-                
+                sx={{ fontWeight: 700, mt: 1 }}
               >
                 {companyData.company.name}
               </Typography>
