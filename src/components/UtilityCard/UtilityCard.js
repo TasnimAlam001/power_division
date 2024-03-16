@@ -14,7 +14,6 @@ export default function UtilityCard({ data }) {
 
   useEffect(() => {
     const end = data.total_tickets;
-
     let start = 0;
     if (start === end) return;
 
