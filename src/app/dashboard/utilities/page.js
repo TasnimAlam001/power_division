@@ -1,16 +1,29 @@
+"use client";
 import { Box, Grid, Paper, Typography } from "@mui/material";
+import Aos from "aos";
+import "aos/dist/aos.css";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Utilities({ dashboardData }) {
   const utility = dashboardData?.companyListWithTickets;
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   return (
     <Grid container spacing={{ xs: 2, sm: 3 }}>
       {utility?.map((data) => (
-        <Grid item xs={12} sm={6} lg={4} xl={2} key={data.id} >
-          <Box>
+        <Grid item xs={12} sm={6} lg={4} xl={2} key={data.id}>
+          <div
+            data-aos="zoom-in-up"
+            data-aos-offset="300"
+            data-aos-duration="800"
+          >
             <Paper
-              elevation={2}
+              // variant="none"
+              elevation={0}
+
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -19,6 +32,8 @@ export default function Utilities({ dashboardData }) {
                 height: "241px",
                 width: { lg: "180px" },
                 borderRadius: "0.5rem",
+                boxShadow: "0px 10px 40px 0px #00000008"
+
               }}
             >
               <Box
@@ -80,10 +95,11 @@ export default function Utilities({ dashboardData }) {
                 sx={{
                   fontSize: 10,
                   backgroundColor: "#04984A1A",
+                 
+
                   width: "100%",
                   fontWeight: 550,
                   textAlign: "center",
-                  
 
                   borderBottomLeftRadius: 6,
                   borderBottomRightRadius: 6,
@@ -92,7 +108,7 @@ export default function Utilities({ dashboardData }) {
                 {data.last_connected_at}
               </Box>
             </Paper>
-          </Box>
+          </div>
         </Grid>
       ))}
     </Grid>

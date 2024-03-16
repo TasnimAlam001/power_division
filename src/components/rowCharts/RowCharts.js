@@ -37,7 +37,7 @@ export default function RowCharts(params) {
   return (
     <ThemeProvider theme={webTheme}>
       <div>
-        <Card>
+        <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>
           <Stack
             sx={{ height: boxHeight }}
             direction="column"

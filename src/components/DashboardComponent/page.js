@@ -7,6 +7,7 @@ import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import { useEffect, useState } from "react";
 import HomeSkeleton from "../Skeletons/HomeSkeleton";
 
+
 const DashboardComponent = () => {
   const [axiosSecure] = useAxiosSecure();
   const [dashboardData, setDashboardData] = useState([]);
@@ -24,6 +25,9 @@ const DashboardComponent = () => {
         setLoading(false);
       });
   }, []);
+
+
+
   return (
     <Box>
       {loading ? (
@@ -47,7 +51,7 @@ const DashboardComponent = () => {
           </Stack>
 
           <Box my={6}>
-            <Utilities dashboardData={dashboardData}/>
+            <Utilities dashboardData={dashboardData} />
           </Box>
           <Box>
             <AllCharts dashboardData={dashboardData} />
@@ -59,6 +63,3 @@ const DashboardComponent = () => {
 };
 
 export default DashboardComponent;
-
-
-

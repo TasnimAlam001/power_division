@@ -22,9 +22,10 @@ export default function DashboardLayout({ children }) {
 
           <Box
             sx={{
-              mt: 10,
-              ml: { xs: 2, md: `${drawerWidth}px` },
-              mr: { xs: 2, md: 3 },
+              bgcolor:"#fafbfc",
+              pt: 10,
+              pl: { xs: 2, md: `${drawerWidth}px` },
+              pr: { xs: 2, md: 3 },
             }}
           >
             {children}

@@ -69,7 +69,7 @@ export default function PieChars(params) {
   return (
     <ThemeProvider theme={webTheme}>
       <div>
-        <Card elevation={1}>
+        <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>
           <Stack
             sx={{ height: boxHeight }}
             direction="column"

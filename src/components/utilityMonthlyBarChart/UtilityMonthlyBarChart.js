@@ -37,7 +37,7 @@ export default function UtilityBarChart({ ticketData }) {
   };
 
   return (
-    <Card>
+    <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3}}>
       <Stack
         sx={{ height: 550 }}
         direction="column"

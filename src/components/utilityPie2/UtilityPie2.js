@@ -73,7 +73,7 @@ export default function UtilityPie2({previous2MonthTicketCount}) {
   const getArcLabel = ({ value }) => `${((value / total) * 100).toFixed(0)}%`;
   return (
     <div>
-      <Card>
+      <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>
         <Stack
           sx={{ height: boxHeight }}
           direction="column"
