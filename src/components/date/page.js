@@ -8,11 +8,12 @@ import webTheme from "@/app/theme";
 import { toast } from 'react-toastify'; // Assuming you're using react-toastify for displaying toasts
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import dayjs from 'dayjs';
 
-export default function Date({ onDatesSelected }) {
+export default function Date({ onDatesSelected , startDate, endDate}) {
   // State to store selected dates
-  const [selectedFromDate, setSelectedFromDate] = useState(null);
-  const [selectedToDate, setSelectedToDate] = useState(null);
+  const [selectedFromDate, setSelectedFromDate] = useState(dayjs(startDate));
+  const [selectedToDate, setSelectedToDate] = useState(dayjs(endDate));
 
   // Handler function to update selected dates
   const handleDateChange = (date, dateType) => {
@@ -43,6 +44,7 @@ export default function Date({ onDatesSelected }) {
       console.log('Please select both from and to dates.');
     }
   };
+  console.log(startDate, endDate)
 
   return (
     <ThemeProvider theme={webTheme}>
@@ -54,7 +56,8 @@ export default function Date({ onDatesSelected }) {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack direction="row" spacing={3} alignItems="center">
                 <DatePicker
-                  label="From"
+                  // label="From"
+                  // defaultValue={dayjs(startDate)}
                   value={selectedFromDate} // Set selected date
                   onChange={(date) => handleDateChange(date, 'from')}
                   slotProps={{
@@ -64,7 +67,9 @@ export default function Date({ onDatesSelected }) {
                 />
                 <Typography sx={{ color: 'success.main' }}>-</Typography>
                 <DatePicker
-                  label="To"
+                  // label="To"
+                  minDate={selectedFromDate ? selectedFromDate : undefined}
+                  // defaultValue={dayjs(endDate)}
                   value={selectedToDate} // Set selected date
                   onChange={(date) => handleDateChange(date, 'to')}
                   slotProps={{

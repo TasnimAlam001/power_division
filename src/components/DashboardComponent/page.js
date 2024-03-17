@@ -41,7 +41,7 @@ const DashboardComponent = () => {
   }, [selectedDates, axiosSecure]);
 
 
-  console.log(",...............", selectedDates)
+  // console.log(",...............", dashboardData)
 
   return (
     <Box>
@@ -62,7 +62,7 @@ const DashboardComponent = () => {
               All Utilities
             </Typography>
 
-            <Date onDatesSelected={setSelectedDates}/>
+            <Date onDatesSelected={setSelectedDates} startDate={dashboardData.startDate} endDate={dashboardData.endDate}/>
           </Stack>
 
           <Box my={6}>
