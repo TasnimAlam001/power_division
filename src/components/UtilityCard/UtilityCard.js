@@ -14,20 +14,38 @@ export default function UtilityCard({ data }) {
 
   useEffect(() => {
     const end = data.total_tickets;
-    let start = 0;
-    if (start === end) return;
-
-    let totalMilSecDur = parseInt(duration);
-    let incrementTime = totalMilSecDur / end;
-
-    let timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start === end) clearInterval(timer);
-    }, incrementTime);
-
-    return () => clearInterval(timer);
+    const start = 0;
+    
+    // Calculate the difference between start and end values
+    const difference = end - start;
+    
+    if (difference === 0) return;
+    
+    let startTime;
+    let animationFrame;
+    
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      
+      const progress = timestamp - startTime;
+      
+      // Calculate the current count based on progress
+      const currentCount = Math.min(Math.floor(progress / duration * difference), difference) + start;
+      
+      // Update the count
+      setCount(currentCount);
+      
+      // Continue animation until duration is reached
+      if (progress < duration) {
+        animationFrame = requestAnimationFrame(step);
+      }
+    };
+  
+    animationFrame = requestAnimationFrame(step);
+  
+    return () => cancelAnimationFrame(animationFrame);
   }, [data.total_tickets, duration]);
+  
   return (
     <Grid item xs={12} sm={6} lg={4} xl={2} key={data.id}>
       <div data-aos="zoom-in-up" data-aos-offset="300" data-aos-duration="800">

@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'; // Assuming you're using react-toastify 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Date() {
+export default function Date({ onDatesSelected }) {
   // State to store selected dates
   const [selectedFromDate, setSelectedFromDate] = useState(null);
   const [selectedToDate, setSelectedToDate] = useState(null);
@@ -34,10 +34,11 @@ export default function Date() {
       }
       
       // Format selected dates into "date/month/year" format
-      const fromDate = selectedFromDate.format('DD/MM/YYYY');
-      const toDate = selectedToDate.format('DD/MM/YYYY');
+      const fromDate = selectedFromDate.format('YYYY-MM-DD');
+      const toDate = selectedToDate.format('YYYY-MM-DD');
       console.log('From Date:', fromDate);
       console.log('To Date:', toDate);
+      onDatesSelected({ from: fromDate, to: toDate });
     } else {
       console.log('Please select both from and to dates.');
     }
@@ -45,16 +46,17 @@ export default function Date() {
 
   return (
     <ThemeProvider theme={webTheme}>
+      <ToastContainer/>
       <Box sx={{ display: { xs: "none", md: "block" } }}>
         <Stack direction="row" spacing={3} alignItems="center" width={550}>
           <Box>
-            {/* <ToastContainer/> */}
+            
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack direction="row" spacing={3} alignItems="center">
                 <DatePicker
                   label="From"
                   value={selectedFromDate} // Set selected date
-                  onChange={(date) => handleDateChange(date, 'from')} // Handle date change
+                  onChange={(date) => handleDateChange(date, 'from')}
                   slotProps={{
                     textField: { size: "small", color: "success" },
                     openPickerButton: { color: "success" },
@@ -64,7 +66,7 @@ export default function Date() {
                 <DatePicker
                   label="To"
                   value={selectedToDate} // Set selected date
-                  onChange={(date) => handleDateChange(date, 'to')} // Handle date change
+                  onChange={(date) => handleDateChange(date, 'to')}
                   slotProps={{
                     textField: { size: "small", color: "success" },
                     openPickerButton: { color: "success" },

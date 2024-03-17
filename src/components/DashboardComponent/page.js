@@ -8,25 +8,40 @@ import { useEffect, useState } from "react";
 import HomeSkeleton from "../Skeletons/HomeSkeleton";
 
 
+
 const DashboardComponent = () => {
   const [axiosSecure] = useAxiosSecure();
   const [dashboardData, setDashboardData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedDates, setSelectedDates] = useState(null);
 
   useEffect(() => {
     setLoading(true);
-    axiosSecure("/dashboard")
-      .then((res) => {
-        setLoading(false);
-        setDashboardData(res.data.data);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
-  }, []);
+    if (selectedDates) {      
+      axiosSecure(`/dashboard?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
+        .then((res) => {
+          setLoading(false);
+          setDashboardData(res.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+          setLoading(false);
+        });
+    } else {
+      axiosSecure("/dashboard")
+        .then((res) => {
+          setLoading(false);
+          setDashboardData(res.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+          setLoading(false);
+        });
+    }
+  }, [selectedDates, axiosSecure]);
 
 
+  console.log(",...............", selectedDates)
 
   return (
     <Box>
@@ -47,7 +62,7 @@ const DashboardComponent = () => {
               All Utilities
             </Typography>
 
-            <Date />
+            <Date onDatesSelected={setSelectedDates}/>
           </Stack>
 
           <Box my={6}>
