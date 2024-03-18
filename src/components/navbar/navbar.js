@@ -36,7 +36,7 @@ import { signOut } from "next-auth/react";
 import Profile from "../profile/profile";
 
 const data = [
-  { id: 1, icon: <FaUser />, label: "Executive", route: "executive" },
+  { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
   // {
   //   id: 2,
   //   icon: <RiLightbulbFlashFill />,
