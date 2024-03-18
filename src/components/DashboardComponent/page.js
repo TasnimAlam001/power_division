@@ -2,10 +2,10 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Utilities from "@/app/dashboard/utilities/page";
 import AllCharts from "../allCharts/AllCharts";
-import Date from "../date/page";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import { useEffect, useState } from "react";
 import HomeSkeleton from "../Skeletons/HomeSkeleton";
+import DashboardDate from "../Dates/DashboardDate";
 
 
 
@@ -62,7 +62,7 @@ const DashboardComponent = () => {
               All Utilities
             </Typography>
 
-            <Date onDatesSelected={setSelectedDates} startDate={dashboardData.startDate} endDate={dashboardData.endDate}/>
+            <DashboardDate onDatesSelected={setSelectedDates} startDate={dashboardData.startDate} endDate={dashboardData.endDate}/>
           </Stack>
 
           <Box my={6}>

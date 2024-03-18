@@ -10,7 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import dayjs from 'dayjs';
 
-export default function Date({ onDatesSelected , startDate, endDate}) {
+export default function DashboardDate({ onDatesSelected , startDate, endDate}) {
   // State to store selected dates
   const [selectedFromDate, setSelectedFromDate] = useState(dayjs(startDate));
   const [selectedToDate, setSelectedToDate] = useState(dayjs(endDate));
@@ -37,8 +37,8 @@ export default function Date({ onDatesSelected , startDate, endDate}) {
       // Format selected dates into "date/month/year" format
       const fromDate = selectedFromDate.format('YYYY-MM-DD');
       const toDate = selectedToDate.format('YYYY-MM-DD');
-      console.log('From Date:', fromDate);
-      console.log('To Date:', toDate);
+      // console.log('From Date:', fromDate);
+      // console.log('To Date:', toDate);
       onDatesSelected({ from: fromDate, to: toDate });
     } else {
       console.log('Please select both from and to dates.');

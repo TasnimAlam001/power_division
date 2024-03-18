@@ -108,7 +108,8 @@ export default function BarCharts(params) {
                       align:"start",
                       scaleType: "band",
                       tickLabelStyle: {
-                        angle: isMediumScreen ? 90 : 0,                        
+                        angle: isMediumScreen ? 90 : 0,
+                        textAnchor:"start",                        
                         fontSize: fontS,
                       },
                     },

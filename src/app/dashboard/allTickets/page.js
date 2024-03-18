@@ -3,9 +3,6 @@ import * as React from "react";
 import {
   DataGrid,
   GridToolbar,
-  GridToolbarContainer,
-  GridToolbarExport,
-  GridToolbarFilterButton,
 } from "@mui/x-data-grid";
 import TicketId from "./ticketId/page";
 import TableStatusColumn from "@/components/tableStatus/page";
@@ -14,24 +11,28 @@ import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import TicketBackdrop from "@/components/Skeletons/TicketBackdrop";
 import {
   Box,
-  InputAdornment,
   Paper,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
-import Date from "@/components/date/page";
-import { FaSearch } from "react-icons/fa";
+import { useEffect } from "react";
+import { useState } from "react";
+import TicketDate from "@/components/TicketDate/TicketDate";
 
 export default function DataTable() {
   const [axiosSecure] = useAxiosSecure();
-  const [ticketData, setTicketData] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const rows = ticketData;
+  const [ticketData, setTicketData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedDates, setSelectedDates] = useState(null);
+  const rows = ticketData.ticket;
+  const dateTime = ticketData.dateFilter;
+  const startDate = dateTime?.start_date.split(" ")[0];
+  const endDate = dateTime?.end_date.split(" ")[0];
 
-  React.useEffect(() => {
+  useEffect(() => {
     setLoading(true);
-    axiosSecure("/ticket?start_date=2023-11-01&end_date=2023-12-31")
+    if(selectedDates){
+      axiosSecure(`/ticket?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
       .then((res) => {
         setLoading(false);
         setTicketData(res.data.data);
@@ -40,7 +41,19 @@ export default function DataTable() {
         console.log(e);
         setLoading(false);
       });
-  }, []);
+    }else{
+      axiosSecure("/ticket")
+      .then((res) => {
+        setLoading(false);
+        setTicketData(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
+    }
+   
+  }, [selectedDates, axiosSecure]);
 
   const columns = [
     {
@@ -49,7 +62,6 @@ export default function DataTable() {
       minWidth: 90,
       align: "left",
       renderCell: (params) => <TicketId {...{ params }} />,
-      
     },
 
     {
@@ -87,14 +99,6 @@ export default function DataTable() {
     },
   ];
 
-  function CustomToolbar() {
-  return (
-    <GridToolbarContainer>
-      <GridToolbarExport />
-    </GridToolbarContainer>
-  );
-}
-
   return (
     <Paper sx={{ height: 780 }}>
       <Stack
@@ -106,7 +110,7 @@ export default function DataTable() {
           {" "}
           Ticket List
         </Typography>
-        <Date />
+        <TicketDate onDatesSelected={setSelectedDates} startDate={startDate} endDate={endDate}/>
       </Stack>
       {loading ? (
         <>
@@ -126,7 +130,7 @@ export default function DataTable() {
               disableColumnFilter
               disableColumnSelector
               disableDensitySelector
-              disableRowSelectionOnClick 
+              disableRowSelectionOnClick
               pageSizeOptions={[10, 20]}
               slots={{ toolbar: GridToolbar }}
               slotProps={{ toolbar: { showQuickFilter: true } }}
