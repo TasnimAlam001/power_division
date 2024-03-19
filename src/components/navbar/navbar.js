@@ -99,7 +99,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 const drawerWidth = 200;
 
 export default function Navbar() {
-  const router = useRouter();
+  // const router = useRouter();
   const theme = useTheme();
   const [isLogin, setIsLogin] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);

@@ -1,10 +1,11 @@
 "use client";
 import * as React from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import { Box, Paper, Typography } from "@mui/material";
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
 import { green } from "@mui/material/colors";
+import UserSkeleton from "@/components/Skeletons/userSkeleton";
 
 const columns = [
   { field: "name", headerName: "Name", minWidth: 110 },
@@ -43,14 +44,14 @@ export default function User() {
   }, []);
 
   return (
-    <Paper sx={{height:550}}>
-      <Box sx={{ p: 4 }} style={{ height: 440, width: "100%" }}>
+    <Paper sx={{ height: 550 }}>
+      <Box sx={{ p: 4 }} style={{ height: 475, width: "100%" }}>
         <Typography variant="h4" sx={{ pb: 4, mt: 1, color: green[300] }}>
           {" "}
           User List
         </Typography>
         {loading ? (
-          <Typography>Loading...</Typography>
+          <UserSkeleton />
         ) : (
           <DataGrid
             rows={userData}
@@ -61,6 +62,12 @@ export default function User() {
               },
             }}
             pageSizeOptions={[5, 10]}
+            disableColumnFilter
+            disableColumnSelector
+            disableDensitySelector
+            disableRowSelectionOnClick
+            slots={{ toolbar: GridToolbar }}
+            slotProps={{ toolbar: { showQuickFilter: true } }}
             checkboxSelection
           />
         )}

@@ -18,6 +18,7 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import TicketDate from "@/components/TicketDate/TicketDate";
+import TicketSkeleton from "@/components/Skeletons/ticketSkeleton";
 
 export default function DataTable() {
   const [axiosSecure] = useAxiosSecure();
@@ -114,7 +115,7 @@ export default function DataTable() {
       </Stack>
       {loading ? (
         <>
-          <TicketBackdrop />
+          <TicketSkeleton />
         </>
       ) : (
         <>

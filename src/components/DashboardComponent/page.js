@@ -65,7 +65,7 @@ const DashboardComponent = () => {
             <DashboardDate onDatesSelected={setSelectedDates} startDate={dashboardData.startDate} endDate={dashboardData.endDate}/>
           </Stack>
 
-          <Box my={6}>
+          <Box my={4}>
             <Utilities dashboardData={dashboardData} />
           </Box>
           <Box>

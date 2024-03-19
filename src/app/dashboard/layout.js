@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar/navbar";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Inter } from "next/font/google";
 import React from "react";
 
@@ -21,6 +21,12 @@ export default function DashboardLayout({ children }) {
           >
             {children}
           </Box>
+          <Typography sx={{ fontSize: 12, mt: 5, textAlign: "center" }}>
+              © 2024, All Rights Reserved. Developed By{" "}
+              <span style={{ color: "#00ACF3" }}>
+                Digicon Technologies ltd.
+              </span>
+            </Typography>
      
       </body>
     </html>

@@ -77,8 +77,8 @@ export default function UtilityPage({ params }) {
                 ticketData={companyData?.last30DaysTicketStatusWiseCount}
               />
             </Box>
-            <Box mt={6}>
-              <Grid container spacing={2}>
+            <Box mt={4}>
+              <Grid container spacing={3}>
                 <Grid item xs={12} lg={7}>
                   <UtilityComplainBarChart
                     companyWiseCategoryWiseComplain={

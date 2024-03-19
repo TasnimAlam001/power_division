@@ -2,7 +2,6 @@
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 
 export default function TicketBackdrop() {
@@ -15,7 +14,7 @@ export default function TicketBackdrop() {
         
       >
         <CircularProgress color="inherit" />
-        <Typography>Please wait...</Typography>
+        <Typography sx={{pl:2}}> Please wait...</Typography>
       </Backdrop>
     </div>
   );

@@ -24,13 +24,13 @@ export default function RowCharts(params) {
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
 
   const width = isSmallScreen
-    ? 170
+    ? 240
     : isMediumScreen
     ? 280
     : isLgScreen
-    ? 510
-    : 470;
-  const height = isMediumScreen ? (isSmallScreen ? 290 : 330) : 400;
+    ? 600
+    : 520;
+  const height = isMediumScreen ? (isSmallScreen ? 290 : 330) : 380;
   const boxHeight = isMediumScreen ? (isSmallScreen ? 400 : 430) : 460;
   const fontS = isMediumScreen ? 8 : 12;
 
@@ -44,7 +44,7 @@ export default function RowCharts(params) {
             justifyContent="space-between"
           >
             <CardContent sx={{ alignContent: "end" }}>
-              <Typography variant="h6">
+              <Typography variant="h6" sx={{mb:1}}>
                 Long Pending Tickets Categories
               </Typography>
               <Stack
@@ -56,6 +56,7 @@ export default function RowCharts(params) {
                 <BarChart
                   margin={{
                     right: 0,
+                    
                   }}
                   width={width}
                   height={height}
@@ -69,13 +70,22 @@ export default function RowCharts(params) {
                       },
                     },
                   ]}
-                  series={[{ dataKey: "count", color: "#CEB900" }]}
+                  series={[{ dataKey: "count", color: "#CEB900" , label:"Ticket Count"}]}
                   layout="horizontal"
-                  xAxis={[
-                    {
-                      label: "Ticket Count",
+                  slotProps={{
+                    legend: {
+                      itemMarkHeight: 9,
+                      itemMarkWidth: 9,
+                      labelStyle: {
+                        fontSize: 15,
+                      },
                     },
-                  ]}
+                  }}
+                  // xAxis={[
+                  //   {
+                  //     label: "Ticket Count",
+                  //   },
+                  // ]}
                 />
               </Stack>
             </CardContent>
