@@ -1,4 +1,6 @@
+// "use client"
 import Navbar from "@/components/navbar/navbar";
+import { useTheme } from "@emotion/react";
 import { Box, Typography } from "@mui/material";
 import { Inter } from "next/font/google";
 import React from "react";
@@ -6,6 +8,7 @@ import React from "react";
 const inter = Inter({ subsets: ["latin"] });
 const drawerWidth = 223;
 export default function DashboardLayout({ children }) {
+  // const theme = useTheme();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -13,7 +16,7 @@ export default function DashboardLayout({ children }) {
           
           <Box
             sx={{
-              bgcolor:"#fafbfc",
+              // bgcolor: theme.palette.mode === "dark" ?"#434544"  : "#fafbfc",
               pt: 10,
               pl: { xs: 2, md: `${drawerWidth}px` },
               pr: { xs: 2, md: 3 },

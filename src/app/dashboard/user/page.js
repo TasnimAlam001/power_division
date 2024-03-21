@@ -68,11 +68,13 @@ export default function User() {
       await axiosSecure.post("/users", { name, email, phone, password, type, company_id })
         .then((response) => {
           if (response) {
+            setOpen(false);
             toast.success("User Added successfully!");
+
           }
         })
         .catch((error) => {
-          console.error("Error submitting form:", error);
+          console.log("Error submitting form:", error);
           toast.error("Error submitting form. Please try again.");
         });
     } catch (error) {
@@ -252,6 +254,7 @@ export default function User() {
               <AddIcon /> Add User
             </Button>
             <Dialog
+              
               fullScreen={fullScreen}
               open={open}
               onClose={handleClose}
@@ -307,7 +310,7 @@ export default function User() {
                       helperText={errors.password ? errors.password.message : ""}
                       
                     />
-                    {errors.password?.type === 'minLength' && <Typography sx={{color: red[600]}} role="alert">Password have to be more then six letters</Typography>}
+                    {errors.password?.type === 'minLength' && <Typography sx={{color: red[600]}} role="alert">Password must be at least 6 characters</Typography>}
                   </Box>
                   <Box sx={{ pb: 2 }}>
                     <FormControl
