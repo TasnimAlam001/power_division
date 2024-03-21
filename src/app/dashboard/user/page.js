@@ -27,7 +27,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
-import { green } from "@mui/material/colors";
+import { green, red } from "@mui/material/colors";
 import UserSkeleton from "@/components/Skeletons/userSkeleton";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -36,11 +36,15 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 import { useTheme } from "@emotion/react";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function User() {
   const [axiosSecure] = useAxiosSecure();
   const [userData, setUserData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [type, setType] = React.useState("");
   const [rows, setRows] = React.useState(userData);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const [open, setOpen] = React.useState(false);
@@ -55,9 +59,25 @@ export default function User() {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    reset();
-    console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data)
+    try {
+      reset();
+      const { name, email, phone, password, type, company_id } = data;
+
+      await axiosSecure.post("/users", { name, email, phone, password, type, company_id })
+        .then((response) => {
+          if (response) {
+            toast.success("User Added successfully!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          toast.error("Error submitting form. Please try again.");
+        });
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
   };
 
   // Set current date and time as default value for created_at field
@@ -75,7 +95,7 @@ export default function User() {
 
   React.useEffect(() => {
     setLoading(true);
-    axiosSecure("/user")
+    axiosSecure("/users")
       .then((res) => {
         setLoading(false);
         setUserData(res.data.data);
@@ -222,6 +242,7 @@ export default function User() {
               pt: 5,
             }}
           >
+            <ToastContainer />
             <Button
               variant="outlined"
               sx={{ mb: 0.5 }}
@@ -231,7 +252,6 @@ export default function User() {
               <AddIcon /> Add User
             </Button>
             <Dialog
-            
               fullScreen={fullScreen}
               open={open}
               onClose={handleClose}
@@ -240,9 +260,9 @@ export default function User() {
               <DialogTitle id="responsive-dialog-title">
                 {"ADD USER"}
               </DialogTitle>
-              <DialogContent >
+              <DialogContent>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Box sx={{ pb: 2, mt:2 }}>
+                  <Box sx={{ pb: 2, mt: 2 }}>
                     <TextField
                       label="Name"
                       fullWidth
@@ -262,6 +282,33 @@ export default function User() {
                       helperText={errors.email ? errors.email.message : ""}
                     />
                   </Box>
+                  <Box sx={{ pb: 2, mt: 2 }}>
+                    <TextField
+                      label="Phone"
+                      fullWidth
+                      variant="outlined"
+                      {...register("phone", {
+                        required: "Phone number is required",
+                      })}
+                      error={!!errors.phone}
+                      helperText={errors.phone ? errors.phone.message : ""}
+                    />
+                  </Box>
+                  <Box sx={{ pb: 2, mt: 2 }}>
+                    <TextField
+                      label="Password"
+                      fullWidth
+                      variant="outlined"
+                      {...register("password", {
+                        required: "Password is required",
+                        minLength: 6,
+                      })}
+                      error={!!errors.password}
+                      helperText={errors.password ? errors.password.message : ""}
+                      
+                    />
+                    {errors.password?.type === 'minLength' && <Typography sx={{color: red[600]}} role="alert">Password have to be more then six letters</Typography>}
+                  </Box>
                   <Box sx={{ pb: 2 }}>
                     <FormControl
                       fullWidth
@@ -272,6 +319,7 @@ export default function User() {
                       <Select
                         {...register("type", { required: "Type is required" })}
                         label="Type"
+                        onChange={(e) => setType(e.target.value)}
                       >
                         <MenuItem value="admin">Admin</MenuItem>
                         <MenuItem value="company">Company</MenuItem>
@@ -284,28 +332,60 @@ export default function User() {
                       </Box>
                     )}
                   </Box>
-                  <Box sx={{ pb: 2 }}>
-                    <TextField
-                      // label="Created At"
-                      type="datetime-local"
-                      fullWidth
-                      variant="outlined"
-                      defaultValue={new Date().toISOString().substr(0, 16)}
-                      disabled
-                    />
-                  </Box>
+                  {type === "company" && (
+                    <Box sx={{ pb: 2 }}>
+                      <FormControl
+                        fullWidth
+                        variant="outlined"
+                        error={!!errors.company}
+                      >
+                        <InputLabel>Company</InputLabel>
+                        <Select
+                          {...register("company_id", {
+                            required: "Company is required",
+                          })}
+                          label="Company"
+                        >
+                          <MenuItem value="1">BPDB</MenuItem>
+                          <MenuItem value="2">BREB</MenuItem>
+                          <MenuItem value="3">DESCO</MenuItem>
+                          <MenuItem value="4">DPDC</MenuItem>
+                          <MenuItem value="5">WZPDCL</MenuItem>
+                          <MenuItem value="6">NESCO</MenuItem>
+                        </Select>
+                      </FormControl>
+                      {errors.company_id && (
+                        <Box sx={{ color: "red", marginTop: 1 }}>
+                          {errors.company_id.message}
+                        </Box>
+                      )}
+                    </Box>
+                  )}
                   <DialogActions>
                     <Button onClick={handleClose} color="secondary">
                       Cancel
                     </Button>
-                    <Button type="submit" variant="contained" color="success">
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="success"
+                      // onClick={handleClose}
+                    >
                       Add User
                     </Button>
                   </DialogActions>
                 </form>
               </DialogContent>
-              
             </Dialog>
+            {/* <Link href="/dashboard/recycleBin">
+              <Button
+                variant="outlined"
+                sx={{ mb: 0.5, ml: 0.5 }}
+                color="secondary"
+              >
+                <DeleteIcon /> Recycle Bin
+              </Button>
+            </Link> */}
             <DataGrid
               rows={rows}
               columns={columns}
@@ -322,7 +402,7 @@ export default function User() {
                 toolbar: GridToolbar,
               }}
               slotProps={{
-                toolbar: { showQuickFilter: true, setRows, setRowModesModel },
+                toolbar: { showQuickFilter: true },
               }}
               initialState={{
                 pagination: {

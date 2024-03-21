@@ -1,14 +1,33 @@
-import { blue } from '@mui/material/colors'
-import Link from 'next/link'
-import React from 'react'
+import { Box, Typography } from '@mui/material';
+import Link from 'next/link';
+import React from 'react';
 
-export default function NotFound() {
+const NotFound = () => {
   return (
-    <div>
-        Requested page is not found. <br></br>
+    <Box
+      sx={{
+        backgroundImage: 'url("/404.jpg")', 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        textAlign: 'center',
+      }}
+    >
+      <Box sx={{color: "black", pb:10}}>
+        <Box>
+          Go Back to{' '}
+          <Link style={{backgroundColor:'black', padding:5, color:"white", borderRadius:"8px"}} href="/dashboard" passHref>
+             Dashboard
+          </Link>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
 
-        Go Back to <Link href="/dashboard" style={{color: blue[800]}}> Dashboard</Link>
-      
-    </div>
-  )
-}
+export default NotFound;
