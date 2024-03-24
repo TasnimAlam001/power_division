@@ -20,11 +20,12 @@ export default function DashboardLayout({ children }) {
             pt: 10,
             pl: { xs: 2, md: `${drawerWidth}px` },
             pr: { xs: 2, md: 3 },
+            pb:3
           }}
         >
           {children}
         </Box>
-        <Typography sx={{ fontSize: 12, mt: 5, textAlign: "center" }}>
+        <Typography sx={{ fontSize: 12, textAlign: "center", py:1}}>
           © 2024, All Rights Reserved. Developed By{" "}
           <span style={{ color: "#00ACF3" }}>Digicon Technologies ltd.</span>
         </Typography>
