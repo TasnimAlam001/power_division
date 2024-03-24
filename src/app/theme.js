@@ -1,5 +1,4 @@
 "use client"
-import { useEffect } from "react";
 import { createTheme } from "@mui/material";
 
 const getLocalStorageMode = () => {
@@ -7,16 +6,6 @@ const getLocalStorageMode = () => {
   return mode === "dark" ? "dark" : "light";
 };
 
-// const setLocalStorageMode = (mode) => {
-//   localStorage.setItem("mode", mode);
-// };
-
-// const useLocalStorageMode = () => {
-//   useEffect(() => {
-//     const mode = getLocalStorageMode();
-//     setLocalStorageMode(mode);
-//   }, []);
-// };
 
 const webTheme = createTheme({
   breakpoints: {
@@ -29,7 +18,7 @@ const webTheme = createTheme({
     },
   },
   palette: {
-    mode: getLocalStorageMode(), // Set mode based on local storage
+    mode: getLocalStorageMode(), 
     primary: {
       main: "#3382EF",
       light: "#e3f2fd",

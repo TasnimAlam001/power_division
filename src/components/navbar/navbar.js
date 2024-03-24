@@ -100,28 +100,10 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 const drawerWidth = 200;
 
 export default function Navbar() {
-  // const router = useRouter();
   const theme = useTheme();
   const [isLogin, setIsLogin] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: light)");
-  // const session =  auth();
-  // const [cUrl, setCUrl] = React.useState();
-
-  // const {data: session} = useSession();
-  // console.log("session data: ",session)
-
-  //  console.log("current rasta",cUrl)
-
-  //   const pathname = usePathname()
-  //   console.log(pathname)
-  //   useEffect(() => {
-  //     const url= pathname;
-  //     setCUrl(url)
-  //     // ...
-  //   }, [pathname])
-
   React.useEffect(() => {
     const token = localStorage.getItem("access-token");
     if (token) {
@@ -135,15 +117,6 @@ export default function Navbar() {
   const [dark, setDark] = React.useState(
     localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode
   );
-  const darkTheme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: dark ? "dark" : "light",
-        },
-      }),
-    [dark]
-  );
 
   // Update local storage when theme mode changes
   useEffect(() => {
@@ -152,11 +125,9 @@ export default function Navbar() {
   
     if (dark !== localStorageDark) {
       localStorage.setItem("mode", dark ? "dark" : "light");
-      window.location.reload(); // Reload the project after setting the theme mode
+      window.location.reload(); 
     }
   }, [dark]);
-
-
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -266,7 +237,7 @@ export default function Navbar() {
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   }));
-  // <CurrentRoute/>
+  
 
   return (
     <ThemeProvider theme={webTheme}>

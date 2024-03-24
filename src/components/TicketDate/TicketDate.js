@@ -15,7 +15,7 @@ export default function TicketDate({ onDatesSelected , startDate, endDate}) {
   const [selectedFromDate, setSelectedFromDate] = useState(dayjs(startDate));
   const [selectedToDate, setSelectedToDate] = useState(dayjs(endDate));
 
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa", startDate, endDate)
+  // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa", startDate, endDate)
   // Handler function to update selected dates
   const handleDateChange = (date, dateType) => {
     if (dateType === 'from') {
