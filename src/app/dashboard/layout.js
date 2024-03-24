@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 import Navbar from "@/components/navbar/navbar";
 import { useTheme } from "@emotion/react";
 import { Box, Typography } from "@mui/material";
@@ -8,7 +8,7 @@ import React from "react";
 const inter = Inter({ subsets: ["latin"] });
 const drawerWidth = 223;
 export default function DashboardLayout({ children }) {
-  // const theme = useTheme();
+  const theme = useTheme();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }) {
           
           <Box
             sx={{
-              // bgcolor: theme.palette.mode === "dark" ?"#434544"  : "#fafbfc",
+              bgcolor: theme.palette.mode === "light" ?  "#fafbfc"  :"#353635",
               pt: 10,
               pl: { xs: 2, md: `${drawerWidth}px` },
               pr: { xs: 2, md: 3 },

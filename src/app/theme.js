@@ -1,8 +1,24 @@
 "use client"
+import { useEffect } from "react";
 import { createTheme } from "@mui/material";
 
-const webTheme = createTheme({
+const getLocalStorageMode = () => {
+  const mode = localStorage.getItem("mode");
+  return mode === "dark" ? "dark" : "light";
+};
 
+// const setLocalStorageMode = (mode) => {
+//   localStorage.setItem("mode", mode);
+// };
+
+// const useLocalStorageMode = () => {
+//   useEffect(() => {
+//     const mode = getLocalStorageMode();
+//     setLocalStorageMode(mode);
+//   }, []);
+// };
+
+const webTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -12,13 +28,11 @@ const webTheme = createTheme({
       xl: 1440,
     },
   },
-
   palette: {
-    mode: "dark",
-    
+    mode: getLocalStorageMode(), // Set mode based on local storage
     primary: {
       main: "#3382EF",
-      light:'#e3f2fd',
+      light: "#e3f2fd",
     },
     success: {
       main: "#04984A",
@@ -30,13 +44,11 @@ const webTheme = createTheme({
       light: "#dbf2d5",
       dark: "#2962ff",
     },
-    text:{
-      main:"#000000",
+    text: {
+      main: "#000000",
       light: "#eeeeee",
-    }
-
+    },
   },
-
 });
 
 export default webTheme;
