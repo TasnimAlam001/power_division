@@ -1,6 +1,6 @@
 // import { auth } from "./app/auth";
 
-import { auth } from "@/app/auth";
+import { auth } from "./src/app/auth";
 
 export default auth((req) => {
   console.log("auth in middleware", !!req.auth);
@@ -9,6 +9,7 @@ export default auth((req) => {
   if (nextUrl.pathname == "/login") return null;
 
   if (!isLoggedIn && nextUrl.pathname != "/login")
+  console.log("Okay")
     return Response.redirect(new URL("/login", nextUrl));
 });
 export const config = {

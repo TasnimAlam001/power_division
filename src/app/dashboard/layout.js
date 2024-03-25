@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }) {
 
         <Box
           sx={{
-            bgcolor: theme.palette.mode === "light" ? "#fafbfc" : "#353635",
+            bgcolor: theme.palette.mode === "light" ? "#fafbfc" : "#2e2e2e",
             pt: 10,
             pl: { xs: 2, md: `${drawerWidth}px` },
             pr: { xs: 2, md: 3 },

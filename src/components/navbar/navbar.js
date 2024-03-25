@@ -120,11 +120,14 @@ export default function Navbar() {
   // if (typeof window !== "undefined") {
   //   localStorageTheme = localStorage.getItem("mode");
   // }
-  const localStorageTheme =  localStorage.getItem("mode");
+  // const localStorageTheme =  localStorage.getItem("mode");
 
   const [dark, setDark] = React.useState(() => {
-    return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
+    return prefersDarkMode;
   });
+  // const [dark, setDark] = React.useState(() => {
+  //   return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
+  // });
 
   // const [dark, setDark] = React.useState(() => {
   //   if (typeof window !== "undefined") {

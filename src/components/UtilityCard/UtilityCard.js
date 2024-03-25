@@ -120,7 +120,7 @@ export default function UtilityCard({ data }) {
             py={0.5}
             sx={{
               fontSize: 10,
-              backgroundColor: "#e9f7e6",
+              backgroundColor: "#e1f5e7",
               width: "100%",
               fontWeight: 550,
               textAlign: "center",
