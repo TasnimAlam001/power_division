@@ -13,10 +13,10 @@ import {
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts";
 import webTheme from "@/app/theme";
 import { useTheme } from "@emotion/react";
-import useAllData from "@/app/Hooks/useAllData";
-import { useEffect, useState } from "react";
-import AxiosSecure from "@/app/Hooks/useAxiousSecure";
-import axios from "axios";
+// import useAllData from "@/app/Hooks/useAllData";
+// import { useEffect, useState } from "react";
+// import AxiosSecure from "@/app/Hooks/useAxiousSecure";
+// import axios from "axios";
 
 export default function PieChars(params) {
 
@@ -29,6 +29,12 @@ export default function PieChars(params) {
     closeTicketCount,
     reopenTicketCount,
   } = dashboardData;
+  const allCountsZero =
+  totalTicketCount === 0 &&
+  openTicketCount === 0 &&
+  processingTicketCount === 0 &&
+  closeTicketCount === 0 &&
+  reopenTicketCount === 0;
 
   let data = [
     { label: "Opened", value: openTicketCount, color: "#04984A" },
@@ -77,7 +83,13 @@ export default function PieChars(params) {
           >
             <CardContent>
               <Typography variant="h5">Total Tickets</Typography>
-              <PieChart
+              {
+                allCountsZero ? (
+                  <Typography sx={{mt:20}} variant="body1" align="center">
+                  No Data Found
+                </Typography>
+                ):(
+                  <PieChart
                 margin={{
                   top: isMediumScreen ? 105 : 10,
                   left: isMediumScreen ? 90 : 5,
@@ -115,6 +127,9 @@ export default function PieChars(params) {
                   },
                 }}
               />
+                )
+              }
+              
 
               <Divider sx={{ pt: 4 }} />
               <Grid container columnSpacing={1} sx={{ mt: 4, pl: 3 }}>

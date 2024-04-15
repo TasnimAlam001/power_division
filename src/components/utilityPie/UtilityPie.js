@@ -37,7 +37,13 @@ export default function UtilityPie({companyData}) {
     reopenTicketCount,
   } = companyData;
 
-  
+  const allCountsZero =
+  totalTicketCount === 0 &&
+  openTicketCount === 0 &&
+  processingTicketCount === 0 &&
+  closeTicketCount === 0 &&
+  reopenTicketCount === 0;
+
   let data = [
     { label: "Opened", value: openTicketCount, color: "#04984A" },
     { label: "Processing", value: processingTicketCount, color: "#10C6FF" },
@@ -87,7 +93,13 @@ export default function UtilityPie({companyData}) {
         >
           <CardContent>
             <Typography variant="h6">Total Tickets</Typography>
-            <PieChart
+            {
+              allCountsZero ? (
+                <Typography sx={{mt:8}} variant="body1" align="center">
+                No Data Found
+              </Typography>
+              ):(
+                <PieChart
               margin={{
                 top: isMediumScreen ? 105 : 10,
                 left: isMediumScreen ? 90 : 5,
@@ -125,6 +137,9 @@ export default function UtilityPie({companyData}) {
                 },
               }}
             />
+              )
+            }
+            
             
           </CardContent>
        

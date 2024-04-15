@@ -28,12 +28,21 @@ const chartSetting = {
   },
 };
 
-export default function UtilityComplainBarChart({
-  companyWiseCategoryWiseComplain,
-}) {
+export default function UtilityComplainBarChart({companyWiseCategoryWiseComplain}) {
   //---------------------- Getting and setting the data
-  const count = companyWiseCategoryWiseComplain.map((item) => item.count);
-  const xLabels = companyWiseCategoryWiseComplain.map((item) => item.name);
+  let count = [];
+  let xLabels = [];
+
+  // Check if companyWiseCategoryWiseComplain is empty
+  if (companyWiseCategoryWiseComplain.length === 0) {
+    // Demo data with value zero
+    count = [0];
+    xLabels = ["No Data"];
+  } else {
+    // Getting and setting the data
+    count = companyWiseCategoryWiseComplain.map((item) => item.count);
+    xLabels = companyWiseCategoryWiseComplain.map((item) => item.name);
+  }
 
   //-----------------------Responsive breakpoints
 
@@ -55,16 +64,16 @@ export default function UtilityComplainBarChart({
   return (
     <ThemeProvider theme={webTheme}>
       <Box sx={{ position: "relative" }}>
-        <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>
+        <Card
+          sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}
+        >
           <Stack
             sx={{ height: boxHeight }}
             direction="column"
             justifyContent="space-between"
           >
             <CardContent>
-              <Typography variant="h6">
-              Category Wise Complains
-              </Typography>
+              <Typography variant="h6">Category Wise Complains</Typography>
               <Stack sx={{ mt: 3 }} direction="row" alignItems="center">
                 <BarChart
                   margin={{
@@ -80,7 +89,6 @@ export default function UtilityComplainBarChart({
                       data: count,
                       label: "Complain",
                       id: "countId",
-                      
                     },
                   ]}
                   slotProps={{

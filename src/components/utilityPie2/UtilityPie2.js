@@ -24,6 +24,7 @@ import theme from "@/app/theme";
 // };
 
 export default function UtilityPie2({previous2MonthTicketCount}) {
+  const isEmpty = previous2MonthTicketCount.length === 0; 
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
@@ -81,7 +82,14 @@ export default function UtilityPie2({previous2MonthTicketCount}) {
         >
           <CardContent>
             <Typography variant="h6">Previous 2 Month Ticket Comparison</Typography>
-            <PieChart
+            {
+              isEmpty ? (
+                <Typography sx={{mt:8}} variant="body1" align="center">
+                No Data Found
+              </Typography>
+              ):
+              (
+                <PieChart
               margin={{
                 top: isMediumScreen ? 105 : 10,
                 left: isMediumScreen ? 90 : 5,
@@ -119,6 +127,9 @@ export default function UtilityPie2({previous2MonthTicketCount}) {
                 },
               }}
             />
+              )
+            }
+            
             
           </CardContent>
        

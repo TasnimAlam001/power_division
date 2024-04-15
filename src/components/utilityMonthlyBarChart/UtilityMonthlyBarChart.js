@@ -4,6 +4,24 @@ import React from "react";
 
 export default function UtilityBarChart({ ticketData }) {
   // console.log("........................", ticketData);
+  if (Object.keys(ticketData).length === 0) {
+    return (
+      <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
+          <Typography variant="h6" sx={{p:4}}>Last 30 Days Tickets Status</Typography>
+
+        <Stack
+          sx={{ height: 350 }}
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <CardContent>
+            <Typography variant="h6">No Data Found</Typography>
+          </CardContent>
+        </Stack>
+      </Card>
+    );
+  }
 
   const dates = Object.keys(ticketData);
   const openedCounts = dates.map((date) => {
