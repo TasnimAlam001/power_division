@@ -9,10 +9,13 @@ import UtilityPie2 from "@/components/utilityPie2/UtilityPie2";
 import UtilityComplainBarChart from "@/components/utilityComplainBarChart/UtilityComplainBarChart";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { useSearchParams } from "next/navigation";
 
 export default function UtilityPage({ params }) {
   const [axiosSecure] = useAxiosSecure();
   const [companyData, setCompanyData] = useState([]);
+  const [selectedDates, setSelectedDates] = useState(null);
+
   const [loading, setLoading] = useState(true);
   const { id } = params;
 
@@ -20,9 +23,23 @@ export default function UtilityPage({ params }) {
     Aos.init();
   }, []);
 
+  const searchParams = useSearchParams()
+  useEffect(() => {
+    console.log("router.query:----", searchParams.get('start_date'),searchParams.get('end_date'));
+    
+      // const { start_date, end_date } = router.query;
+
+      setSelectedDates({
+        from: searchParams.get('start_date'),
+        to: searchParams.get('end_date'),
+      });
+     
+    
+  }, [searchParams]);
+
   useEffect(() => {
     setLoading(true);
-    axiosSecure(`/companyDashboard/${id}`)
+    axiosSecure(`/companyDashboard/${id}?start_date=${searchParams.get('start_date')}&end_date=${searchParams.get('end_date')}`)
       .then((res) => {
         setCompanyData(res.data.data);
         setLoading(false);
@@ -117,7 +134,7 @@ export default function UtilityPage({ params }) {
 }
 
 // export async function generateStaticParams(){
-//   const res = await fetch("http://172.17.0.87:16999/api/web-app//dashboard")
+//   const res = await fetch("http://202.51.182.190:5412/api/web-app//dashboard")
 //   const utilities = res.data.data;
 
 //   return utilities.map((utility)=>({

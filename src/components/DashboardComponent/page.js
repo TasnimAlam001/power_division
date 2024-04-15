@@ -6,10 +6,19 @@ import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import { useEffect, useState } from "react";
 import HomeSkeleton from "../Skeletons/HomeSkeleton";
 import DashboardDate from "../Dates/DashboardDate";
+import { useRouter } from "next/navigation";
+// import { useRouter } from "next/router";
+// import { NextRequest } from "next/server";
 
+
+// export async function GET(request: NextRequest ){
+//   const searchParams = request.nextUrl.searchParams;
+
+// }
 
 
 const DashboardComponent = () => {
+  const router = useRouter();
   const [axiosSecure] = useAxiosSecure();
   const [dashboardData, setDashboardData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,6 +48,15 @@ const DashboardComponent = () => {
         });
     }
   }, [selectedDates, axiosSecure]);
+
+  useEffect(() => {
+    // Update the URL when selectedDates change
+    if (selectedDates) {
+      router.push(`/dashboard?start_date=${selectedDates.from}&end_date=${selectedDates.to}`);
+    } else {
+      router.push(`/dashboard?start_date=${dashboardData.startDate}&end_date=${dashboardData.endDate}`);
+    }
+  }, [selectedDates, router,dashboardData]);
 
 
   // console.log(",...............", dashboardData)
