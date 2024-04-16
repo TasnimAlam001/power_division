@@ -1,13 +1,12 @@
 "use client";
 import { createTheme } from "@mui/material";
-
 const getLocalStorageMode = () => {
   if (typeof  window !== "undefined") {
     const mode = localStorage.getItem("mode");
     return mode === "dark" ? "dark" : "light";
   }
 };
-
+console.log("------,",getLocalStorageMode())
 const webTheme = createTheme({
   breakpoints: {
     values: {

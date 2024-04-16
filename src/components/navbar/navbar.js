@@ -120,14 +120,14 @@ export default function Navbar() {
   // if (typeof window !== "undefined") {
   //   localStorageTheme = localStorage.getItem("mode");
   // }
-  // const localStorageTheme =  localStorage.getItem("mode");
+  const localStorageTheme =  localStorage.getItem("mode");
 
-  const [dark, setDark] = React.useState(() => {
-    return prefersDarkMode;
-  });
   // const [dark, setDark] = React.useState(() => {
-  //   return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
+  //   return prefersDarkMode;
   // });
+  const [dark, setDark] = React.useState(() => {
+    return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
+  });
 
   // const [dark, setDark] = React.useState(() => {
   //   if (typeof window !== "undefined") {
@@ -141,12 +141,16 @@ export default function Navbar() {
   useEffect(() => {
     const localStorageMode = localStorage.getItem("mode");
     const localStorageDark = localStorageMode === "dark";
-
+  
     if (dark !== localStorageDark) {
       localStorage.setItem("mode", dark ? "dark" : "light");
-      window.location.reload();
+      // Reload the page only if the localStorage mode and current state are different
+      if (localStorageDark !== null) {
+        window.location.reload();
+      }
     }
   }, [dark]);
+  
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -349,7 +353,7 @@ export default function Navbar() {
                       onClick={() => setDark(!dark)}
                     />
                   </Typography>
-
+                  {/* TODO : check isLogin as in middleware */}
                   {isLogin ? <Profile /> : <Button>SignIn</Button>}
                 </Stack>
               </Stack>

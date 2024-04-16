@@ -34,3 +34,54 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+<!-- 
+
+
+  const isSystemEnableDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  // const getLocalStorageMode = () => {
+  //   if (typeof  window !== "undefined") {
+  //     const mode = localStorage.getItem("mode");
+  //     return mode === "dark" ? "dark" : "light";
+  //   }else{
+  //     return prefersDarkMode === 'dark' ? 'dark': 'light';
+  //   }
+  // };
+
+  //-----------Dark mode -----
+  const defaultMode = isSystemEnableDarkMode ? "dark" : "light";
+
+  const [mode, setMode] = useState(defaultMode);
+  useEffect(() => {
+    localStorage.setItem("mode", mode);
+  }, [mode]);
+
+  const modeChangeHandler = () => {
+    let currentMode = mode == "light" ? "dark" : "light";
+    setMode(currentMode);
+
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    const localStorageMode = localStorage.getItem("mode");
+    if (localStorageMode) {
+      setMode(localStorageMode);
+    } else {
+      isSystemEnableDarkMode ? setMode("dark") : setMode("light");
+    }
+
+    // console.info(isSystemEnableDarkMode, localStorageMode);
+
+    // const localStorageDark = localStorageMode === "dark";
+
+    // if (dark !== localStorageDark) {
+    //   localStorage.setItem("mode", dark ? "dark" : "light");
+    //   // Reload the page only if the localStorage mode and current state are different
+    //   if (localStorageDark !== null) {
+    //     window.location.reload();
+    //   }
+    // }
+  }, [isSystemEnableDarkMode]);
+ -->

@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import webTheme, { useLocalStorageMode } from "./theme";
+import webTheme from "./theme";
 
 
 const inter = Inter({ subsets: ["latin"] });

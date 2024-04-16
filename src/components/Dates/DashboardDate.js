@@ -44,7 +44,7 @@ export default function DashboardDate({ onDatesSelected , startDate, endDate}) {
       console.log('Please select both from and to dates.');
     }
   };
-  console.log(startDate, endDate)
+  // console.log(startDate, endDate)
 
   return (
     <ThemeProvider theme={webTheme}>
