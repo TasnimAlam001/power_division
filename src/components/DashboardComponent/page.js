@@ -52,9 +52,9 @@ const DashboardComponent = () => {
   useEffect(() => {
     // Update the URL when selectedDates change
     if (selectedDates) {
-      router.push(`/dashboard?start_date=${selectedDates.from}&end_date=${selectedDates.to}`);
+      router.push(`/dashboard?m=l&start_date=${selectedDates.from}&end_date=${selectedDates.to}`);
     } else {
-      router.push(`/dashboard?start_date=${dashboardData.startDate}&end_date=${dashboardData.endDate}`);
+      router.push(`/dashboard?m=l&start_date=${dashboardData.startDate}&end_date=${dashboardData.endDate}`);
     }
   }, [selectedDates, router,dashboardData]);
 

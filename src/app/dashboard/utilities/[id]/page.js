@@ -25,7 +25,7 @@ export default function UtilityPage({ params }) {
 
   const searchParams = useSearchParams()
   useEffect(() => {
-    console.log("router.query:----", searchParams.get('start_date'),searchParams.get('end_date'));
+    // console.log("router.query:----", searchParams.get('start_date'),searchParams.get('end_date'));
     
       // const { start_date, end_date } = router.query;
 

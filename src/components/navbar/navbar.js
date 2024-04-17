@@ -104,7 +104,7 @@ export default function Navbar() {
   const [isLogin, setIsLogin] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  // const [localStorageTheme, setLocalStorageTheme] = useState(initialState);
+  // const [localStorageTheme, setLocalStorageTheme] = useState(null);
 
   React.useEffect(() => {
     const token = localStorage.getItem("access-token");
@@ -114,20 +114,33 @@ export default function Navbar() {
   }, []);
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  
+    const [dark, setDark] =useState(prefersDarkMode);
 
   // let localStorageTheme = prefersDarkMode;
 
   // if (typeof window !== "undefined") {
   //   localStorageTheme = localStorage.getItem("mode");
   // }
-  const localStorageTheme =  localStorage.getItem("mode");
 
   // const [dark, setDark] = React.useState(() => {
   //   return prefersDarkMode;
   // });
-  const [dark, setDark] = React.useState(() => {
-    return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
-  });
+  // const [dark, setDark] = useState("light");
+  // const localStorageTheme =  localStorage.getItem("mode");
+
+  // useEffect(() => {
+  //   const mode = localStorage.getItem("mode");
+  //   // set mode
+  //   // console.log(`get localStore ${mode}`);
+  //   if(mode !== dark){
+  //     setDark(mode  === "true");
+  //   }
+  // }, [dark]);
+
+  // const [dark, setDark] = React.useState(() => {
+  //   return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
+  // });
 
   // const [dark, setDark] = React.useState(() => {
   //   if (typeof window !== "undefined") {
@@ -138,19 +151,28 @@ export default function Navbar() {
   // });
 
   // Update local storage when theme mode changes
-  useEffect(() => {
-    const localStorageMode = localStorage.getItem("mode");
-    const localStorageDark = localStorageMode === "dark";
+  // useEffect(() => {
+  //   const localStorageMode = localStorage.getItem("mode");
+  //   // setLocalStorageTheme(localStorageMode)
+  //   const localStorageDark = localStorageMode === "dark";
   
-    if (dark !== localStorageDark) {
-      localStorage.setItem("mode", dark ? "dark" : "light");
-      // Reload the page only if the localStorage mode and current state are different
-      if (localStorageDark !== null) {
-        window.location.reload();
-      }
-    }
-  }, [dark]);
+  //   if (dark !== localStorageDark) {
+  //     localStorage.setItem("mode", dark ? "dark" : "light");
+  //     // Reload the page only if the localStorage mode and current state are different
+  //     if (localStorageDark !== null) {
+  //       window.location.reload();
+  //     }
+  //   }
+  // }, [dark]);
   
+  const handleDarkMode = ()=>{
+    // dark ? setDark("light") :"dark"
+    setDark(!dark)
+    localStorage.setItem('mode',dark ? "dark" : "light");
+    window.location.reload();
+  }
+
+
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -350,7 +372,7 @@ export default function Navbar() {
                   >
                     <MaterialUISwitch
                       checked={dark}
-                      onClick={() => setDark(!dark)}
+                      onClick={handleDarkMode}
                     />
                   </Typography>
                   {/* TODO : check isLogin as in middleware */}

@@ -96,7 +96,7 @@ export default function UtilityComplainBarChart({companyWiseCategoryWiseComplain
                       itemMarkHeight: 9,
                       itemMarkWidth: 9,
                       labelStyle: {
-                        fontSize: 10,
+                        fontSize: 14,
                       },
                     },
                   }}
