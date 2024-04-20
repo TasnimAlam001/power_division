@@ -5,7 +5,7 @@ import {
   Card,
   CardContent,
   Stack,
-  ThemeProvider,
+  
   Typography,
   createTheme,
   useMediaQuery,
@@ -13,7 +13,7 @@ import {
 
 import { LineChart, axisClasses } from "@mui/x-charts";
 import theme from "@/app/theme";
-import webTheme from "@/app/theme";
+
 
 const chartSetting = {
   yAxis: [
@@ -51,7 +51,7 @@ export default function AreaCharts(params) {
   const fontS = isMediumScreen ? 8 : 11;
 
   return (
-    <ThemeProvider theme={webTheme}>
+
       <Box sx={{ position: "relative" }}>
         <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>
           <Stack
@@ -156,6 +156,5 @@ export default function AreaCharts(params) {
           </Stack>
         </Card>
       </Box>
-    </ThemeProvider>
   );
 }

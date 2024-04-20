@@ -5,17 +5,14 @@ import {
   Button,
   Checkbox,
   FormControl,
-  FormControlLabel,
   Grid,
   IconButton,
   InputAdornment,
   InputLabel,
   OutlinedInput,
   Stack,
-  TextField,
-  ThemeProvider,
-  Typography,
   useMediaQuery,
+  Typography
 } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -26,7 +23,7 @@ import { useForm } from "react-hook-form";
 
 import { loginAction } from "@/components/loginAction/loginAction";
 // import useAxiosSecure from "../Hooks/AxiousSecure";
-import webTheme from "../theme";
+
 import LoginSVG from "@/components/LoginSVG/LoginSVG";
 import AxiosSecure from "../Hooks/useAxiousSecure";
 
@@ -83,7 +80,6 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={webTheme}>
       <Stack alignItems="center" justifyContent="center" sx={{ mt: 4 }}>
         <Grid container spacing={6} sx={{ ml: { md: 10 }, display: "flex", justifyContent: "center", alignItems: "center"  }}>
           <Grid item xs={12} md={3}>
@@ -234,6 +230,5 @@ export default function Login() {
           </Grid>
         </Grid>
       </Stack>
-    </ThemeProvider>
   );
 }

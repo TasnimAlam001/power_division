@@ -6,13 +6,12 @@ import {
   Card,
   CardContent,
   Stack,
-  ThemeProvider,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import theme from "@/app/theme";
 import { axisClasses } from "@mui/x-charts";
-import webTheme from "@/app/theme";
+
 
 const chartSetting = {
   yAxis: [
@@ -62,67 +61,65 @@ export default function UtilityComplainBarChart({companyWiseCategoryWiseComplain
   const fontS = isSmallScreen ? 9 : 12;
 
   return (
-    <ThemeProvider theme={webTheme}>
-      <Box sx={{ position: "relative" }}>
-        <Card
-          sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}
+    <Box sx={{ position: "relative" }}>
+      <Card
+        sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}
+      >
+        <Stack
+          sx={{ height: boxHeight }}
+          direction="column"
+          justifyContent="space-between"
         >
-          <Stack
-            sx={{ height: boxHeight }}
-            direction="column"
-            justifyContent="space-between"
-          >
-            <CardContent>
-              <Typography variant="h6">Category Wise Complains</Typography>
-              <Stack sx={{ mt: 3 }} direction="row" alignItems="center">
-                <BarChart
-                  margin={{
-                    top: 60,
-                    bottom: 120,
-                    right: 0,
-                    left: 20,
-                  }}
-                  width={width}
-                  height={height}
-                  series={[
-                    {
-                      data: count,
-                      label: "Complain",
-                      id: "countId",
+          <CardContent>
+            <Typography variant="h6">Category Wise Complains</Typography>
+            <Stack sx={{ mt: 3 }} direction="row" alignItems="center">
+              <BarChart
+                margin={{
+                  top: 60,
+                  bottom: 120,
+                  right: 0,
+                  left: 20,
+                }}
+                width={width}
+                height={height}
+                series={[
+                  {
+                    data: count,
+                    label: "Complain",
+                    id: "countId",
+                  },
+                ]}
+                slotProps={{
+                  legend: {
+                    itemMarkHeight: 9,
+                    itemMarkWidth: 9,
+                    labelStyle: {
+                      fontSize: 14,
                     },
-                  ]}
-                  slotProps={{
-                    legend: {
-                      itemMarkHeight: 9,
-                      itemMarkWidth: 9,
-                      labelStyle: {
-                        fontSize: 14,
-                      },
-                    },
-                  }}
-                  xAxis={[
-                    {
-                      data: xLabels,
+                  },
+                }}
+                xAxis={[
+                  {
+                    data: xLabels,
 
-                      scaleType: "band",
-                      tickLabelStyle: {
-                        angle: -45,
-                        textAnchor: "end",
-                        fontSize: 12,
-                      },
-                      categoryGapRatio:
-                        companyWiseCategoryWiseComplain.length < 4
-                          ? 0.9
-                          : undefined,
+                    scaleType: "band",
+                    tickLabelStyle: {
+                      angle: -45,
+                      textAnchor: "end",
+                      fontSize: 12,
                     },
-                  ]}
-                  {...chartSetting}
-                />
-              </Stack>
-            </CardContent>
-          </Stack>
-        </Card>
-      </Box>
-    </ThemeProvider>
+                    categoryGapRatio:
+                      companyWiseCategoryWiseComplain.length < 4
+                        ? 0.9
+                        : undefined,
+                  },
+                ]}
+                {...chartSetting}
+              />
+            </Stack>
+          </CardContent>
+        </Stack>
+      </Card>
+    </Box>
   );
 }

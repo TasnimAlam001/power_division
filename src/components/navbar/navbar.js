@@ -20,9 +20,7 @@ import {
 import SettingsOverscanIcon from "@mui/icons-material/SettingsOverscan";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import {
-  ThemeProvider,
-  createTheme,
+import {  
   styled,
   useTheme,
 } from "@mui/material/styles";
@@ -34,7 +32,7 @@ import { GiWallet } from "react-icons/gi";
 import Image from "next/image";
 import Link from "next/link";
 import Profile from "../profile/profile";
-import webTheme from "@/app/theme";
+
 
 const data = [
   { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
@@ -99,7 +97,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 const drawerWidth = 200;
 
-export default function Navbar() {
+export default function Navbar(props) {
+  const {toggleMode, currentMode} = props;
   const theme = useTheme();
   const [isLogin, setIsLogin] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -110,12 +109,12 @@ export default function Navbar() {
     const token = localStorage.getItem("access-token");
     if (token) {
       setIsLogin(true);
-    }
+    }    
   }, []);
-
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   
-    const [dark, setDark] =useState(prefersDarkMode);
+
+  
 
   // let localStorageTheme = prefersDarkMode;
 
@@ -138,7 +137,7 @@ export default function Navbar() {
   //   }
   // }, [dark]);
 
-  // const [dark, setDark] = React.useState(() => {
+  // const [dark, setDark] = useState(() => {
   //   return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
   // });
 
@@ -155,7 +154,7 @@ export default function Navbar() {
   //   const localStorageMode = localStorage.getItem("mode");
   //   // setLocalStorageTheme(localStorageMode)
   //   const localStorageDark = localStorageMode === "dark";
-  
+
   //   if (dark !== localStorageDark) {
   //     localStorage.setItem("mode", dark ? "dark" : "light");
   //     // Reload the page only if the localStorage mode and current state are different
@@ -164,13 +163,6 @@ export default function Navbar() {
   //     }
   //   }
   // }, [dark]);
-  
-  const handleDarkMode = ()=>{
-    // dark ? setDark("light") :"dark"
-    setDark(!dark)
-    localStorage.setItem('mode',dark ? "dark" : "light");
-    window.location.reload();
-  }
 
 
 
@@ -297,8 +289,6 @@ export default function Navbar() {
   }));
 
   return (
-    <ThemeProvider theme={webTheme}>
-      <div>
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
 
@@ -361,7 +351,7 @@ export default function Navbar() {
                       },
                     }}
                   >
-                    <SettingsOverscanIcon onClick={toggleFullScreen}/>
+                    <SettingsOverscanIcon onClick={toggleFullScreen} />
                   </Typography>
                   <Typography
                     lineHeight={0}
@@ -370,10 +360,8 @@ export default function Navbar() {
                       cursor: "pointer",
                     }}
                   >
-                    <MaterialUISwitch
-                      checked={dark}
-                      onClick={handleDarkMode}
-                    />
+                    {/* <MaterialUISwitch checked={mode} onClick={handleDarkMode} /> */}
+                    <Switch checked={theme.palette.mode==='dark'} onClick={toggleMode}/>
                   </Typography>
                   {/* TODO : check isLogin as in middleware */}
                   {isLogin ? <Profile /> : <Button>SignIn</Button>}
@@ -440,7 +428,5 @@ export default function Navbar() {
             {children}
           </Box> */}
         </Box>
-      </div>
-    </ThemeProvider>
   );
 }

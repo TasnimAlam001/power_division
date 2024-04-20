@@ -3,8 +3,8 @@ import { useState } from 'react'; // Import useState hook
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { Box, Button, Stack, ThemeProvider, Typography } from "@mui/material";
-import webTheme from "@/app/theme";
+import { Box, Button, Stack, Typography } from "@mui/material";
+
 import { toast } from 'react-toastify'; // Assuming you're using react-toastify for displaying toasts
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,7 +47,7 @@ export default function DashboardDate({ onDatesSelected , startDate, endDate}) {
   // console.log(startDate, endDate)
 
   return (
-    <ThemeProvider theme={webTheme}>
+    <>
       <ToastContainer/>
       <Box sx={{ display: { xs: "none", md: "block" } }}>
         <Stack direction="row" spacing={3} alignItems="center" width={550}>
@@ -87,7 +87,7 @@ export default function DashboardDate({ onDatesSelected , startDate, endDate}) {
           </Box>
         </Stack>
       </Box>
-    </ThemeProvider>
+    </>
   );
 }
 

@@ -5,12 +5,11 @@ import {
   Card,
   CardContent,
   Stack,
-  ThemeProvider,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import theme from "@/app/theme";
-import webTheme from "@/app/theme";
+
 
 export default function RowCharts(params) {
   //---------------------- Getting and setting the data
@@ -39,58 +38,54 @@ export default function RowCharts(params) {
   const fontS = isMediumScreen ? 8 : 12;
 
   return (
-    <ThemeProvider theme={webTheme}>
-      <div>
-        <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
+    <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
+      <Stack
+        sx={{ height: boxHeight }}
+        direction="column"
+        justifyContent="space-between"
+      >
+        <CardContent sx={{ alignContent: "end" }}>
+          <Typography variant="h6" sx={{ mb: 1 }}>
+            Long Pending Tickets Categories
+          </Typography>
           <Stack
-            sx={{ height: boxHeight }}
-            direction="column"
-            justifyContent="space-between"
+            sx={{ pl: 0, textAlign: "right" }}
+            direction="row"
+            alignContent="flex-end"
+            justifyContent="flex-end"
           >
-            <CardContent sx={{ alignContent: "end" }}>
-              <Typography variant="h6" sx={{ mb: 1 }}>
-                Long Pending Tickets Categories
-              </Typography>
-              <Stack
-                sx={{ pl: 0, textAlign: "right" }}
-                direction="row"
-                alignContent="flex-end"
-                justifyContent="flex-end"
-              >
-                <BarChart
-                  margin={{
-                    right: 0,
-                  }}
-                  width={width}
-                  height={height}
-                  dataset={dataset}
-                  yAxis={[
-                    {
-                      scaleType: "band",
-                      dataKey: "name",
-                      tickLabelStyle: {
-                        fontSize: fontS,
-                      },
-                    },
-                  ]}
-                  series={[{ dataKey: "count", color: "#CEB900", label: "Ticket Count" }]}
-                  layout="horizontal"
-                  slotProps={{
-                    legend: {
-                      itemMarkHeight: 9,
-                      itemMarkWidth: 9,
-                      labelStyle: {
-                        fontSize: 15,
-                      },
-                    },
-                  }}
-                />
-              </Stack>
-            </CardContent>
+            <BarChart
+              margin={{
+                right: 0,
+              }}
+              width={width}
+              height={height}
+              dataset={dataset}
+              yAxis={[
+                {
+                  scaleType: "band",
+                  dataKey: "name",
+                  tickLabelStyle: {
+                    fontSize: fontS,
+                  },
+                },
+              ]}
+              series={[{ dataKey: "count", color: "#CEB900", label: "Ticket Count" }]}
+              layout="horizontal"
+              slotProps={{
+                legend: {
+                  itemMarkHeight: 9,
+                  itemMarkWidth: 9,
+                  labelStyle: {
+                    fontSize: 15,
+                  },
+                },
+              }}
+            />
           </Stack>
-        </Card>
-      </div>
-    </ThemeProvider>
+        </CardContent>
+      </Stack>
+    </Card>
   );
 }
 

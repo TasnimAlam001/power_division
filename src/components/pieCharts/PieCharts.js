@@ -8,10 +8,10 @@ import {
   Typography,
   useMediaQuery,
   Box,
-  ThemeProvider,
+  
 } from "@mui/material";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts";
-import webTheme from "@/app/theme";
+
 import { useTheme } from "@emotion/react";
 // import useAllData from "@/app/Hooks/useAllData";
 // import { useEffect, useState } from "react";
@@ -73,9 +73,7 @@ export default function PieChars(params) {
   const markFont = isMediumScreen ? 12 : 15;
 
   return (
-    <ThemeProvider theme={webTheme}>
-      <div>
-        <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>  
+    <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>  
           <Stack
             sx={{ height: boxHeight }}
             direction="column"
@@ -168,7 +166,5 @@ export default function PieChars(params) {
             </Typography>
           </Stack>
         </Card>
-      </div>
-    </ThemeProvider>
   );
 }

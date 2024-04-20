@@ -1,5 +1,5 @@
-import { Grid, ThemeProvider, createTheme } from "@mui/material";
-import webTheme from "@/app/theme";
+import { Grid } from "@mui/material";
+
 import BarCharts from "../barCharts/BarCharts";
 import PieChars from "../pieCharts/PieCharts";
 import AreaCharts from "../areaCharts/AreaCharts";
@@ -10,7 +10,7 @@ export default function AllCharts({dashboardData}) {
 
 
   return (
-    <ThemeProvider theme={webTheme}>
+
       <Grid container spacing={3}>
         
             <Grid item xs={12} lg={5}>
@@ -29,6 +29,6 @@ export default function AllCharts({dashboardData}) {
       
       
       </Grid>
-    </ThemeProvider>
+
   );
 }

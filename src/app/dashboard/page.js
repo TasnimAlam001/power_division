@@ -1,8 +1,7 @@
-import { ThemeProvider } from "@mui/material";
+
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
 import DashboardComponent from "@/components/DashboardComponent/page";
-import webTheme from "../theme";
 
 export default async function Dashboard() {
   
@@ -14,10 +13,8 @@ export default async function Dashboard() {
   if(!session) redirect("/api/auth/signin");
 
   return (
-    <main>
-      <ThemeProvider theme={webTheme}>
-        <DashboardComponent />
-      </ThemeProvider>
+    <main>      
+        <DashboardComponent />      
     </main>
   );
 }

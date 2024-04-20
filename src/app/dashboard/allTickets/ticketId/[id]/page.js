@@ -17,6 +17,7 @@ import { blue, grey } from "@mui/material/colors";
 import React from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter } from "next/navigation";
+import Divider from "@mui/material/Divider";
 
 export default function CompanyId({ params }) {
   const router = useRouter();
@@ -63,13 +64,14 @@ export default function CompanyId({ params }) {
             <Typography>Ticket Details | ID #{ticketDetailsData.id}</Typography>
             <Typography
               sx={{
-                bgcolor: "primary.light",
+                bgcolor: "success.light",
                 px: 1,
                 py: 0.5,
                 borderRadius: 2,
                 color: "black",
                 textAlign: "center",
                 mt: { xs: 3, md: 0 },
+                fontWeight: 700,
               }}
             >
               {(() => {
@@ -98,7 +100,7 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "primary.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" }}
                           align="center"
                           colSpan={2}
                         >
@@ -108,19 +110,19 @@ export default function CompanyId({ params }) {
                     </TableHead>
                     <TableBody>
                       <TableRow>
-                        <TableCell>Name</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Name</TableCell>
                         <TableCell>{ticketDetailsData.name}</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Email</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Email</TableCell>
                         <TableCell>{ticketDetailsData.email}</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Phone</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Phone</TableCell>
                         <TableCell>{ticketDetailsData.phone}</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Address</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Address</TableCell>
                         <TableCell>{ticketDetailsData.address}</TableCell>
                       </TableRow>
                     </TableBody>
@@ -134,7 +136,7 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "primary.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" }}
                           align="center"
                           colSpan={2}
                         >
@@ -144,21 +146,39 @@ export default function CompanyId({ params }) {
                     </TableHead>
                     <TableBody>
                       <TableRow>
-                        <TableCell>Request Type</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>
+                          Request Type
+                        </TableCell>
                         <TableCell>
                           {ticketDetailsData.request_type_name}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Request Category</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>
+                          Request Category
+                        </TableCell>
                         <TableCell>
                           {ticketDetailsData.request_category_name}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Request Sub Category</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>
+                          Request Sub Category
+                        </TableCell>
                         <TableCell>
                           {ticketDetailsData.request_sub_category_name}
+                        </TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell sx={{ fontWeight: 700 }}>Source : 
+                        
+                        <Box component="span" sx={{ bgcolor: "success.light", px:2, py:0.5,borderRadius: 2,ml:0.5,color: "black", textTransform: "uppercase", }}>{ticketDetailsData.platform}</Box>
+                        
+                        
+                        </TableCell>
+                        <TableCell sx={{color: "black", textTransform: "uppercase", }} >    Created By:                        
+                        <Box component="span" sx={{ bgcolor: grey[200], px:2, py:0.5,borderRadius: 2,ml:0.5,color: "black", textTransform: "uppercase",fontWeight: 700 }}>{ticketDetailsData.user_name}</Box>
+                          
                         </TableCell>
                       </TableRow>
                     </TableBody>
@@ -166,31 +186,25 @@ export default function CompanyId({ params }) {
                 </TableContainer>
                 <Box sx={{ pt: 1 }}>
                   <Typography>
-                    Source{" "}
-                    <Box
-                      component="span"
-                      sx={{
-                        bgcolor: "primary.light",
-                        px: 2,
-                        py: 0.5,
-                        borderRadius: 2,
-                        mr: 2,
-                        color: "black",
-                      }}
-                    >
-                      {ticketDetailsData.platform}
+                   
+                    <Box component="span" sx={{ fontWeight: 700 }}>
+                      Submitted At:
                     </Box>
-                    Submitted At:
+
                     {ticketDetailsData.submitted_at}
                   </Typography>
                   <Typography sx={{ mt: 2 }}>
-                    Created By{" "}
+                    <Box component="span" sx={{ fontWeight: 700 }}>
+                      Created By
+                    </Box>
+
                     <Box
                       component="span"
                       sx={{
                         bgcolor: grey[200],
                         px: 2,
                         py: 0.5,
+                        ml: 0.5,
                         borderRadius: 2,
                         textTransform: "uppercase",
                         color: "black",
@@ -208,11 +222,11 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "primary.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" }}
                           align="center"
                           colSpan={2}
                         >
-                          Customer Info
+                          Consumer Info
                         </TableCell>
                       </TableRow>
                     </TableHead>
@@ -250,7 +264,7 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "primary.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" }}
                           align="center"
                           colSpan={2}
                         >
@@ -304,7 +318,7 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "primary.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" }}
                           align="center"
                           colSpan={3}
                         >
