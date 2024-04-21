@@ -8,12 +8,12 @@ export default function Utilities({ dashboardData }) {
   const utility = dashboardData?.companyListWithTickets;
 
   return (
-    <ThemeProvider theme={webTheme}>
+    
       <Grid container spacing={{ xs: 2, sm: 4 }}>
         {utility?.map((data, index) => (
           <UtilityCard key={index} data={data} />
         ))}
       </Grid>
-    </ThemeProvider>
+    
   );
 }

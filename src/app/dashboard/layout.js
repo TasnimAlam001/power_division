@@ -119,7 +119,7 @@ export default function DashboardLayout({ children }) {
   //   },
   // });
 
-  const themeS = useTheme();
+  
   // const Araf=(props)=>{
   //   let {children, myTheme} = props;
   //   return 
@@ -128,7 +128,7 @@ export default function DashboardLayout({ children }) {
   
 
   return (
-    <DarkModeProvider>   
+    <DarkModeProvider>
 
 
    <ContextConsumer>
@@ -138,7 +138,7 @@ export default function DashboardLayout({ children }) {
       <Navbar  />
       <Box
         sx={{
-          bgcolor: themeS.palette.mode === "light" ? "#fafbfc" : "#2e2e2e",
+          
           pt: 10,
           pl: { xs: 2, md: `${drawerWidth}px` },
           pr: { xs: 2, md: 3 },
