@@ -32,6 +32,8 @@ import { GiWallet } from "react-icons/gi";
 import Image from "next/image";
 import Link from "next/link";
 import Profile from "../profile/profile";
+import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
+
 
 
 const data = [
@@ -104,6 +106,8 @@ export default function Navbar(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   // const [localStorageTheme, setLocalStorageTheme] = useState(null);
+  const {isDarkMode, toggleDarkMode} = useDarkMode();
+  console.log(isDarkMode)
 
   React.useEffect(() => {
     const token = localStorage.getItem("access-token");
@@ -361,7 +365,7 @@ export default function Navbar(props) {
                     }}
                   >
                     {/* <MaterialUISwitch checked={mode} onClick={handleDarkMode} /> */}
-                    <Switch checked={theme.palette.mode==='dark'} onClick={toggleMode}/>
+                    <Switch checked={isDarkMode} onClick={toggleDarkMode}/>
                   </Typography>
                   {/* TODO : check isLogin as in middleware */}
                   {isLogin ? <Profile /> : <Button>SignIn</Button>}
