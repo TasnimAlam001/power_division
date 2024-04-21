@@ -254,16 +254,19 @@ export default function User() {
               <AddIcon /> Add User
             </Button>
             <Dialog
-              
-              fullScreen={fullScreen}
+              fullWidth
+              maxWidth="md"
+              // fullScreen={fullScreen}
               open={open}
               onClose={handleClose}
               aria-labelledby="responsive-dialog-title"
+              // sx={{width:1000}}
             >
+              {/* <DialogTitle> */}
               <DialogTitle id="responsive-dialog-title">
                 {"ADD USER"}
               </DialogTitle>
-              <DialogContent>
+              <DialogContent sx={{ px: { md: 10 } }}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Box sx={{ pb: 2, mt: 2 }}>
                     <TextField

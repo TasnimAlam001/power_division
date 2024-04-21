@@ -7,14 +7,6 @@ import { useEffect, useState } from "react";
 import HomeSkeleton from "../Skeletons/HomeSkeleton";
 import DashboardDate from "../Dates/DashboardDate";
 import { useRouter } from "next/navigation";
-// import { useRouter } from "next/router";
-// import { NextRequest } from "next/server";
-
-
-// export async function GET(request: NextRequest ){
-//   const searchParams = request.nextUrl.searchParams;
-
-// }
 
 
 const DashboardComponent = () => {

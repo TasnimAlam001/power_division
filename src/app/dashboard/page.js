@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
-import DashboardComponent from "@/components/DashboardComponent/page";
+import DashboardComponent from "@/components/DashboardComponent/DashboardComponent";
 
 
 export default async function Dashboard() {

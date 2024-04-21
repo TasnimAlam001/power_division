@@ -105,7 +105,6 @@ export default function Navbar(props) {
   const [isLogin, setIsLogin] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  // const [localStorageTheme, setLocalStorageTheme] = useState(null);
   const {isDarkMode, toggleDarkMode} = useDarkMode();
   console.log(isDarkMode)
 
@@ -115,7 +114,7 @@ export default function Navbar(props) {
       setIsLogin(true);
     }    
   }, []);
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
   
 
   
@@ -365,7 +364,8 @@ export default function Navbar(props) {
                     }}
                   >
                     {/* <MaterialUISwitch checked={mode} onClick={handleDarkMode} /> */}
-                    <Switch checked={isDarkMode} onClick={toggleDarkMode}/>
+                    <Switch checked={isDarkMode === 'true'} onClick={toggleDarkMode}/>
+                    {console.log("from .....", isDarkMode)}
                   </Typography>
                   {/* TODO : check isLogin as in middleware */}
                   {isLogin ? <Profile /> : <Button>SignIn</Button>}
