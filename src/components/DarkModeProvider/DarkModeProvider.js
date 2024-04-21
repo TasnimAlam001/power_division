@@ -1,24 +1,9 @@
-// import React, { createContext } from 'react'
-
-// const ChangeModeContext = createContext();
-// export default function DarkModeProvider({children}) {
-//     const 
-
-//   return (
-//     <ChangeModeContext.Provider >
-//         {children}
-//     </ChangeModeContext.Provider>
-    
-//   )
-// }
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-import webTheme from '@/app/theme';
+import { useTheme, createTheme } from "@mui/material/styles";
+import webTheme from "@/app/theme";
 
 
-
-  
 // Create a context for managing dark mode
 const DarkModeContext = createContext();
 
@@ -26,42 +11,35 @@ const DarkModeContext = createContext();
 export const useDarkMode = () => useContext(DarkModeContext);
 
 // Dark mode provider component
-export const DarkModeProvider = ({ children }) => {
-    const theme = useTheme();
-    
-    const myTheme = webTheme;
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+export const DarkModeProvider = ({ children }) => { 
+
+
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [isDarkMode, setIsDarkMode] = useState(prefersDarkMode);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(prevMode => !prevMode);
-    localStorage.setItem('darkMode', !isDarkMode);
-    theme.palette.mode = isDarkMode ? 'dark': 'light';
-    console.log(theme)
+  const theme = useTheme();
 
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+    localStorage.setItem("darkMode", !isDarkMode);
+    theme.palette.mode = isDarkMode ? "dark" : "light";
+    console.log('change to', myTheme.palette.mode);
   };
 
-//   let setThemeMode = (modeValue) => {
-    
-//   }
 
-  // Function to toggle dark mode
-
-  useEffect(()=>{
-    const localStorageMode = localStorage.getItem('darkMode');
-    if(localStorageMode){
-
-        setIsDarkMode(localStorageMode);
-
+  const myTheme = createTheme({
+    palette: {
+        mode: isDarkMode ? 'dark' : 'light'
     }
-
-    
-
+  })
 
 
-
-
-  },[])
+  useEffect(() => {
+    const localStorageMode = localStorage.getItem("darkMode");
+    if (localStorageMode) {
+      setIsDarkMode(localStorageMode);
+    }
+  }, []);
 
   return (
     <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode, myTheme }}>

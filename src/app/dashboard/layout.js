@@ -14,33 +14,12 @@ import {
 } from "@/components/DarkModeProvider/DarkModeProvider";
 
 
-const ThemeWrapper = (props) => {
-  let {children, myTheme} = props;
+const ContextConsumer = (props) => {
+  let {children} = props;
+  let {myTheme} = useDarkMode();
+  console.log('in consumer ', myTheme.palette.mode)
 
-  console.log(props)
-
-  return <div {...props}>
-    <ThemeProvider theme={theme}>
-      
-      <CssBaseline />
-      <Navbar  />
-      <Box
-        sx={{
-          bgcolor: theme.palette.mode === "light" ? "#fafbfc" : "#2e2e2e",
-          pt: 10,
-          pl: { xs: 2, md: `${drawerWidth}px` },
-          pr: { xs: 2, md: 3 },
-          pb: 3,
-        }}
-      >
-        {children}
-      </Box>
-      <Typography sx={{ fontSize: 12, textAlign: "center", py: 1 }}>
-        © 2024, All Rights Reserved. Developed By{" "}
-        <span style={{ color: "#00ACF3" }}>Digicon Technologies ltd.</span>
-      </Typography>
-    </ThemeProvider>
-    </div>
+  return   <ThemeProvider theme={myTheme}>{children}</ThemeProvider>
 }
 
 
@@ -151,7 +130,9 @@ export default function DashboardLayout({ children }) {
   return (
     <DarkModeProvider>   
 
-    <ThemeProvider theme={themeS}>
+
+   <ContextConsumer>
+ 
       
       <CssBaseline />
       <Navbar  />
@@ -170,7 +151,13 @@ export default function DashboardLayout({ children }) {
         © 2024, All Rights Reserved. Developed By{" "}
         <span style={{ color: "#00ACF3" }}>Digicon Technologies ltd.</span>
       </Typography>
-    </ThemeProvider>
+    
+   </ContextConsumer>
+
+
+
+
+    
     </DarkModeProvider>
   );
 }
