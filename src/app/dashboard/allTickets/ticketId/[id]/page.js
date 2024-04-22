@@ -100,7 +100,7 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "success.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" , fontWeight:700}}
                           align="center"
                           colSpan={2}
                         >
@@ -110,7 +110,7 @@ export default function CompanyId({ params }) {
                     </TableHead>
                     <TableBody>
                       <TableRow>
-                        <TableCell sx={{ fontWeight: 700 }}>Name</TableCell>
+                        <TableCell sx={{ fontWeight: 700 ,}}>Name</TableCell>
                         <TableCell>{ticketDetailsData.name}</TableCell>
                       </TableRow>
                       <TableRow>
@@ -136,9 +136,10 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "success.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" , fontWeight:700}}
                           align="center"
                           colSpan={2}
+
                         >
                           Warp Up
                         </TableCell>
@@ -146,7 +147,7 @@ export default function CompanyId({ params }) {
                     </TableHead>
                     <TableBody>
                       <TableRow>
-                        <TableCell sx={{ fontWeight: 700 }}>
+                        <TableCell sx={{ fontWeight: 700 , width:"45%"}}>
                           Request Type
                         </TableCell>
                         <TableCell>
@@ -169,60 +170,63 @@ export default function CompanyId({ params }) {
                           {ticketDetailsData.request_sub_category_name}
                         </TableCell>
                       </TableRow>
+
                       <TableRow>
-                        <TableCell sx={{ fontWeight: 700 }}>Source : 
-                        
-                        <Box component="span" sx={{ bgcolor: "success.light", px:2, py:0.5,borderRadius: 2,ml:0.5,color: "black", textTransform: "uppercase", }}>{ticketDetailsData.platform}</Box>
-                        
-                        
+                        <TableCell sx={{ fontWeight: 700 }}>
+                          Submitted At:
                         </TableCell>
-                        <TableCell sx={{color: "black", textTransform: "uppercase", }} >    Created By:                        
-                        <Box component="span" sx={{ bgcolor: grey[200], px:2, py:0.5,borderRadius: 2,ml:0.5,color: "black", textTransform: "uppercase",fontWeight: 700 }}>{ticketDetailsData.user_name}</Box>
-                          
+                        <TableCell>{ticketDetailsData.submitted_at}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell sx={{ fontWeight: 700 }}>
+                          Source :
+                          <Box
+                            component="span"
+                            sx={{
+                              bgcolor: "success.light",
+                              px: 2,
+                              py: 0.5,
+                              borderRadius: 2,
+                              ml: 0.5,
+                              color: "black",
+                              textTransform: "uppercase",
+                            }}
+                          >
+                            {ticketDetailsData.platform}
+                          </Box>
+                        </TableCell>
+                        <TableCell sx={{ textTransform: "uppercase" }}>
+                          {" "}
+                          Created By:
+                          <Box
+                            component="span"
+                            sx={{
+                              bgcolor: grey[200],
+                              px: 2,
+                              py: 0.5,
+                              borderRadius: 2,
+                              ml: 0.5,
+                              color: "black",
+                              textTransform: "uppercase",
+                              fontWeight: 700,
+                            }}
+                          >
+                            {ticketDetailsData.user_name}
+                          </Box>
                         </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
                 </TableContainer>
-                <Box sx={{ pt: 1 }}>
-                  <Typography>
-                   
-                    <Box component="span" sx={{ fontWeight: 700 }}>
-                      Submitted At:
-                    </Box>
-
-                    {ticketDetailsData.submitted_at}
-                  </Typography>
-                  <Typography sx={{ mt: 2 }}>
-                    <Box component="span" sx={{ fontWeight: 700 }}>
-                      Created By
-                    </Box>
-
-                    <Box
-                      component="span"
-                      sx={{
-                        bgcolor: grey[200],
-                        px: 2,
-                        py: 0.5,
-                        ml: 0.5,
-                        borderRadius: 2,
-                        textTransform: "uppercase",
-                        color: "black",
-                      }}
-                    >
-                      {ticketDetailsData.user_name}
-                    </Box>
-                  </Typography>
-                </Box>
               </Grid>
-              {/* -----------------------------------Customer info-2----------------------------- */}
+              {/* -----------------------------------Consumer info----------------------------- */}
               <Grid item xs={12} md={4} lg={3}>
                 <TableContainer sx={{ border: 1, color: grey[200] }}>
                   <Table sx={{ maxWidth: "100%" }}>
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "success.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" ,fontWeight:700}}
                           align="center"
                           colSpan={2}
                         >
@@ -232,7 +236,7 @@ export default function CompanyId({ params }) {
                     </TableHead>
                     <TableBody>
                       <TableRow>
-                        <TableCell>Meter Type</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Meter Type</TableCell>
                         <TableCell>
                           {ticketDetailsData.request_type_id === 1
                             ? "PREPAID"
@@ -240,13 +244,13 @@ export default function CompanyId({ params }) {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell sx={{ width: "40%" }}> Area</TableCell>
+                        <TableCell sx={{ width: "45%" ,fontWeight:700}}> Area</TableCell>
                         <TableCell>
                           {ticketDetailsData.company_zone_name}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Nearest Office</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Nearest Office</TableCell>
                         <TableCell>
                           {ticketDetailsData.supply_and_distribution_name}
                         </TableCell>
@@ -264,7 +268,7 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "success.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" ,fontWeight:700}}
                           align="center"
                           colSpan={2}
                         >
@@ -274,37 +278,37 @@ export default function CompanyId({ params }) {
                     </TableHead>
                     <TableBody>
                       <TableRow>
-                        <TableCell>Power Division Id</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Power Division Id</TableCell>
                         <TableCell>{ticketDetailsData.ticket_id}</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Created Time</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Created Time</TableCell>
                         <TableCell>{ticketDetailsData.created_at}</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Start Processing at</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Start Processing at</TableCell>
                         <TableCell>
                           {ticketDetailsData.start_processing_at}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Closed at</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Closed at</TableCell>
                         <TableCell>{ticketDetailsData.closed_at}</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Reopen</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Reopen</TableCell>
                         <TableCell>
                           {ticketDetailsData.reopen_count} times
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Updated By</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Updated By</TableCell>
                         <TableCell>
                           {ticketDetailsData.update_by_name}
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>Problem Details</TableCell>
+                        <TableCell sx={{ fontWeight: 700 }}>Problem Details</TableCell>
                         <TableCell>{ticketDetailsData.complain}</TableCell>
                       </TableRow>
                     </TableBody>
@@ -318,7 +322,7 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "success.light", color: "black" }}
+                          sx={{ bgcolor: "success.light", color: "black" ,fontWeight:700}}
                           align="center"
                           colSpan={3}
                         >

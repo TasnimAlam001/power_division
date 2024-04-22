@@ -44,7 +44,7 @@ export default function User() {
   const [axiosSecure] = useAxiosSecure();
   const [userData, setUserData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [type, setType] = React.useState("");
+  const [type, setType] = React.useState("customer");
   const [rows, setRows] = React.useState(userData);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const [open, setOpen] = React.useState(false);

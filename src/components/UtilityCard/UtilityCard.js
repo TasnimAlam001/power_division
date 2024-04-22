@@ -6,31 +6,27 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export default function UtilityCard({ data }) {
+export default function UtilityCard({ data, selectedDates}) {
   const router = useRouter();
-  const [selectedDates, setSelectedDates] = useState(null);
+  // const [selectedDates, setSelectedDates] = useState(null);
   const [count, setCount] = useState(0);
   const duration = 2000;
+  // console.log("s&e", selectedDates)
   useEffect(() => {
     Aos.init();
   }, []);
 
-  const searchParams = useSearchParams()
-  useEffect(() => {
-    // console.log("router.query:", searchParams.get('start_date'),searchParams.get('end_date'));
-    
-      // const { start_date, end_date } = router.query;
+  // const searchParams = useSearchParams();
+  // useEffect(() => {
+  //   // console.log("router.query:", searchParams.get('start_date'),searchParams.get('end_date'));
 
-      setSelectedDates({
-        from: searchParams.get('start_date'),
-        to: searchParams.get('end_date'),
-      });
-     
-    
-  }, [searchParams]);
+  //   // const { start_date, end_date } = router.query;
 
-
-
+  //   setSelectedDates({
+  //     from: searchParams.get("start_date"),
+  //     to: searchParams.get("end_date"),
+  //   });
+  // }, [searchParams]);
 
   useEffect(() => {
     const end = data.total_tickets;
@@ -95,15 +91,10 @@ export default function UtilityCard({ data }) {
             }}
           >
             <Link
-                href={{
-                  pathname: `/dashboard/utilities/${data.id}`,
-                  query: selectedDates
-                    ? {
-                        start_date: selectedDates.from || "",
-                        end_date: selectedDates.to || "",
-                      }
-                    : undefined,
-                }}
+              href={{
+                pathname: `/dashboard/utilities/${data.id}`,
+                
+              }}
             >
               <Box
                 height={120}

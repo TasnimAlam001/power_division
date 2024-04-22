@@ -23,23 +23,24 @@ export default function UtilityPage({ params }) {
     Aos.init();
   }, []);
 
-  const searchParams = useSearchParams()
-  useEffect(() => {
-    // console.log("router.query:----", searchParams.get('start_date'),searchParams.get('end_date'));
+  // const searchParams = useSearchParams()
+  // useEffect(() => {
+  //   // console.log("router.query:----", searchParams.get('start_date'),searchParams.get('end_date'));
     
-      // const { start_date, end_date } = router.query;
+  //     // const { start_date, end_date } = router.query;
 
-      setSelectedDates({
-        from: searchParams.get('start_date'),
-        to: searchParams.get('end_date'),
-      });
+  //     setSelectedDates({
+  //       from: searchParams.get('start_date'),
+  //       to: searchParams.get('end_date'),
+  //     });
      
     
-  }, [searchParams]);
+  // }, [searchParams]);
 
   useEffect(() => {
     setLoading(true);
-    axiosSecure(`/companyDashboard/${id}?start_date=${searchParams.get('start_date')}&end_date=${searchParams.get('end_date')}`)
+    axiosSecure(`/companyDashboard/${id}`)
+    // axiosSecure(`/companyDashboard/${id}?start_date=${selectedDates.from}&end_date=${searchParams.get('end_date')}`)
       .then((res) => {
         setCompanyData(res.data.data);
         setLoading(false);
