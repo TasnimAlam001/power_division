@@ -7,6 +7,7 @@ import {
   DarkModeProvider,
   useDarkMode,
 } from "@/components/DarkModeProvider/DarkModeProvider";
+import { useTheme } from '@mui/material/styles';
 
 const ContextConsumer = (props) => {
   let { children } = props;
@@ -18,6 +19,7 @@ const ContextConsumer = (props) => {
 
 export default function DashboardLayout({ children }) {
   const drawerWidth = 223;
+  const theme = useTheme();
   const [currentMode, setCurrentMode] = React.useState("light"); // Initialize with 'light'
   useEffect(() => {
     const mode =
@@ -32,6 +34,7 @@ export default function DashboardLayout({ children }) {
         <Navbar />
         <Box
           sx={{
+            bgcolor: "bg.main",
             pt: 10,
             pl: { xs: 2, md: `${drawerWidth}px` },
             pr: { xs: 2, md: 3 },

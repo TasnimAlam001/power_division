@@ -363,9 +363,8 @@ export default function Navbar(props) {
                       cursor: "pointer",
                     }}
                   >
-                    {/* <MaterialUISwitch checked={mode} onClick={handleDarkMode} /> */}
-                    <Switch checked={isDarkMode === 'true'} onClick={toggleDarkMode}/>
-                    {console.log("from .....", isDarkMode)}
+                    <MaterialUISwitch checked={isDarkMode} onClick={toggleDarkMode} />
+                                 
                   </Typography>
                   {/* TODO : check isLogin as in middleware */}
                   {isLogin ? <Profile /> : <Button>SignIn</Button>}
