@@ -13,11 +13,15 @@ const DashboardComponent = () => {
   const [axiosSecure] = useAxiosSecure();
   const [dashboardData, setDashboardData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedDates, setSelectedDates] = useState(()=>{
-    if(dashboardData){
-      return dashboardData.startDate,dashboardData.endDate
+  const [selectedDates, setSelectedDates] = useState(() => {
+    if (dashboardData && dashboardData.startDate && dashboardData.endDate) {
+      return { from: dashboardData.startDate, to: dashboardData.endDate };
+    } else {
+      
+      return { from: "", to: "" };
     }
   });
+  
 
   useEffect(() => {
     setLoading(true);
@@ -46,8 +50,7 @@ const DashboardComponent = () => {
     }
   }, [selectedDates, axiosSecure]);
 
-  useEffect(() => {
-   
+  useEffect(() => {   
       setSelectedDates(dashboardData.startDate, dashboardData.endDate);
       console.log("in dashboardComponent",dashboardData.startDate, dashboardData.endDate)
   }, [dashboardData]);
