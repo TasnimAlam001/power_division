@@ -106,7 +106,6 @@ export default function Navbar(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const {isDarkMode, toggleDarkMode} = useDarkMode();
-  console.log(isDarkMode)
 
   React.useEffect(() => {
     const token = localStorage.getItem("access-token");
@@ -202,9 +201,9 @@ export default function Navbar(props) {
       <Link href="/dashboard">
         <Stack direction="row" height={70} pl={2} pt={4}>
           <Image
-            src="/logo2.png"
-            width={50}
-            height={50}
+            src="/bdLogo.svg"
+            width={55}
+            height={55}
             // className="w-[70px] pl-4"
             alt="ministry of power energy and mineral resources bangladesh logo"
           ></Image>
@@ -363,8 +362,10 @@ export default function Navbar(props) {
                       cursor: "pointer",
                     }}
                   >
-                    <MaterialUISwitch checked={isDarkMode} onClick={toggleDarkMode} />
-                                 
+                    {/* <MaterialUISwitch checked={isDarkMode} onClick={toggleDarkMode} /> */}
+                    <MaterialUISwitch checked={typeof isDarkMode === 'string' ? isDarkMode === 'true' : isDarkMode} onClick={toggleDarkMode} />
+
+                      
                   </Typography>
                   {/* TODO : check isLogin as in middleware */}
                   {isLogin ? <Profile /> : <Button>SignIn</Button>}

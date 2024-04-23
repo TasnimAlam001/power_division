@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme, createTheme } from "@mui/material/styles";
-import webTheme from "@/app/theme";
+import { auth } from "@/app/auth";
 
 
 // Create a context for managing dark mode
@@ -12,18 +12,16 @@ export const useDarkMode = () => useContext(DarkModeContext);
 
 // Dark mode provider component
 export const DarkModeProvider = ({ children }) => { 
-
-
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [isDarkMode, setIsDarkMode] = useState(prefersDarkMode);
-
+  const [session, setSession] = useState(null);
   const theme = useTheme();
+
 
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
     localStorage.setItem("darkMode", !isDarkMode);
     theme.palette.mode = isDarkMode ? "dark" : "light";
-    console.log('change to', myTheme.palette.mode);
   };
 
   let themeSettingsLight = {
@@ -58,6 +56,10 @@ export const DarkModeProvider = ({ children }) => {
       },
       bg: {
         main:"#fafbfc"        
+      },
+      background: {
+        paper: "#fff",
+        default: "#fafbfc" 
       }
     },
   };
@@ -93,6 +95,12 @@ export const DarkModeProvider = ({ children }) => {
       },
       bg: {
         main: "#383838",        
+      },
+      background: {
+        paper: "#282b33",
+        default: "#121624" 
+        
+
       }
     },
   };
@@ -107,8 +115,9 @@ export const DarkModeProvider = ({ children }) => {
     }
   }, []);
 
+
   return (
-    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode, myTheme }}>
+    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode, myTheme , session}}>
       {children}
     </DarkModeContext.Provider>
   );

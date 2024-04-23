@@ -8,11 +8,12 @@ import {
   useDarkMode,
 } from "@/components/DarkModeProvider/DarkModeProvider";
 import { useTheme } from '@mui/material/styles';
+// import { redirect } from "next/navigation";
 
 const ContextConsumer = (props) => {
   let { children } = props;
   let { myTheme } = useDarkMode();
-  console.log("in consumer ", myTheme.palette.mode);
+
 
   return <ThemeProvider theme={myTheme}>{children}</ThemeProvider>;
 };
@@ -34,7 +35,7 @@ export default function DashboardLayout({ children }) {
         <Navbar />
         <Box
           sx={{
-            bgcolor: "bg.main",
+            // bgcolor: "bg.main",
             pt: 10,
             pl: { xs: 2, md: `${drawerWidth}px` },
             pr: { xs: 2, md: 3 },
