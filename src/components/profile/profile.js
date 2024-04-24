@@ -53,7 +53,7 @@ export default function Profile() {
             onClick={handleClick}
             size="small"
             sx={{
-              "&:hover": { backgroundColor: "#e1e1e3" },
+              "&:hover": { backgroundColor: "success.light" },
               borderRadius: 2,
             }}
             aria-controls={open ? "account-menu" : undefined}
@@ -120,7 +120,7 @@ export default function Profile() {
           <Box sx={{display: "flex"}} >
             <AccountCircleOutlinedIcon fontSize="large" sx={{ pr: 0.5 }} />
             <Box>
-              <Typography sx={{ fontWeight: 550 }} variant="body2" spacing={2}>
+              <Typography sx={{ fontWeight: 750 , color:"black"}} spacing={2}>
                 Super Admin
               </Typography>
               {/* <h2 className="text-md flex gap-2"> </h2> */}
@@ -134,7 +134,7 @@ export default function Profile() {
             </Box>
           </Box>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        {/* <MenuItem onClick={handleClose}>
           <AccountCircleOutlinedIcon fontSize="large" sx={{ pr: 0.5 }} /> My
           account
         </MenuItem>
@@ -159,7 +159,7 @@ export default function Profile() {
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize="small" />

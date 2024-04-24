@@ -39,11 +39,14 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UserData from "../../../../lib/UserData";
 
 export default function User() {
+  const { userData, loading } = UserData();
+
   const [axiosSecure] = useAxiosSecure();
-  const [userData, setUserData] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+  // const [userData, setUserData] = React.useState([]);
+  // const [loading, setLoading] = React.useState(true);
   const [type, setType] = React.useState("customer");
   const [rows, setRows] = React.useState(userData);
   const [rowModesModel, setRowModesModel] = React.useState({});
@@ -96,18 +99,23 @@ export default function User() {
   };
 
   React.useEffect(() => {
-    setLoading(true);
-    axiosSecure("/users")
-      .then((res) => {
-        setLoading(false);
-        setUserData(res.data.data);
-        setRows(res.data.data);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
-  }, []);
+    if (userData) {
+      setRows(userData);
+    }
+  }, [userData]); 
+  // React.useEffect(() => {
+  //   setLoading(true);
+  //   axiosSecure("/users")
+  //     .then((res) => {
+  //       setLoading(false);
+  //       setUserData(res.data.data);
+  //       setRows(res.data.data);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {

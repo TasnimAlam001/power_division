@@ -42,7 +42,7 @@ export const DarkModeProvider = ({ children }) => {
       },
       success: {
         main: "#04984A",
-        light: "#bbdefb",
+        light: "#c9e0c8",
         dark: "#1b5e20",
       },
       info: {
@@ -81,7 +81,7 @@ export const DarkModeProvider = ({ children }) => {
       },
       success: {
         main: "#04984A",
-        light: "#bbdefb",
+        light: "#94b392",
         dark: "#1b5e20",
       },
       info: {

@@ -85,3 +85,95 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     // }
   }, [isSystemEnableDarkMode]);
  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- 
+ --------------------login page 
+
+
+
+ import { Box, Grid, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import React from "react";
+import { green } from "@mui/material/colors";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import LoginSVG from "@/components/LoginSVG/LoginSVG";
+import Login from "@/components/Form/Login";
+
+export default function MyLogin() {
+  return (
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="center"
+      sx={{ height: "100vh", width: "100vw", }}
+    >
+      <Grid
+        container
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <Grid item xs={12} md={4}>
+          <Stack sx={{ px: 2 }} direction="column" spacing={2} alignItems={"center"}>
+            <Stack
+              direction="column"
+              alignItems="center"
+              sx={{ alignSelf: "center" }}
+            >
+              <Image
+                width={60}
+                height={60}
+                src="/bdLogo.svg"
+                spacing={2}
+                alt="ministry of power logo"
+              />
+              <Typography sx={{ mt: 1 }} variant="body1">
+                বিদ্যুৎ জ্বালানি ও খনিজ সম্পদ মন্ত্রণালয়
+              </Typography>
+            </Stack>
+            <Box>
+              <Box>
+                <Typography fontWeight={300} variant="subtitle2">
+                  Welcome back!
+                </Typography>
+                <Typography fontWeight={700} variant="h6" sx={{ mb: 4 }}>
+                  Login to your account.
+                </Typography>
+              </Box>
+              <Login />
+              <ToastContainer />
+              <Typography variant="caption" sx={{ textAlign: "center" }}>
+                Don`t have an account?{" "}
+                <span style={{ color: green[900], fontWeight: 600 }}>
+                  Sign up
+                </span>
+              </Typography>
+            </Box>
+          </Stack>
+          <Typography sx={{ fontSize: 12, mt: 8, textAlign: "center" }}>
+            © 2023, All Rights Reserved. Developed By{" "}
+            <span style={{ color: "#00ACF3" }}>Digicon Technologies ltd.</span>
+          </Typography>
+        </Grid>
+        <Grid sx={{ display: { xs: "none", md: "block" } }} item xs={7}>
+          {/* Login SVG */}
+          <LoginSVG />
+        </Grid>
+      </Grid>
+    </Stack>
+  );
+}
+
+  -->

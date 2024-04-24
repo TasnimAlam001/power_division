@@ -348,7 +348,7 @@ export default function Navbar(props) {
                       padding: "7px",
                       transition: "background-color ",
                       "&:hover": {
-                        backgroundColor: "#e1e1e3",
+                        backgroundColor: "success.light",
                         borderRadius: "100%",
                       },
                     }}
