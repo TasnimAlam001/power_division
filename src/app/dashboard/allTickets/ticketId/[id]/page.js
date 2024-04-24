@@ -100,7 +100,7 @@ export default function CompanyId({ params }) {
                     <TableHead>
                       <TableRow>
                         <TableCell
-                          sx={{ bgcolor: "#e1f5e7", color: "black" , fontWeight:700}}
+                          sx={{ bgcolor: "success.light", color: "black" , fontWeight:700}}
                           align="center"
                           colSpan={2}
                         >

@@ -25,6 +25,7 @@ import {
   TextField,
   Typography,
   useMediaQuery,
+  Grid,
 } from "@mui/material";
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
 import { green, red } from "@mui/material/colors";
@@ -63,17 +64,17 @@ export default function User() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data)
+    console.log(data);
     try {
       reset();
       const { name, email, phone, password, type, company_id } = data;
 
-      await axiosSecure.post("/users", { name, email, phone, password, type, company_id })
+      await axiosSecure
+        .post("/users", { name, email, phone, password, type, company_id })
         .then((response) => {
           if (response) {
             setOpen(false);
             toast.success("User Added successfully!");
-
           }
         })
         .catch((error) => {
@@ -102,7 +103,7 @@ export default function User() {
     if (userData) {
       setRows(userData);
     }
-  }, [userData]); 
+  }, [userData]);
   // React.useEffect(() => {
   //   setLoading(true);
   //   axiosSecure("/users")
@@ -274,116 +275,134 @@ export default function User() {
               <DialogTitle id="responsive-dialog-title">
                 {"ADD USER"}
               </DialogTitle>
-              <DialogContent sx={{ px: { md: 10 } }}>
+              <DialogContent sx={{ px: { md: 7 }}}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Box sx={{ pb: 2, mt: 2 }}>
-                    <TextField
-                      label="Name"
-                      fullWidth
-                      variant="outlined"
-                      {...register("name", { required: "Name is required" })}
-                      error={!!errors.name}
-                      helperText={errors.name ? errors.name.message : ""}
-                    />
-                  </Box>
-                  <Box sx={{ pb: 2 }}>
-                    <TextField
-                      label="Email"
-                      fullWidth
-                      variant="outlined"
-                      {...register("email", { required: "Email is required" })}
-                      error={!!errors.email}
-                      helperText={errors.email ? errors.email.message : ""}
-                    />
-                  </Box>
-                  <Box sx={{ pb: 2, mt: 2 }}>
-                    <TextField
-                      label="Phone"
-                      fullWidth
-                      variant="outlined"
-                      {...register("phone", {
-                        required: "Phone number is required",
-                      })}
-                      error={!!errors.phone}
-                      helperText={errors.phone ? errors.phone.message : ""}
-                    />
-                  </Box>
-                  <Box sx={{ pb: 2, mt: 2 }}>
-                    <TextField
-                      label="Password"
-                      fullWidth
-                      variant="outlined"
-                      {...register("password", {
-                        required: "Password is required",
-                        minLength: 6,
-                      })}
-                      error={!!errors.password}
-                      helperText={errors.password ? errors.password.message : ""}
-                      
-                    />
-                    {errors.password?.type === 'minLength' && <Typography sx={{color: red[600]}} role="alert">Password must be at least 6 characters</Typography>}
-                  </Box>
-                  <Box sx={{ pb: 2 }}>
-                    <FormControl
-                      fullWidth
-                      variant="outlined"
-                      error={!!errors.type}
-                    >
-                      <InputLabel>Type</InputLabel>
-                      <Select
-                        {...register("type", { required: "Type is required" })}
-                        label="Type"
-                        onChange={(e) => setType(e.target.value)}
-                      >
-                        <MenuItem value="admin">Admin</MenuItem>
-                        <MenuItem value="company">Company</MenuItem>
-                        <MenuItem value="customer">Customer</MenuItem>
-                      </Select>
-                    </FormControl>
-                    {errors.type && (
-                      <Box sx={{ color: "red", marginTop: 1 }}>
-                        {errors.type.message}
-                      </Box>
-                    )}
-                  </Box>
-                  {type === "company" && (
-                    <Box sx={{ pb: 2 }}>
+                  <Grid container spacing={2} sx={{ mb: 3 , mt:3}}>
+                    <Grid item xs={6}>
+                      <TextField
+                        label="Name"
+                        fullWidth
+                        variant="outlined"
+                        color="success"
+                        {...register("name", { required: "Name is required" })}
+                        error={!!errors.name}
+                        helperText={errors.name ? errors.name.message : ""}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField
+                        label="Email"
+                        fullWidth
+                        variant="outlined"
+                        color="success"
+                        {...register("email", {
+                          required: "Email is required",
+                        })}
+                        error={!!errors.email}
+                        helperText={errors.email ? errors.email.message : ""}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField
+                        label="Phone"
+                        fullWidth
+                        variant="outlined"
+                        color="success"
+                        {...register("phone", {
+                          required: "Phone number is required",
+                        })}
+                        error={!!errors.phone}
+                        helperText={errors.phone ? errors.phone.message : ""}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField
+                        label="Password"
+                        fullWidth
+                        variant="outlined"
+                        type="password"
+                        color="success"
+                        {...register("password", {
+                          required: "Password is required",
+                          minLength: 6,
+                        })}
+                        error={!!errors.password}
+                        helperText={
+                          errors.password ? errors.password.message : ""
+                        }
+                      />
+                      {errors.password?.type === "minLength" && (
+                        <Typography sx={{ color: red[600], mt: 1 }}>
+                          Password must be at least 6 characters
+                        </Typography>
+                      )}
+                    </Grid>
+                    <Grid item xs={6}>
                       <FormControl
                         fullWidth
                         variant="outlined"
-                        error={!!errors.company}
+                        color="success"
+                        error={!!errors.type}
                       >
-                        <InputLabel>Company</InputLabel>
+                        <InputLabel>Type</InputLabel>
                         <Select
-                          {...register("company_id", {
-                            required: "Company is required",
+                          {...register("type", {
+                            required: "Type is required",
                           })}
-                          label="Company"
+                          label="Type"
+                          onChange={(e) => setType(e.target.value)}
                         >
-                          <MenuItem value="1">BPDB</MenuItem>
-                          <MenuItem value="2">BREB</MenuItem>
-                          <MenuItem value="3">DESCO</MenuItem>
-                          <MenuItem value="4">DPDC</MenuItem>
-                          <MenuItem value="5">WZPDCL</MenuItem>
-                          <MenuItem value="6">NESCO</MenuItem>
+                          <MenuItem value="admin">Admin</MenuItem>
+                          <MenuItem value="company">Company</MenuItem>
+                          <MenuItem value="customer">Customer</MenuItem>
                         </Select>
                       </FormControl>
-                      {errors.company_id && (
-                        <Box sx={{ color: "red", marginTop: 1 }}>
-                          {errors.company_id.message}
-                        </Box>
+                      {errors.type && (
+                        <Typography sx={{ color: red[600], mt: 1 }}>
+                          {errors.type.message}
+                        </Typography>
                       )}
-                    </Box>
-                  )}
+                    </Grid>
+                    {type === "company" && (
+                      <Grid item xs={6}>
+                        <FormControl
+                          fullWidth
+                          variant="outlined"
+                          color="success"
+                          error={!!errors.company}
+                        >
+                          <InputLabel>Company Name</InputLabel>
+                          <Select
+                            {...register("company_id", {
+                              required: "Company is required",
+                            })}
+                            label="Company Name"
+                          >
+                            <MenuItem value="1">BPDB</MenuItem>
+                            <MenuItem value="2">BREB</MenuItem>
+                            <MenuItem value="3">DESCO</MenuItem>
+                            <MenuItem value="4">DPDC</MenuItem>
+                            <MenuItem value="5">WZPDCL</MenuItem>
+                            <MenuItem value="6">NESCO</MenuItem>
+                          </Select>
+                        </FormControl>
+                        {errors.company_id && (
+                          <Typography sx={{ color: red[600], mt: 1 }}>
+                            {errors.company_id.message}
+                          </Typography>
+                        )}
+                      </Grid>
+                    )}
+                  </Grid>
                   <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
+                    <Button onClick={handleClose} color="error">
                       Cancel
                     </Button>
                     <Button
                       type="submit"
-                      variant="contained"
+                      variant="outlined"
                       color="success"
-                      // onClick={handleClose}
+                      
                     >
                       Add User
                     </Button>

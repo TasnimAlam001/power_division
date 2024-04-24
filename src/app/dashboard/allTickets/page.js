@@ -1,60 +1,54 @@
 "use client";
 import * as React from "react";
-import {
-  DataGrid,
-  GridToolbar,
-} from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import TicketId from "./ticketId/page";
 import TableStatusColumn from "@/components/tableStatus/page";
 import TimeDateFormate from "@/components/TicketColumn/TimeDateFormate";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import TicketBackdrop from "@/components/Skeletons/TicketBackdrop";
-import {
-  Box,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Paper, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
 import TicketDate from "@/components/TicketDate/TicketDate";
 import TicketSkeleton from "@/components/Skeletons/ticketSkeleton";
+import useTicketData from "../../../../lib/useTicketData";
 
 export default function DataTable() {
-  const [axiosSecure] = useAxiosSecure();
-  const [ticketData, setTicketData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [selectedDates, setSelectedDates] = useState(null);
+  const { ticketData, loading } = useTicketData(selectedDates);
+  // const [axiosSecure] = useAxiosSecure();
+  // const [ticketData, setTicketData] = useState([]);
+  // const [loading, setLoading] = useState(true);
   const rows = ticketData.ticket;
   const dateTime = ticketData.dateFilter;
   const startDate = dateTime?.start_date.split(" ")[0];
   const endDate = dateTime?.end_date.split(" ")[0];
 
-  useEffect(() => {
-    setLoading(true);
-    if(selectedDates){
-      axiosSecure(`/ticket?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
-      .then((res) => {
-        setLoading(false);
-        setTicketData(res.data.data);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
-    }else{
-      axiosSecure("/ticket")
-      .then((res) => {
-        setLoading(false);
-        setTicketData(res.data.data);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
-    }
-   
-  }, [selectedDates, axiosSecure]);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   if(selectedDates){
+  //     axiosSecure(`/ticket?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
+  //     .then((res) => {
+  //       setLoading(false);
+  //       setTicketData(res.data.data);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //       setLoading(false);
+  //     });
+  //   }else{
+  //     axiosSecure("/ticket")
+  //     .then((res) => {
+  //       setLoading(false);
+  //       setTicketData(res.data.data);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //       setLoading(false);
+  //     });
+  //   }
+
+  // }, [selectedDates, axiosSecure]);
 
   const columns = [
     {
@@ -111,7 +105,11 @@ export default function DataTable() {
           {" "}
           Ticket List
         </Typography>
-        <TicketDate onDatesSelected={setSelectedDates} startDate={startDate} endDate={endDate}/>
+        <TicketDate
+          onDatesSelected={setSelectedDates}
+          startDate={startDate}
+          endDate={endDate}
+        />
       </Stack>
       {loading ? (
         <>
