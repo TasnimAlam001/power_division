@@ -18,7 +18,7 @@ export default function CompanyData({ id }) {
         console.log("error hoisee fetching a", e);
         setLoading(false);
       });
-  }, []);
+  }, [axiosSecure,id]);
 
   return [companyData, loading];
 }

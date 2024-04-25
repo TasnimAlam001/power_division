@@ -49,7 +49,7 @@ export default function UtilityPage({ params }) {
         console.log(e);
         setLoading(false);
       });
-  }, []);
+  }, [axiosSecure,id]);
 
   // console.log(
   //   companyData,

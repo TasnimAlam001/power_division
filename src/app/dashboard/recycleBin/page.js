@@ -74,7 +74,7 @@ export default function User() {
         console.log(e);
         setLoading(false);
       });
-  }, []);
+  }, [axiosSecure]);
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {

@@ -23,8 +23,7 @@ export default function DashboardLayout({ children }) {
   const theme = useTheme();
   const [currentMode, setCurrentMode] = React.useState("light"); // Initialize with 'light'
   useEffect(() => {
-    const mode =
-      localStorage.getItem("darkMode") || (prefersDarkMode ? "dark" : "light");
+    const mode =localStorage.getItem("darkMode") || (prefersDarkMode ? "dark" : "light");
     setCurrentMode(mode);
   }, []);
 

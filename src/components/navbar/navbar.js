@@ -198,7 +198,7 @@ export default function Navbar(props) {
 
   const drawer = (
     <div>
-      <Link href="/dashboard">
+      <Link href="/dashboard" onClick={handleDrawerClose}>
         <Stack direction="row" height={70} pl={2} pt={4}>
           <Image
             src="/bdLogo.svg"
@@ -224,7 +224,7 @@ export default function Navbar(props) {
       >
         <Box>
           {data.map((item) => (
-            <Link key={item.label} href={`/dashboard/${item.route}`}>
+            <Link key={item.label} href={`/dashboard/${item.route}` } onClick={handleDrawerClose}>
               <ListItemButton sx={{ py: 0, minHeight: 38 }}>
                 <ListItemIcon sx={{ color: "inherit" }}>
                   {item.icon}

@@ -37,7 +37,7 @@ export default function CompanyId({ params }) {
         console.log(e);
         setLoading(false);
       });
-  }, []);
+  }, [axiosSecure, id]);
 
   // console.log(ticketDetailsData);
 

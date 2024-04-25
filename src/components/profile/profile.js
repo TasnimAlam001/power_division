@@ -120,7 +120,7 @@ export default function Profile() {
           <Box sx={{display: "flex"}} >
             <AccountCircleOutlinedIcon fontSize="large" sx={{ pr: 0.5 }} />
             <Box>
-              <Typography sx={{ fontWeight: 750 , color:"black"}} spacing={2}>
+              <Typography sx={{ fontWeight: 750 }} spacing={2}>
                 Super Admin
               </Typography>
               {/* <h2 className="text-md flex gap-2"> </h2> */}
