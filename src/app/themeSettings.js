@@ -10,7 +10,6 @@ export const themeSettings = {
    },
    palette: {
      mode: "light",
-     // mode: getLocalStorageMode(),
      primary: {
        main: "#3382EF",
        light: "#e3f2fd",

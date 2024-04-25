@@ -8,7 +8,6 @@ import {
   useDarkMode,
 } from "@/components/DarkModeProvider/DarkModeProvider";
 import { useTheme } from '@mui/material/styles';
-// import { redirect } from "next/navigation";
 
 const ContextConsumer = (props) => {
   let { children } = props;

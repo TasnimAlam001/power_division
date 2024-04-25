@@ -28,38 +28,16 @@ import {
 } from "@mui/material";
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
 import UserSkeleton from "@/components/Skeletons/userSkeleton";
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Close";
 import { useTheme } from "@emotion/react";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
+
 
 export default function User() {
   const [axiosSecure] = useAxiosSecure();
   const [userData, setUserData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [rows, setRows] = React.useState(userData);
-  const [rowModesModel, setRowModesModel] = React.useState({});
-  const theme = useTheme();
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-    reset,
-  } = useForm();
-
-  const onSubmit = (data) => {
-    reset();
-    console.log(data);
-  };
-
-  // Set current date and time as default value for created_at field
 
 
   React.useEffect(() => {
@@ -82,39 +60,11 @@ export default function User() {
     }
   };
 
-//   const handleEditClick = (id) => () => {
-//     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
-//   };
-
-//   const handleSaveClick = (id) => () => {
-//     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-//   };
 
   const handleDeleteClick = (id) => () => {
     setRows(rows.filter((row) => row.id !== id));
   };
 
-//   const handleCancelClick = (id) => () => {
-//     setRowModesModel({
-//       ...rowModesModel,
-//       [id]: { mode: GridRowModes.View, ignoreModifications: true },
-//     });
-
-//     const editedRow = rows.find((row) => row.id === id);
-//     if (editedRow.isNew) {
-//       setRows(rows.filter((row) => row.id !== id));
-//     }
-//   };
-
-//   const processRowUpdate = (newRow) => {
-//     const updatedRow = { ...newRow, isNew: false };
-//     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-//     return updatedRow;
-//   };
-
-//   const handleRowModesModelChange = (newRowModesModel) => {
-//     setRowModesModel(newRowModesModel);
-//   };
   const columns = [
     { field: "name", headerName: "Name", minWidth: 110, editable: true },
     { field: "email", headerName: "Email", minWidth: 160, editable: true },
@@ -141,39 +91,9 @@ export default function User() {
       width: 100,
       cellClassName: "actions",
       getActions: ({ id }) => {
-        // const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-
-        // if (isInEditMode) {
-        //   return [
-        //     <GridActionsCellItem
-        //       key={`save-${id}`}
-        //       icon={<SaveIcon />}
-        //       label="Save"
-        //       sx={{
-        //         color: "primary.main",
-        //       }}
-        //       onClick={handleSaveClick(id)}
-        //     />,
-        //     <GridActionsCellItem
-        //       key={`cancel-${id}`}
-        //       icon={<CancelIcon />}
-        //       label="Cancel"
-        //       className="textPrimary"
-        //       onClick={handleCancelClick(id)}
-        //       color="inherit"
-        //     />,
-        //   ];
-        // }
+       
 
         return [
-        //   <GridActionsCellItem
-        //     key={`edit-${id}`}
-        //     icon={<EditIcon />}
-        //     label="Edit"
-        //     className="textPrimary"
-        //     onClick={handleEditClick(id)}
-        //     color="inherit"
-        //   />,
           <GridActionsCellItem
             key={`delete-${id}`}
             icon={<DeleteIcon />}

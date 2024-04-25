@@ -28,9 +28,7 @@ import LoginSVG from "@/components/LoginSVG/LoginSVG";
 import AxiosSecure from "../Hooks/useAxiousSecure";
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);  
   const [axiosSecure] = AxiosSecure();
 
   const {
@@ -41,12 +39,16 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    
+
     const email = data.email;
     const password = data.password;
 
+    
+
     try {
       const res = await axiosSecure.post("login", { email, password });
-      let r = await loginAction(data);
+      await loginAction(data);
       // console.log("response of", r);
 
       if (res.data.message === "Login Successful") {
@@ -117,9 +119,9 @@ export default function Login() {
                       id="component-outlined"
                       // placeholder="Inter your Email"
                       label="Email"
-                      value={email}
-                      {...register("email", { required: true })}
-                      onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="email"
+                      
+                      {...register("email", { required: true })}                     
                     />
                   </FormControl>
 
@@ -138,15 +140,9 @@ export default function Login() {
                       id="outlined-adornment-password"
                       sx={{ width: { xs: 280, sm: 350 } }}
                       type={showPassword ? "text" : "password"}
-                      value={password}
-                      {...register("password", { required: true })}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          handleSubmit(onSubmit)();
-                        }
-                      }}
+                      autoComplete="current-password"
+                      
+                      {...register("password", { required: true })}                    
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton

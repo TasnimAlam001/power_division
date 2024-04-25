@@ -39,7 +39,6 @@ export default function CompanyId({ params }) {
       });
   }, [axiosSecure, id]);
 
-  // console.log(ticketDetailsData);
 
   return (
     <Box>

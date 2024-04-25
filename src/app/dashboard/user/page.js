@@ -46,8 +46,6 @@ export default function User() {
   const { userData, loading } = UserData();
 
   const [axiosSecure] = useAxiosSecure();
-  // const [userData, setUserData] = React.useState([]);
-  // const [loading, setLoading] = React.useState(true);
   const [type, setType] = React.useState("customer");
   const [rows, setRows] = React.useState(userData);
   const [rowModesModel, setRowModesModel] = React.useState({});
@@ -57,8 +55,7 @@ export default function User() {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
+    setValue,    
     formState: { errors },
     reset,
   } = useForm();
@@ -104,19 +101,6 @@ export default function User() {
       setRows(userData);
     }
   }, [userData]);
-  // React.useEffect(() => {
-  //   setLoading(true);
-  //   axiosSecure("/users")
-  //     .then((res) => {
-  //       setLoading(false);
-  //       setUserData(res.data.data);
-  //       setRows(res.data.data);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //       setLoading(false);
-  //     });
-  // }, []);
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -265,20 +249,21 @@ export default function User() {
             <Dialog
               fullWidth
               maxWidth="md"
-              // fullScreen={fullScreen}
+              fullScreen={fullScreen}
               open={open}
               onClose={handleClose}
               aria-labelledby="responsive-dialog-title"
               // sx={{width:1000}}
             >
               {/* <DialogTitle> */}
+              {/* TODO: make responsive ... all the from will be in line in mobile view */}
               <DialogTitle id="responsive-dialog-title">
                 {"ADD USER"}
               </DialogTitle>
-              <DialogContent sx={{ px: { md: 7 }}}>
+              <DialogContent sx={{ px: { md: 7 } }}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Grid container spacing={2} sx={{ mb: 3 , mt:3}}>
-                    <Grid item xs={6}>
+                  <Grid container spacing={2} sx={{ mb: 3, mt: 3 }}>
+                    <Grid item xs={12} md={6}>
                       <TextField
                         label="Name"
                         fullWidth
@@ -289,7 +274,7 @@ export default function User() {
                         helperText={errors.name ? errors.name.message : ""}
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                       <TextField
                         label="Email"
                         fullWidth
@@ -302,7 +287,7 @@ export default function User() {
                         helperText={errors.email ? errors.email.message : ""}
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                       <TextField
                         label="Phone"
                         fullWidth
@@ -315,7 +300,7 @@ export default function User() {
                         helperText={errors.phone ? errors.phone.message : ""}
                       />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                       <TextField
                         label="Password"
                         fullWidth
@@ -337,7 +322,7 @@ export default function User() {
                         </Typography>
                       )}
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                       <FormControl
                         fullWidth
                         variant="outlined"
@@ -364,7 +349,7 @@ export default function User() {
                       )}
                     </Grid>
                     {type === "company" && (
-                      <Grid item xs={6}>
+                      <Grid item xs={12} md={6}>
                         <FormControl
                           fullWidth
                           variant="outlined"
@@ -398,12 +383,7 @@ export default function User() {
                     <Button onClick={handleClose} color="error">
                       Cancel
                     </Button>
-                    <Button
-                      type="submit"
-                      variant="outlined"
-                      color="success"
-                      
-                    >
+                    <Button type="submit" variant="outlined" color="success">
                       Add User
                     </Button>
                   </DialogActions>

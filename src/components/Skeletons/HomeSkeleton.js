@@ -9,7 +9,7 @@ export default function Variants() {
       <Stack spacing={1}>
         <Grid container spacing={{ xs: 2, sm: 2 }}>
           <Grid item xs={12} sm={6} lg={4} xl={2}>
-            <Skeleton animation="wave" variant="rounded" width={172}
+            <Skeleton animation="wave" variant="rounded" width="90%"
               height={240}
             />
           </Grid>
@@ -17,7 +17,7 @@ export default function Variants() {
             <Skeleton
               animation="wave"
               variant="rounded"
-              width={172}
+              width="90%"
               height={240}
             />
           </Grid>
@@ -25,7 +25,7 @@ export default function Variants() {
             <Skeleton
               animation="wave"
               variant="rounded"
-              width={172}
+              width="90%"
               height={240}
             />
           </Grid>
@@ -33,7 +33,7 @@ export default function Variants() {
             <Skeleton
               animation="wave"
               variant="rounded"
-              width={172}
+              width="90%"
               height={240}
             />
           </Grid>
@@ -41,7 +41,7 @@ export default function Variants() {
             <Skeleton
               animation="wave"
               variant="rounded"
-              width={172}
+              width="90%"
               height={240}
             />
           </Grid>
@@ -49,7 +49,7 @@ export default function Variants() {
             <Skeleton
               animation="wave"
               variant="rounded"
-              width={172}
+              width="90%"
               height={240}
             />
           </Grid>

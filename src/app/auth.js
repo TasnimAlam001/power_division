@@ -48,7 +48,7 @@ export const {
           token.type = user.user.type;
           token.token = user.token;
         }
-        // console.log("from jwt token=", token)
+       
     
         return token;
      
@@ -61,18 +61,10 @@ export const {
           session.user.token = token.token;
 
         }
-        // console.log("from jwt session=", session)
+        
         return session;
     },
   },
-  // callbacks: {
-  //   async jwt(params) {
-  //     return params;
-  //   },
-  //   async session(sessions) {
-  //     return sessions;
-  //   },
-  // },
 
   pages: {
     signIn: "/login",
