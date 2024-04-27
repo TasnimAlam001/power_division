@@ -31,9 +31,9 @@ export default function BarCharts(params) {
    //---------------------- Getting and setting the data
   let { dashboardData } = params;
   const { utilityWiseOpenAndClosed } = dashboardData;
-  const solvedData = utilityWiseOpenAndClosed.map((item) => item.close);
-  const openedData = utilityWiseOpenAndClosed.map((item) => item.open);
-  const xLabels = utilityWiseOpenAndClosed.map((item) => item.company_short_name);
+  const solvedData = utilityWiseOpenAndClosed?.map((item) => item.close);
+  const openedData = utilityWiseOpenAndClosed?.map((item) => item.open);
+  const xLabels = utilityWiseOpenAndClosed?.map((item) => item.company_short_name);
 
 
 

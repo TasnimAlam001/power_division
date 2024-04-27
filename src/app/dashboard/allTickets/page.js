@@ -18,32 +18,6 @@ export default function DataTable() {
   const startDate = dateTime?.start_date.split(" ")[0];
   const endDate = dateTime?.end_date.split(" ")[0];
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if(selectedDates){
-  //     axiosSecure(`/ticket?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
-  //     .then((res) => {
-  //       setLoading(false);
-  //       setTicketData(res.data.data);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //       setLoading(false);
-  //     });
-  //   }else{
-  //     axiosSecure("/ticket")
-  //     .then((res) => {
-  //       setLoading(false);
-  //       setTicketData(res.data.data);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //       setLoading(false);
-  //     });
-  //   }
-
-  // }, [selectedDates, axiosSecure]);
-
   const columns = [
     {
       field: "id",
@@ -84,7 +58,6 @@ export default function DataTable() {
       headerAlign: "left",
       minWidth: 150,
       renderCell: (params) => <TimeDateFormate {...{ params }} />,
-      // type: "dateTime"
     },
   ];
 

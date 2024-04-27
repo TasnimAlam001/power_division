@@ -42,7 +42,6 @@ export default function Error({ error, reset }) {
         <Typography variant="h5" sx={{ color: red[700],mb:2 }}>
           Something went wrong.
         </Typography>
-        {/* <Typography variant='caption'>{error}</Typography> */}
         <Button
           variant="contained"
           sx={{ backgroundColor: green[400], borderRadius: 4 , "&:hover": {backgroundColor:green[600]}}}

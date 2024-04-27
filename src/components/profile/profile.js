@@ -49,7 +49,6 @@ export default function Profile() {
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton
-            // className="rounded-md hover:bg-green-100"
             onClick={handleClick}
             size="small"
             sx={{
@@ -69,7 +68,6 @@ export default function Profile() {
                 Super Admin
                 {arrow ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </Stack>
-              {/* <h2 className="text-sm flex gap-2"> </h2> */}
               <Typography variant="caption" component="">
                 admin@gmail.com
               </Typography>
@@ -117,13 +115,12 @@ export default function Profile() {
           sx={{ display: { xs: "block", md: "none" } }}
           onClick={handleClose}
         >
-          <Box sx={{display: "flex"}} >
+          <Box sx={{ display: "flex" }}>
             <AccountCircleOutlinedIcon fontSize="large" sx={{ pr: 0.5 }} />
             <Box>
               <Typography sx={{ fontWeight: 750 }} spacing={2}>
                 Super Admin
               </Typography>
-              {/* <h2 className="text-md flex gap-2"> </h2> */}
               <Typography
                 sx={{ fontSize: 10 }}
                 variant="caption"

@@ -24,11 +24,12 @@ const useAxiosSecure = () => {
       async (error) => {
         if (
           error.response &&
-          (error.response.status === 401 || error.response.status === 403 || error.response.status == "Unauthorized")
+          (error.response.status === 401 ||
+            error.response.status === 403 ||
+            error.response.status == "Unauthorized")
         ) {
           signOut();
           router.push("/login", { scroll: true });
-
         }
         return Promise.reject(error);
       }

@@ -8,18 +8,11 @@ import {
   Typography,
   useMediaQuery,
   Box,
-  
 } from "@mui/material";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts";
-
 import { useTheme } from "@emotion/react";
-// import useAllData from "@/app/Hooks/useAllData";
-// import { useEffect, useState } from "react";
-// import AxiosSecure from "@/app/Hooks/useAxiousSecure";
-// import axios from "axios";
 
 export default function PieChars(params) {
-
   //---------------------- Getting and setting the data
   let { dashboardData } = params;
   let {
@@ -30,11 +23,11 @@ export default function PieChars(params) {
     reopenTicketCount,
   } = dashboardData;
   const allCountsZero =
-  totalTicketCount === 0 &&
-  openTicketCount === 0 &&
-  processingTicketCount === 0 &&
-  closeTicketCount === 0 &&
-  reopenTicketCount === 0;
+    totalTicketCount === 0 &&
+    openTicketCount === 0 &&
+    processingTicketCount === 0 &&
+    closeTicketCount === 0 &&
+    reopenTicketCount === 0;
 
   let data = [
     { label: "Opened", value: openTicketCount, color: "#04984A" },
@@ -46,7 +39,6 @@ export default function PieChars(params) {
   //-------------------Making percentage of value
 
   const getArcLabel = (params) => {
-    // console.warn(params)
     if (params.value == 0) {
       return " ";
     } else {
@@ -73,98 +65,95 @@ export default function PieChars(params) {
   const markFont = isMediumScreen ? 12 : 15;
 
   return (
-    <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>  
-          <Stack
-            sx={{ height: boxHeight }}
-            direction="column"
-            justifyContent="space-between"
-          >
-            <CardContent>
-              <Typography variant="h5">Total Tickets</Typography>
-              {
-                allCountsZero ? (
-                  <Typography sx={{mt:20}} variant="body1" align="center">
-                  No Data Found
-                </Typography>
-                ):(
-                  <PieChart
-                margin={{
-                  top: isMediumScreen ? 105 : 10,
-                  left: isMediumScreen ? 90 : 5,
-                }}
-                series={[
-                  {
-                    outerRadius: 95,
-                    innerRadius: 50,
-                    data,
-                    arcLabel: getArcLabel,
-                  },
-                ]}
-                slotProps={{
-                  legend: isMediumScreen
-                    ? {
-                        direction: "row",
-                        position: { vertical: "top", horizontal: "middle" },
-                        itemMarkWidth: 9,
-                        itemMarkHeight: 9,
-                      }
-                    : {
-                        itemMarkWidth: 9,
-                        itemMarkHeight: 9,
-                        labelStyle: {
-                          fontSize: markFont,
-                        },
-                      },
-                }}
-                width={width}
-                height={height}
-                sx={{
-                  [`& .${pieArcLabelClasses.root}`]: {
-                    fill: "white",
-                    fontSize: 13,
-                  },
-                }}
-              />
-                )
-              }
-              
-
-              <Divider sx={{ pt: 4 }} />
-              <Grid container columnSpacing={1} sx={{ mt: 4, pl: 3 }}>
-                {data.map((name) => (
-                  <Grid item xs={12} md={6} key={name.label}>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <Box
-                        sx={{
-                          width: 10,
-                          height: 10,
-                          borderRadius: "50%",
-                          backgroundColor: name.color,
-                        }}
-                      />
-                      <Typography
-                        sx={{ fontSize: { xs: 13, sm: 15 } }}
-                        className="list-disc"
-                      >
-                        {name.label} Tickets-{name.value}
-                      </Typography>
-                    </Stack>
-                  </Grid>
-                ))}
-              </Grid>
-            </CardContent>
-
-            <Typography
-              bgcolor="#ecedeb"
-              pt={0.5}
-              textAlign="center"
-              variant="caption"
-              sx={{ fontWeight: 550, color: "#048943" }}
-              className=" bg-slate-200 text-green-700 align-bottom font-bold py-2 text-center"
-            >
-              Total Tickets : {totalTicketCount}
+    <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
+      <Stack
+        sx={{ height: boxHeight }}
+        direction="column"
+        justifyContent="space-between"
+      >
+        <CardContent>
+          <Typography variant="h5">Total Tickets</Typography>
+          {allCountsZero ? (
+            <Typography sx={{ mt: 20 }} variant="body1" align="center">
+              No Data Found
             </Typography>
-          </Stack>
-        </Card>
+          ) : (
+            <PieChart
+              margin={{
+                top: isMediumScreen ? 105 : 10,
+                left: isMediumScreen ? 90 : 5,
+              }}
+              series={[
+                {
+                  outerRadius: 95,
+                  innerRadius: 50,
+                  data,
+                  arcLabel: getArcLabel,
+                },
+              ]}
+              slotProps={{
+                legend: isMediumScreen
+                  ? {
+                      direction: "row",
+                      position: { vertical: "top", horizontal: "middle" },
+                      itemMarkWidth: 9,
+                      itemMarkHeight: 9,
+                    }
+                  : {
+                      itemMarkWidth: 9,
+                      itemMarkHeight: 9,
+                      labelStyle: {
+                        fontSize: markFont,
+                      },
+                    },
+              }}
+              width={width}
+              height={height}
+              sx={{
+                [`& .${pieArcLabelClasses.root}`]: {
+                  fill: "white",
+                  fontSize: 13,
+                },
+              }}
+            />
+          )}
+
+          <Divider sx={{ pt: 4 }} />
+          <Grid container columnSpacing={1} sx={{ mt: 4, pl: 3 }}>
+            {data.map((name) => (
+              <Grid item xs={12} md={6} key={name.label}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Box
+                    sx={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: "50%",
+                      backgroundColor: name.color,
+                    }}
+                  />
+                  <Typography
+                    sx={{ fontSize: { xs: 13, sm: 15 } }}
+                    className="list-disc"
+                  >
+                    {name.label} Tickets-{name.value}
+                  </Typography>
+                </Stack>
+              </Grid>
+            ))}
+          </Grid>
+        </CardContent>
+
+        <Typography
+          bgcolor="#ecedeb"
+          pt={0.5}
+          textAlign="center"
+          variant="caption"
+          sx={{ fontWeight: 550, color: "#048943" }}
+          className=" bg-slate-200 text-green-700 align-bottom font-bold py-2 text-center"
+        >
+          Total Tickets : {totalTicketCount}
+        </Typography>
+      </Stack>
+    </Card>
   );
 }

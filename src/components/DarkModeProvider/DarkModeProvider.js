@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme, createTheme } from "@mui/material/styles";
-import { auth } from "@/app/auth";
 
 // Create a context for managing dark mode
 const DarkModeContext = createContext();

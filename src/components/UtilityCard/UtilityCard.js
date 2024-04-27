@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export default function UtilityCard({ data, selectedDates}) {
+export default function UtilityCard({ data, selectedDates }) {
   const router = useRouter();
   // const [selectedDates, setSelectedDates] = useState(null);
   const [count, setCount] = useState(0);
@@ -63,6 +63,15 @@ export default function UtilityCard({ data, selectedDates}) {
 
     return () => cancelAnimationFrame(animationFrame);
   }, [data.total_tickets, duration]);
+  const queryParameters = {};
+  if (
+    selectedDates &&
+    selectedDates.from !== undefined &&
+    selectedDates.to !== undefined
+  ) {
+    queryParameters.start_date = selectedDates.from;
+    queryParameters.end_date = selectedDates.to;
+  }
 
   return (
     <Grid item xs={12} sm={6} lg={4} xl={2} key={data.id}>
@@ -93,7 +102,7 @@ export default function UtilityCard({ data, selectedDates}) {
             <Link
               href={{
                 pathname: `/dashboard/utilities/${data.id}`,
-                
+                query: queryParameters || undefined,
               }}
             >
               <Box

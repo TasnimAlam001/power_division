@@ -27,8 +27,7 @@ const getArcLabel = (params) => {
   return `${(percent * 100).toFixed(0)}%`;
 };
 
-export default function UtilityPie({companyData}) {
-
+export default function UtilityPie({ companyData }) {
   let {
     totalTicketCount,
     openTicketCount,
@@ -38,11 +37,11 @@ export default function UtilityPie({companyData}) {
   } = companyData;
 
   const allCountsZero =
-  totalTicketCount === 0 &&
-  openTicketCount === 0 &&
-  processingTicketCount === 0 &&
-  closeTicketCount === 0 &&
-  reopenTicketCount === 0;
+    totalTicketCount === 0 &&
+    openTicketCount === 0 &&
+    processingTicketCount === 0 &&
+    closeTicketCount === 0 &&
+    reopenTicketCount === 0;
 
   let data = [
     { label: "Opened", value: openTicketCount, color: "#04984A" },
@@ -63,13 +62,10 @@ export default function UtilityPie({companyData}) {
     }
   };
 
-
-
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
 
-  // const width = isMediumScreen ? (isSmallScreen ? 260 : 360) : 410;
   const width = isSmallScreen
     ? 260
     : isMediumScreen
@@ -79,13 +75,11 @@ export default function UtilityPie({companyData}) {
     : 410;
   const height = isMediumScreen ? (isSmallScreen ? 290 : 290) : 150;
   const boxHeight = isMediumScreen ? (isSmallScreen ? 360 : 360) : 217;
-
-  // const markH = isMediumScreen ? 4: 15;
   const markFont = isMediumScreen ? 12 : 15;
 
   return (
     <div>
-      <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>
+      <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
         <Stack
           sx={{ height: boxHeight }}
           direction="column"
@@ -93,56 +87,51 @@ export default function UtilityPie({companyData}) {
         >
           <CardContent>
             <Typography variant="h6">Total Tickets</Typography>
-            {
-              allCountsZero ? (
-                <Typography sx={{mt:8}} variant="body1" align="center">
+            {allCountsZero ? (
+              <Typography sx={{ mt: 8 }} variant="body1" align="center">
                 No Data Found
               </Typography>
-              ):(
-                <PieChart
-              margin={{
-                top: isMediumScreen ? 105 : 10,
-                left: isMediumScreen ? 90 : 5,
-              }}
-              series={[
-                {
-                  outerRadius: 65,
-                  innerRadius: 30,
-                  data,
-                  arcLabel: getArcLabel,
-                },
-              ]}
-              slotProps={{
-                legend: isMediumScreen
-                  ? {
-                      direction: "row",
-                      position: { vertical: "top", horizontal: "middle" },
-                      itemMarkWidth: 9,
-                      itemMarkHeight: 9,
-                    }
-                  : {
-                      itemMarkWidth: 9,
-                      itemMarkHeight: 9,
-                      labelStyle: {
-                        fontSize: markFont,
+            ) : (
+              <PieChart
+                margin={{
+                  top: isMediumScreen ? 105 : 10,
+                  left: isMediumScreen ? 90 : 5,
+                }}
+                series={[
+                  {
+                    outerRadius: 65,
+                    innerRadius: 30,
+                    data,
+                    arcLabel: getArcLabel,
+                  },
+                ]}
+                slotProps={{
+                  legend: isMediumScreen
+                    ? {
+                        direction: "row",
+                        position: { vertical: "top", horizontal: "middle" },
+                        itemMarkWidth: 9,
+                        itemMarkHeight: 9,
+                      }
+                    : {
+                        itemMarkWidth: 9,
+                        itemMarkHeight: 9,
+                        labelStyle: {
+                          fontSize: markFont,
+                        },
                       },
-                    },
-              }}
-              width={width}
-              height={height}
-              sx={{
-                [`& .${pieArcLabelClasses.root}`]: {
-                  fill: "white",
-                  fontSize: 13,
-                },
-              }}
-            />
-              )
-            }
-            
-            
+                }}
+                width={width}
+                height={height}
+                sx={{
+                  [`& .${pieArcLabelClasses.root}`]: {
+                    fill: "white",
+                    fontSize: 13,
+                  },
+                }}
+              />
+            )}
           </CardContent>
-       
         </Stack>
       </Card>
     </div>

@@ -12,7 +12,6 @@ import {
 import theme from "@/app/theme";
 import { axisClasses } from "@mui/x-charts";
 
-
 const chartSetting = {
   yAxis: [
     {
@@ -27,18 +26,18 @@ const chartSetting = {
   },
 };
 
-export default function UtilityComplainBarChart({companyWiseCategoryWiseComplain}) {
+export default function UtilityComplainBarChart({
+  companyWiseCategoryWiseComplain,
+}) {
   //---------------------- Getting and setting the data
   let count = [];
   let xLabels = [];
 
   // Check if companyWiseCategoryWiseComplain is empty
   if (companyWiseCategoryWiseComplain.length === 0) {
-    // Demo data with value zero
     count = [0];
     xLabels = ["No Data"];
   } else {
-    // Getting and setting the data
     count = companyWiseCategoryWiseComplain.map((item) => item.count);
     xLabels = companyWiseCategoryWiseComplain.map((item) => item.name);
   }
@@ -62,9 +61,7 @@ export default function UtilityComplainBarChart({companyWiseCategoryWiseComplain
 
   return (
     <Box sx={{ position: "relative" }}>
-      <Card
-        sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}
-      >
+      <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
         <Stack
           sx={{ height: boxHeight }}
           direction="column"

@@ -4,10 +4,8 @@ import {
   Box,
   Card,
   CardContent,
-  Stack,
-  
+  Stack,  
   Typography,
-  createTheme,
   useMediaQuery,
 } from "@mui/material";
 
@@ -105,21 +103,7 @@ export default function AreaCharts(params) {
                         fontSize: fontS,
                       },
                     },
-                  ]}
-                  // bottomAxis={{
-                  //   labelStyle: {
-                  //     fontSize: 14,
-                  //     // transform: `translateY(${
-                  //     //       // Hack that should be added in the lib latter.
-                  //     //       5 * Math.abs(Math.sin((Math.PI * props.angle) / 180))
-                  //     //     }px)`
-                  //   },
-                  //   tickLabelStyle: {
-                  //     angle: 90,
-                  //     textAnchor: 'start',
-                  //     fontSize: 12,
-                  //   },
-                  // }}
+                  ]}              
 
                   sx={{
                     "& path": {

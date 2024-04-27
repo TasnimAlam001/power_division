@@ -47,37 +47,7 @@ const DashboardComponent = () => {
       setSelectedDates({form: dashboardData.startDate, to: dashboardData.endDate});
       console.log("in dashboardComponent",dashboardData.startDate, dashboardData.endDate)
   }, []);
-
-  // console.log("................", selectedDates.from,selectedDates.to )
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (selectedDates && selectedDates.from && selectedDates.to) {
-  //     axiosSecure(`/dashboard?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
-  //       .then((res) => {
-  //         setLoading(false);
-  //         setDashboardData(res.data.data);
-  //       })
-  //       .catch((e) => {
-  //         console.log(e);
-  //         setLoading(false);
-  //       });
-  //   } else {
-  //     setLoading(false); // No need to set loading to false if no API call is made
-  //     // Optionally, you can set default data or handle the absence of selected dates here
-  //   }
-  // }, [selectedDates, axiosSecure]);
-
-  // useEffect(() => {
-  //   // Update the URL when selectedDates change
-  //   if (selectedDates ) {
-  //     router.push(`/dashboard?start_date=${selectedDates.from}&end_date=${selectedDates.to}`);
-  //   } else{
-  //   router.push(`/dashboard?start_date=${dashboardData.startDate}&end_date=${dashboardData.endDate}`);
-  // }
-  // }, [selectedDates, router,dashboardData]);
-
-  // console.log(",...............", dashboardData)
+  
 
   return (
     <Box>

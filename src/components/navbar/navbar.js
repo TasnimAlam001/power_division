@@ -20,32 +20,19 @@ import {
 import SettingsOverscanIcon from "@mui/icons-material/SettingsOverscan";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import {  
-  styled,
-  useTheme,
-} from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import React, { useEffect, useMemo, useState } from "react";
 import { FaUser, FaUsers } from "react-icons/fa";
 import { GiWallet } from "react-icons/gi";
 import Image from "next/image";
 import Link from "next/link";
 import Profile from "../profile/profile";
 import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
-
-
+import React from "react";
+import { auth } from "@/app/auth";
 
 const data = [
   { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
-  // {
-  //   id: 2,
-  //   icon: <RiLightbulbFlashFill />,
-  //   label: "Utilities",
-  //   route: "utility",
-  // },
-  // { id: 3, icon: <FaMapMarkerAlt />, label: "Zone", route: "zone" },
-  // { id: 4, icon: <TbBulbFilled />, label: "S & D List", route: "executive" },
   { id: 5, icon: <FaUsers />, label: "Users", route: "user" },
   { id: 6, icon: <GiWallet />, label: "All Tickets", route: "allTickets" },
 ];
@@ -100,73 +87,18 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 const drawerWidth = 200;
 
 export default function Navbar(props) {
-  const {toggleMode, currentMode} = props;
   const theme = useTheme();
   const [isLogin, setIsLogin] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  const {isDarkMode, toggleDarkMode} = useDarkMode();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   React.useEffect(() => {
     const token = localStorage.getItem("access-token");
     if (token) {
       setIsLogin(true);
-    }    
+    }
   }, []);
-
-  
-
-  
-
-  // let localStorageTheme = prefersDarkMode;
-
-  // if (typeof window !== "undefined") {
-  //   localStorageTheme = localStorage.getItem("mode");
-  // }
-
-  // const [dark, setDark] = React.useState(() => {
-  //   return prefersDarkMode;
-  // });
-  // const [dark, setDark] = useState("light");
-  // const localStorageTheme =  localStorage.getItem("mode");
-
-  // useEffect(() => {
-  //   const mode = localStorage.getItem("mode");
-  //   // set mode
-  //   // console.log(`get localStore ${mode}`);
-  //   if(mode !== dark){
-  //     setDark(mode  === "true");
-  //   }
-  // }, [dark]);
-
-  // const [dark, setDark] = useState(() => {
-  //   return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
-  // });
-
-  // const [dark, setDark] = React.useState(() => {
-  //   if (typeof window !== "undefined") {
-  //     const localStorageTheme = localStorage.getItem("mode");
-  //     return localStorageTheme ? localStorageTheme === "dark" : prefersDarkMode;
-  //   }
-  //   return false; // Default value if window is not defined
-  // });
-
-  // Update local storage when theme mode changes
-  // useEffect(() => {
-  //   const localStorageMode = localStorage.getItem("mode");
-  //   // setLocalStorageTheme(localStorageMode)
-  //   const localStorageDark = localStorageMode === "dark";
-
-  //   if (dark !== localStorageDark) {
-  //     localStorage.setItem("mode", dark ? "dark" : "light");
-  //     // Reload the page only if the localStorage mode and current state are different
-  //     if (localStorageDark !== null) {
-  //       window.location.reload();
-  //     }
-  //   }
-  // }, [dark]);
-
-
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -184,12 +116,9 @@ export default function Navbar(props) {
   };
 
   function toggleFullScreen() {
-    // Check if fullscreen mode is currently active
     if (!document.fullscreenElement) {
-      // If not active, enter fullscreen mode
       document.documentElement.requestFullscreen();
     } else {
-      // If active, exit fullscreen mode
       if (document.exitFullscreen) {
         document.exitFullscreen();
       }
@@ -224,7 +153,11 @@ export default function Navbar(props) {
       >
         <Box>
           {data.map((item) => (
-            <Link key={item.label} href={`/dashboard/${item.route}` } onClick={handleDrawerClose}>
+            <Link
+              key={item.label}
+              href={`/dashboard/${item.route}`}
+              onClick={handleDrawerClose}
+            >
               <ListItemButton sx={{ py: 0, minHeight: 38 }}>
                 <ListItemIcon sx={{ color: "inherit" }}>
                   {item.icon}
@@ -241,43 +174,6 @@ export default function Navbar(props) {
             </Link>
           ))}
         </Box>
-        {/* <Box>
-          {isLogin ? (
-            <ListItemButton
-              onClick={handleLogOut}
-              sx={{ py: 0, minHeight: 38 }}
-            >
-              <ListItemIcon sx={{ color: "inherit" }}>
-                <FaSignOutAlt />
-              </ListItemIcon>
-              <ListItemText
-                sx={{ ml: -2 }}
-                primary="Log out"
-                primaryTypographyProps={{
-                  fontSize: 13,
-                  fontWeight: "medium",
-                }}
-              />
-            </ListItemButton>
-          ) : (
-            <ListItemButton
-              onClick={() => signIn()}
-              sx={{ py: 0, minHeight: 38 }}
-            >
-              <ListItemIcon sx={{ color: "inherit" }}>
-                <FaSignOutAlt />
-              </ListItemIcon>
-              <ListItemText
-                sx={{ ml: -2 }}
-                primary="Login"
-                primaryTypographyProps={{
-                  fontSize: 13,
-                  fontWeight: "medium",
-                }}
-              />
-            </ListItemButton>
-          )}
-        </Box> */}
       </List>
     </div>
   );
@@ -285,152 +181,131 @@ export default function Navbar(props) {
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   }));
 
   return (
-        <Box sx={{ display: "flex" }}>
-          <CssBaseline />
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
 
-          {/* --------------------------------------------------nav------------------------------ */}
-          <AppBar
-            color="inherit"
-            variant="none"
-            // position="fixed"
-            sx={{
-              width: { md: `calc(100% - ${drawerWidth}px)` },
-              ml: { md: `${drawerWidth}px` },
-            }}
+      {/* --------------------------------------------------nav------------------------------ */}
+      <AppBar
+        color="inherit"
+        variant="none"
+        sx={{
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
+        }}
+      >
+        <Toolbar>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ width: "100%" }}
           >
-            <Toolbar>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                sx={{ width: "100%" }}
+            <Stack direction="row" alignItems="center">
+              <FormatAlignLeftIcon
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { md: "none" } }}
+              />
+            </Stack>
+
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="center"
+              spacing={1}
+            >
+              <Typography
+                lineHeight={0}
+                gutterBottom={false}
+                sx={{
+                  cursor: "pointer",
+
+                  padding: "7px",
+                  transition: "background-color ",
+                  "&:hover": {
+                    backgroundColor: "success.light",
+                    borderRadius: "100%",
+                  },
+                }}
               >
-                <Stack direction="row" alignItems="center">
-                  <FormatAlignLeftIcon
-                    aria-label="open drawer"
-                    edge="start"
-                    onClick={handleDrawerToggle}
-                    sx={{ mr: 2, display: { md: "none" } }}
-                  />
+                <SettingsOverscanIcon onClick={toggleFullScreen} />
+              </Typography>
+              <Typography
+                lineHeight={0}
+                gutterBottom={false}
+                sx={{
+                  cursor: "pointer",
+                }}
+              >
+                <MaterialUISwitch
+                  checked={
+                    typeof isDarkMode === "string"
+                      ? isDarkMode === "true"
+                      : isDarkMode
+                  }
+                  onClick={toggleDarkMode}
+                />
+              </Typography>
+              {/* TODO : check isLogin as in middleware */}
+              {isLogin ? <Profile /> : <Button>SignIn</Button>}
+            </Stack>
+          </Stack>
+        </Toolbar>
+        <Divider />
+      </AppBar>
+      {/* ------------------------------------------side drawer------------------------------- */}
 
-                  {/* <TextField
-                  sx={{ ml: 4, display: { xs: "none", md: "block" } }}
-                  placeholder="Search.."
-                  size="small"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        {" "}
-                        <FaSearch />
-                      </InputAdornment>
-                    ),
-                  }}
-                /> */}
-                </Stack>
-
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="center"
-                  spacing={1}
-                >
-                  <Typography
-                    lineHeight={0}
-                    gutterBottom={false}
-                    sx={{
-                      cursor: "pointer",
-
-                      padding: "7px",
-                      transition: "background-color ",
-                      "&:hover": {
-                        backgroundColor: "success.light",
-                        borderRadius: "100%",
-                      },
-                    }}
-                  >
-                    <SettingsOverscanIcon onClick={toggleFullScreen} />
-                  </Typography>
-                  <Typography
-                    lineHeight={0}
-                    gutterBottom={false}
-                    sx={{
-                      cursor: "pointer",
-                    }}
-                  >
-                    {/* <MaterialUISwitch checked={isDarkMode} onClick={toggleDarkMode} /> */}
-                    <MaterialUISwitch checked={typeof isDarkMode === 'string' ? isDarkMode === 'true' : isDarkMode} onClick={toggleDarkMode} />
-
-                      
-                  </Typography>
-                  {/* TODO : check isLogin as in middleware */}
-                  {isLogin ? <Profile /> : <Button>SignIn</Button>}
-                </Stack>
-              </Stack>
-            </Toolbar>
-            <Divider />
-          </AppBar>
-          {/* ------------------------------------------side drawer------------------------------- */}
-
-          <Box
-            component="nav"
-            sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
-            aria-label="mailbox folders"
-          >
-            <Drawer
-              variant="temporary"
-              open={mobileOpen}
-              onTransitionEnd={handleDrawerTransitionEnd}
-              onClose={handleDrawerClose}
-              ModalProps={{
-                keepMounted: true,
-              }}
-              sx={{
-                display: { xs: "block", md: "none" },
-                "& .MuiDrawer-paper": {
-                  boxSizing: "border-box",
-                  width: drawerWidth,
-                },
-              }}
-            >
-              <DrawerHeader>
-                <IconButton onClick={handleDrawerClose}>
-                  {theme.direction === "ltr" ? (
-                    <ChevronLeftIcon />
-                  ) : (
-                    <ChevronRightIcon />
-                  )}
-                </IconButton>
-              </DrawerHeader>
-              {drawer}
-            </Drawer>
-            <Drawer
-              variant="permanent"
-              sx={{
-                display: { xs: "none", md: "block" },
-                "& .MuiDrawer-paper": {
-                  boxSizing: "border-box",
-                  width: drawerWidth,
-                },
-              }}
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Box>
-
-          {/* <Box
-            px={{ xs: 2, md: 4 }}
-            component="main"
-            sx={{ flexGrow: 1, pt: 3 }}
-          >
-            <Toolbar />
-            {children}
-          </Box> */}
-        </Box>
+      <Box
+        component="nav"
+        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+        aria-label="mailbox folders"
+      >
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onTransitionEnd={handleDrawerTransitionEnd}
+          onClose={handleDrawerClose}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          sx={{
+            display: { xs: "block", md: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", md: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+    </Box>
   );
 }

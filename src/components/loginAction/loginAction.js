@@ -6,7 +6,7 @@ import { AuthError } from "next-auth";
 
 
 export async function loginAction(formData) {
-    // console.log(formData)
+
   try{
     await signIn("credentials", {
       email: formData.email,

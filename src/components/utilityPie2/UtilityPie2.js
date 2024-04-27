@@ -13,7 +13,7 @@ import theme from "@/app/theme";
 // const data = [
 //   { label: "December", value: 273, color: "#04984A" },
 //   { label: "January", value: 236, color: "#10C6FF" },
-  
+
 // ];
 
 // const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);
@@ -23,8 +23,8 @@ import theme from "@/app/theme";
 //   return `${(percent * 100).toFixed(0)}%`;
 // };
 
-export default function UtilityPie2({previous2MonthTicketCount}) {
-  const isEmpty = previous2MonthTicketCount.length === 0; 
+export default function UtilityPie2({ previous2MonthTicketCount }) {
+  const isEmpty = previous2MonthTicketCount.length === 0;
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));
@@ -43,9 +43,6 @@ export default function UtilityPie2({previous2MonthTicketCount}) {
   // const markH = isMediumScreen ? 4: 15;
   const markFont = isMediumScreen ? 12 : 15;
 
-
-
-
   const monthNames = [
     "January",
     "February",
@@ -61,9 +58,8 @@ export default function UtilityPie2({previous2MonthTicketCount}) {
     "December",
   ];
 
-  // Generate data array for the pie chart
   const data = previous2MonthTicketCount.map(({ month, count }) => ({
-    label: monthNames[month - 1], // Subtract 1 to convert month number to array index
+    label: monthNames[month - 1],
     value: count,
   }));
 
@@ -74,65 +70,61 @@ export default function UtilityPie2({previous2MonthTicketCount}) {
   const getArcLabel = ({ value }) => `${((value / total) * 100).toFixed(0)}%`;
   return (
     <div>
-      <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius:3}}>
+      <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
         <Stack
           sx={{ height: boxHeight }}
           direction="column"
           justifyContent="space-between"
         >
           <CardContent>
-            <Typography variant="h6">Previous 2 Month Ticket Comparison</Typography>
-            {
-              isEmpty ? (
-                <Typography sx={{mt:8}} variant="body1" align="center">
+            <Typography variant="h6">
+              Previous 2 Month Ticket Comparison
+            </Typography>
+            {isEmpty ? (
+              <Typography sx={{ mt: 8 }} variant="body1" align="center">
                 No Data Found
               </Typography>
-              ):
-              (
-                <PieChart
-              margin={{
-                top: isMediumScreen ? 105 : 10,
-                left: isMediumScreen ? 90 : 5,
-              }}
-              series={[
-                {
-                  outerRadius: 65,
-                  innerRadius: 30,
-                  data,
-                  arcLabel: getArcLabel,
-                },
-              ]}
-              slotProps={{
-                legend: isMediumScreen
-                  ? {
-                      direction: "row",
-                      position: { vertical: "top", horizontal: "middle" },
-                      itemMarkWidth: 9,
-                      itemMarkHeight: 9,
-                    }
-                  : {
-                      itemMarkWidth: 9,
-                      itemMarkHeight: 9,
-                      labelStyle: {
-                        fontSize: markFont,
+            ) : (
+              <PieChart
+                margin={{
+                  top: isMediumScreen ? 105 : 10,
+                  left: isMediumScreen ? 90 : 5,
+                }}
+                series={[
+                  {
+                    outerRadius: 65,
+                    innerRadius: 30,
+                    data,
+                    arcLabel: getArcLabel,
+                  },
+                ]}
+                slotProps={{
+                  legend: isMediumScreen
+                    ? {
+                        direction: "row",
+                        position: { vertical: "top", horizontal: "middle" },
+                        itemMarkWidth: 9,
+                        itemMarkHeight: 9,
+                      }
+                    : {
+                        itemMarkWidth: 9,
+                        itemMarkHeight: 9,
+                        labelStyle: {
+                          fontSize: markFont,
+                        },
                       },
-                    },
-              }}
-              width={width}
-              height={height}
-              sx={{
-                [`& .${pieArcLabelClasses.root}`]: {
-                  fill: "white",
-                  fontSize: 13,
-                },
-              }}
-            />
-              )
-            }
-            
-            
+                }}
+                width={width}
+                height={height}
+                sx={{
+                  [`& .${pieArcLabelClasses.root}`]: {
+                    fill: "white",
+                    fontSize: 13,
+                  },
+                }}
+              />
+            )}
           </CardContent>
-       
         </Stack>
       </Card>
     </div>

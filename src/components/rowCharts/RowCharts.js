@@ -10,17 +10,16 @@ import {
 } from "@mui/material";
 import theme from "@/app/theme";
 
-
 export default function RowCharts(params) {
   //---------------------- Getting and setting the data
   let { dashboardData } = params;
   const { longPendingComplainCategoryAndCount } = dashboardData;
-  
-  // Check if dataset is empty, if so, set it to an array of objects with zero counts
-  const dataset = longPendingComplainCategoryAndCount.length === 0
-    ? [{ name: 'No Data', count: 0 } /* Add more categories as needed */]
-    : longPendingComplainCategoryAndCount;
-  
+
+  const dataset =
+    longPendingComplainCategoryAndCount.length === 0
+      ? [{ name: "No Data", count: 0 }]
+      : longPendingComplainCategoryAndCount;
+
   //-----------------------Responsive breakpoints
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -70,7 +69,9 @@ export default function RowCharts(params) {
                   },
                 },
               ]}
-              series={[{ dataKey: "count", color: "#CEB900", label: "Ticket Count" }]}
+              series={[
+                { dataKey: "count", color: "#CEB900", label: "Ticket Count" },
+              ]}
               layout="horizontal"
               slotProps={{
                 legend: {
@@ -88,4 +89,3 @@ export default function RowCharts(params) {
     </Card>
   );
 }
-

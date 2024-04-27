@@ -3,7 +3,6 @@ import * as React from "react";
 import {
   DataGrid,
   GridActionsCellItem,
-  GridToolbarContainer,
   GridRowModes,
   GridRowEditStopReasons,
   GridToolbar,
@@ -15,7 +14,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   InputLabel,
@@ -28,7 +26,7 @@ import {
   Grid,
 } from "@mui/material";
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
-import { green, red } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 import UserSkeleton from "@/components/Skeletons/userSkeleton";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -37,7 +35,6 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 import { useTheme } from "@emotion/react";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserData from "../../../../lib/UserData";
@@ -55,7 +52,7 @@ export default function User() {
   const {
     register,
     handleSubmit,
-    setValue,    
+    setValue,
     formState: { errors },
     reset,
   } = useForm();
@@ -253,10 +250,7 @@ export default function User() {
               open={open}
               onClose={handleClose}
               aria-labelledby="responsive-dialog-title"
-              // sx={{width:1000}}
             >
-              {/* <DialogTitle> */}
-              {/* TODO: make responsive ... all the from will be in line in mobile view */}
               <DialogTitle id="responsive-dialog-title">
                 {"ADD USER"}
               </DialogTitle>
@@ -390,15 +384,6 @@ export default function User() {
                 </form>
               </DialogContent>
             </Dialog>
-            {/* <Link href="/dashboard/recycleBin">
-              <Button
-                variant="outlined"
-                sx={{ mb: 0.5, ml: 0.5 }}
-                color="secondary"
-              >
-                <DeleteIcon /> Recycle Bin
-              </Button>
-            </Link> */}
             <DataGrid
               rows={rows}
               columns={columns}

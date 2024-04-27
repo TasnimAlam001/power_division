@@ -3,11 +3,12 @@ import { BarChart, axisClasses } from "@mui/x-charts";
 import React from "react";
 
 export default function UtilityBarChart({ ticketData }) {
-  // console.log("........................", ticketData);
   if (Object.keys(ticketData).length === 0) {
     return (
       <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
-          <Typography variant="h6" sx={{p:4}}>Last 30 Days Tickets Status</Typography>
+        <Typography variant="h6" sx={{ p: 4 }}>
+          Last 30 Days Tickets Status
+        </Typography>
 
         <Stack
           sx={{ height: 350 }}
@@ -37,9 +38,6 @@ export default function UtilityBarChart({ ticketData }) {
     return ticketData[date]["reopened"] || 0;
   });
 
-  // console.log("Dates:", dates);
-  // console.log("Opened Counts:", openedCounts);
-
   const chartSetting = {
     yAxis: [
       {
@@ -55,7 +53,7 @@ export default function UtilityBarChart({ ticketData }) {
   };
 
   return (
-    <Card sx={{boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3}}>
+    <Card sx={{ boxShadow: "0px 10px 40px 0px #00000008", borderRadius: 3 }}>
       <Stack
         sx={{ height: 550 }}
         direction="column"
@@ -78,8 +76,6 @@ export default function UtilityBarChart({ ticketData }) {
                   label: "Opened",
                   id: "openedId",
                   stack: "total",
-                  
-                 
                 },
                 {
                   data: closedCounts,
@@ -121,7 +117,6 @@ export default function UtilityBarChart({ ticketData }) {
                     fontSize: 15,
                   },
                 },
-               
               }}
               {...chartSetting}
             />

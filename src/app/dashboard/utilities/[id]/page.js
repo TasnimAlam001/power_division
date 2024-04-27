@@ -9,38 +9,24 @@ import UtilityPie2 from "@/components/utilityPie2/UtilityPie2";
 import UtilityComplainBarChart from "@/components/utilityComplainBarChart/UtilityComplainBarChart";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function UtilityPage({ params }) {
   const [axiosSecure] = useAxiosSecure();
   const [companyData, setCompanyData] = useState([]);
-  const [selectedDates, setSelectedDates] = useState(null);
-
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const { id } = params;
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     Aos.init();
   }, []);
 
-  // const searchParams = useSearchParams()
-  // useEffect(() => {
-  //   // console.log("router.query:----", searchParams.get('start_date'),searchParams.get('end_date'));
-    
-  //     // const { start_date, end_date } = router.query;
-
-  //     setSelectedDates({
-  //       from: searchParams.get('start_date'),
-  //       to: searchParams.get('end_date'),
-  //     });
-     
-    
-  // }, [searchParams]);
-
   useEffect(() => {
     setLoading(true);
     axiosSecure(`/companyDashboard/${id}`)
-    // axiosSecure(`/companyDashboard/${id}?start_date=${selectedDates.from}&end_date=${searchParams.get('end_date')}`)
+      // axiosSecure(`/companyDashboard/${id}?start_date=${selectedDates.from}&end_date=${searchParams.get('end_date')}`)
       .then((res) => {
         setCompanyData(res.data.data);
         setLoading(false);
@@ -49,12 +35,19 @@ export default function UtilityPage({ params }) {
         console.log(e);
         setLoading(false);
       });
-  }, [axiosSecure,id]);
+  }, [axiosSecure, id]);
 
-  // console.log(
-  //   companyData,
-  //   ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"
-  // );
+  if (searchParams.size == 0) {
+    if (
+      companyData &&
+      companyData.startDate !== undefined &&
+      companyData.endDate !== undefined
+    ) {
+      router.push(
+        `/dashboard/utilities/${id}?start_date=${companyData.startDate}&end_date=${companyData.endDate}`
+      );
+    }
+  }
 
   return (
     <Box sx={{ mt: 2 }}>
@@ -133,12 +126,3 @@ export default function UtilityPage({ params }) {
     </Box>
   );
 }
-
-// export async function generateStaticParams(){
-//   const res = await fetch("http://202.51.182.190:5412/api/web-app//dashboard")
-//   const utilities = res.data.data;
-
-//   return utilities.map((utility)=>({
-//       id:utility.id.toString(),
-//   }))
-// }

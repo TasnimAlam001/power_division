@@ -7,7 +7,7 @@ export default function UserSkeleton() {
   return (
     <Stack spacing={1} sx={{ mt: 6 }}>
       <Skeleton animation="wave" variant="rounded" width="10%" height={40} />
-      <Stack spacing={1} sx={{ border: 1, color: grey[200], p: 2}}>
+      <Stack spacing={1} sx={{ border: 1, color: grey[200], p: 2 }}>
         <Skeleton animation="wave" variant="rounded" width="100%" height={80} />
         <Skeleton animation="wave" variant="rounded" width="100%" height={60} />
         <Skeleton animation="wave" variant="rounded" width="100%" height={60} />

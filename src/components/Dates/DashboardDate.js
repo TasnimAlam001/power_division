@@ -1,20 +1,16 @@
 "use client";
-import { useState } from "react"; // Import useState hook
+import { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Box, Button, Stack, Typography } from "@mui/material";
-
-import { toast } from "react-toastify"; // Assuming you're using react-toastify for displaying toasts
-
+import { toast } from "react-toastify";
 import dayjs from "dayjs";
 
 export default function DashboardDate({ onDatesSelected, startDate, endDate }) {
-  // State to store selected dates
-  const [selectedFromDate, setSelectedFromDate] = useState(dayjs(startDate));
-  const [selectedToDate, setSelectedToDate] = useState(dayjs(endDate));
+  const [selectedFromDate, setSelectedFromDate] = useState(() => dayjs(startDate));
+  const [selectedToDate, setSelectedToDate] = useState(() => dayjs(endDate));
 
-  // Handler function to update selected dates
   const handleDateChange = (date, dateType) => {
     if (dateType === "from") {
       setSelectedFromDate(date);
@@ -23,21 +19,18 @@ export default function DashboardDate({ onDatesSelected, startDate, endDate }) {
     }
   };
 
-  // Handler function to handle filter button click
   const handleFilterClick = () => {
-    if (selectedFromDate && selectedToDate) {
-      if (selectedToDate.isBefore(selectedFromDate)) {
-        toast.error("End date cannot be before start date");
-        return;
-      }
-
-      // Format selected dates into "date/month/year" format
-      const fromDate = selectedFromDate.format("YYYY-MM-DD");
-      const toDate = selectedToDate.format("YYYY-MM-DD");
-      onDatesSelected({ from: fromDate, to: toDate });
-    } else {
-      console.log("Please select both from and to dates.");
+    if (!selectedFromDate || !selectedToDate) {
+      toast.error("Please select both from and to dates.");
+      return;
     }
+    if (selectedToDate.isBefore(selectedFromDate)) {
+      toast.error("End date cannot be before start date");
+      return;
+    }
+    const fromDate = selectedFromDate.format("YYYY-MM-DD");
+    const toDate = selectedToDate.format("YYYY-MM-DD");
+    onDatesSelected({ from: fromDate, to: toDate });
   };
 
   return (
@@ -56,7 +49,7 @@ export default function DashboardDate({ onDatesSelected, startDate, endDate }) {
               />
               <Typography sx={{ color: "success.main" }}>-</Typography>
               <DatePicker
-                minDate={selectedFromDate ? selectedFromDate : undefined}
+                minDate={selectedFromDate}
                 value={selectedToDate}
                 onChange={(date) => handleDateChange(date, "to")}
                 slotProps={{
