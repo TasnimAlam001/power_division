@@ -45,7 +45,7 @@ const DashboardComponent = () => {
 
   useEffect(() => {   
       setSelectedDates({form: dashboardData.startDate, to: dashboardData.endDate});
-      console.log("in dashboardComponent",dashboardData.startDate, dashboardData.endDate)
+      // console.log("in dashboardComponent",dashboardData.startDate, dashboardData.endDate)
   }, []);
   
 

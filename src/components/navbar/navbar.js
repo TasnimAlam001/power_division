@@ -29,7 +29,8 @@ import Link from "next/link";
 import Profile from "../profile/profile";
 import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
 import React from "react";
-import { auth } from "@/app/auth";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const data = [
   { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
@@ -88,12 +89,12 @@ const drawerWidth = 200;
 
 export default function Navbar(props) {
   const theme = useTheme();
-  const [isLogin, setIsLogin] = React.useState(false);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("access-token");
     if (token) {
       setIsLogin(true);
@@ -133,8 +134,8 @@ export default function Navbar(props) {
             src="/bdLogo.svg"
             width={55}
             height={55}
-            // className="w-[70px] pl-4"
             alt="ministry of power energy and mineral resources bangladesh logo"
+            priority={90}
           ></Image>
           <Typography variant="caption" pl={1} component="h6">
             Ministry of Power Energy & Mineral Resources
@@ -253,6 +254,7 @@ export default function Navbar(props) {
               </Typography>
               {/* TODO : check isLogin as in middleware */}
               {isLogin ? <Profile /> : <Button>SignIn</Button>}
+              {/* {isLogin ? <Button>Log Out</Button> : <Button>SignIn</Button>} */}
             </Stack>
           </Stack>
         </Toolbar>

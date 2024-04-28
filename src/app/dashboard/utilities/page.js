@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 
 export default function Utilities({ dashboardData ,selectedDates}) {
   const utility = dashboardData?.companyListWithTickets;
-  console.log(selectedDates,"in utility page")
+  // console.log(selectedDates,"in utility page")
 
   return (
     
