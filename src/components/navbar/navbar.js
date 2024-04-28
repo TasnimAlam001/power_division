@@ -135,7 +135,6 @@ export default function Navbar(props) {
             width={55}
             height={55}
             alt="ministry of power energy and mineral resources bangladesh logo"
-            priority={90}
           ></Image>
           <Typography variant="caption" pl={1} component="h6">
             Ministry of Power Energy & Mineral Resources

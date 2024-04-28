@@ -38,15 +38,15 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserData from "../../../../lib/UserData";
+import { useState } from "react";
 
 export default function User() {
   const { userData, loading } = UserData();
-
   const [axiosSecure] = useAxiosSecure();
-  const [type, setType] = React.useState("customer");
-  const [rows, setRows] = React.useState(userData);
-  const [rowModesModel, setRowModesModel] = React.useState({});
-  const [open, setOpen] = React.useState(false);
+  const [type, setType] = useState("customer");
+  const [rows, setRows] = useState(userData);
+  const [rowModesModel, setRowModesModel] = useState({});
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const {
@@ -262,6 +262,7 @@ export default function User() {
                         label="Name"
                         fullWidth
                         variant="outlined"
+                        autoComplete="name"
                         color="success"
                         {...register("name", { required: "Name is required" })}
                         error={!!errors.name}
@@ -273,6 +274,7 @@ export default function User() {
                         label="Email"
                         fullWidth
                         variant="outlined"
+                        autoComplete="email"
                         color="success"
                         {...register("email", {
                           required: "Email is required",
@@ -286,6 +288,7 @@ export default function User() {
                         label="Phone"
                         fullWidth
                         variant="outlined"
+                        autoComplete="phone"
                         color="success"
                         {...register("phone", {
                           required: "Phone number is required",
@@ -299,6 +302,7 @@ export default function User() {
                         label="Password"
                         fullWidth
                         variant="outlined"
+                        autoComplete="current-password"
                         type="password"
                         color="success"
                         {...register("password", {

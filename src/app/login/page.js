@@ -92,7 +92,7 @@ export default function Login() {
               <Image
                 width={60}
                 height={60}
-                src="/logo2.png"
+                src="/bdLogo.svg"
                 spacing={2}
                 alt="ministry of power logo"
               />
