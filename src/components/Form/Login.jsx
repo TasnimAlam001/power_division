@@ -55,8 +55,7 @@ export default function Login() {
       } else {
         toast.error(
           `${
-            error.response
-              ? error.response.data.message
+            error.response? error.response.data.message
               : "Something went wrong!"
           }`
         );
