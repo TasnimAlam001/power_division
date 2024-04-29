@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { loginAction } from "@/components/loginAction/loginAction";
 import LoginSVG from "@/components/LoginSVG/LoginSVG";
 import AxiosSecure from "../Hooks/useAxiousSecure";
+import { redirect } from "next/navigation";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,6 +47,7 @@ export default function Login() {
 
         toast("Login Successful");
         localStorage.setItem("access-token", token);
+        // redirect('/dashboard')
       }
     } catch (error) {
       if (error.response.status === 400) {

@@ -36,7 +36,7 @@ import Skeleton from "@mui/material/Skeleton";
 import ProfileSkeleton from "../Skeletons/ProfileSkeleton";
 
 const data = [
-  { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
+  { id: 1, icon: <FaUser />, label: "Executive", route: "/dashboard" },
   { id: 5, icon: <FaUsers />, label: "Users", route: "user" },
   { id: 6, icon: <GiWallet />, label: "All Tickets", route: "allTickets" },
 ];

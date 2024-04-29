@@ -63,8 +63,7 @@ export default function User() {
       reset();
       const { name, email, phone, password, type, company_id } = data;
 
-      await axiosSecure
-        .post("/users", { name, email, phone, password, type, company_id })
+      await axiosSecure.post("/users", { name, email, phone, password, type, company_id })
         .then((response) => {
           if (response) {
             setOpen(false);
