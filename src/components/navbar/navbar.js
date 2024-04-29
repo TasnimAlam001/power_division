@@ -31,6 +31,9 @@ import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import Skeleton from "@mui/material/Skeleton";
+import ProfileSkeleton from "../Skeletons/ProfileSkeleton";
 
 const data = [
   { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
@@ -93,6 +96,7 @@ export default function Navbar(props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { data: userSession, status } = useSession();
 
   useEffect(() => {
     const token = localStorage.getItem("access-token");
@@ -252,7 +256,12 @@ export default function Navbar(props) {
                 />
               </Typography>
               {/* TODO : check isLogin as in middleware */}
-              {isLogin ? <Profile /> : <Button>SignIn</Button>}
+              {userSession
+                ? status === "loading"
+                  ? <ProfileSkeleton/>
+                  : <Profile  userSession={userSession}/>
+                : <ProfileSkeleton/>}
+              {/* {isLogin ? <Profile /> : <Button>SignIn</Button>} */}
               {/* {isLogin ? <Button>Log Out</Button> : <Button>SignIn</Button>} */}
             </Stack>
           </Stack>

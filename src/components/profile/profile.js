@@ -5,22 +5,19 @@ import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { FaUserAlt } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { Badge, Stack } from "@mui/material";
-import CircleNotificationsOutlinedIcon from "@mui/icons-material/CircleNotificationsOutlined";
+import { Stack } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function Profile() {
+export default function Profile({userSession}) {
+  console.log("session: --", userSession.user)
   const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [arrow, setArrow] = React.useState(false);
@@ -65,11 +62,11 @@ export default function Profile() {
 
             <Box sx={{ display: { xs: "none", md: "block" } }} pl={1}>
               <Stack direction="row" variant="body2" spacing={2}>
-                Super Admin
+                {userSession.user.name}
                 {arrow ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </Stack>
               <Typography variant="caption" component="">
-                admin@gmail.com
+              {userSession.user.email}
               </Typography>
             </Box>
           </IconButton>

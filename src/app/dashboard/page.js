@@ -11,6 +11,7 @@ export default async function Dashboard() {
 
   if (!session) redirect("/api/auth/signin");
 
+
   return (
     <main>
       <DashboardComponent />
