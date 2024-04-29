@@ -71,7 +71,13 @@ export default function Login() {
   };
 
   return (
-    <Stack alignItems="center" justifyContent="center" sx={{ mt: 4 }}>
+    <Stack
+      height="100vh"
+      width="100vw"
+      alignItems="center"
+      justifyContent="center"
+      sx={{ mt: 4 }}
+    >
       <Grid
         container
         spacing={6}
@@ -82,8 +88,8 @@ export default function Login() {
           alignItems: "center",
         }}
       >
-        <Grid item xs={12} md={3}>
-          <Stack sx={{ px: 2 }} direction="column" spacing={3}>
+        <Grid item xs={12} md={5} >
+          <Stack sx={{ px: 2 }} direction="column" alignItems="center" justifyContent="center" spacing={3}>
             <Stack
               direction="column"
               alignItems="center"
@@ -204,7 +210,7 @@ export default function Login() {
             <span style={{ color: "#00ACF3" }}>Digicon Technologies ltd.</span>
           </Typography>
         </Grid>
-        <Grid sx={{ display: { xs: "none", md: "block" } }} item xs={8}>
+        <Grid sx={{ display: { xs: "none", md: "block" } }} item xs={7}>
           {/* Login SVG */}
           <LoginSVG />
         </Grid>
