@@ -10,14 +10,14 @@ export const {
   providers: [
     Credentials({
       name: "credentials",
-        trust: true,
+        trustHost: true,
 
-      async authorize(credential) {
+        async authorize(credential) {
         const email = credential?.email;
         const password = credential?.password;
 
         const userData = await fetch(
-          "http://localhost:5412/api/web-app/login",
+          "http://202.51.182.190:5412/api/web-app/login",
           {
             method: "POST",
             headers: {
