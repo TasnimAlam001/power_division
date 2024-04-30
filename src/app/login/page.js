@@ -47,7 +47,7 @@ export default function Login() {
 
         toast("Login Successful");
         localStorage.setItem("access-token", token);
-        // redirect('/dashboard')
+        redirect('/dashboard')
       }
     } catch (error) {
       if (error.response.status === 400) {

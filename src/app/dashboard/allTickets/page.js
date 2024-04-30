@@ -56,7 +56,7 @@ export default function DataTable() {
       editable: true,
       align: "left",
       headerAlign: "left",
-      minWidth: 150,
+      minWidth: 180,
       renderCell: (params) => <TimeDateFormate {...{ params }} />,
     },
   ];

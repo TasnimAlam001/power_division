@@ -17,7 +17,6 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function Profile({userSession}) {
-  console.log("session: --", userSession.user)
   const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [arrow, setArrow] = React.useState(false);

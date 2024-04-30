@@ -39,6 +39,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserData from "../../../../lib/UserData";
 import { useState } from "react";
+import UserDateFormatter from "@/components/UserDateFormatter/UserDateFormatter";
 
 export default function User() {
   const { userData, loading } = UserData();
@@ -138,13 +139,13 @@ export default function User() {
     setRowModesModel(newRowModesModel);
   };
   const columns = [
-    { field: "name", headerName: "Name", minWidth: 110, editable: true },
-    { field: "email", headerName: "Email", minWidth: 160, editable: true },
+    { field: "name", headerName: "Name", minWidth: 180, editable: true },
+    { field: "email", headerName: "Email", minWidth: 260, editable: true },
 
     {
       field: "type",
       headerName: "Type",
-      minWidth: 90,
+      minWidth: 180,
       renderCell: (params) => <UserTypeCell {...{ params }} />,
       editable: true,
       type: "singleSelect",
@@ -153,14 +154,15 @@ export default function User() {
     {
       field: "created_at",
       headerName: "Created At",
-      minWidth: 230,
+      minWidth: 300,
+      renderCell: (params) => <UserDateFormatter {...{ params }} />,
       editable: true,
     },
     {
       field: "actions",
       type: "actions",
       headerName: "Actions",
-      width: 100,
+      width: 170,
       cellClassName: "actions",
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;

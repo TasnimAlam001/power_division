@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
 import React from "react";
+import moment from "moment";
 
 export default function TimeDateFormate({ params }) {
   const dateTime = params.formattedValue;
 
-  const split_string = dateTime.split(" ");
-  const formatted_string = split_string.join("\n");
+  // Format the date and time using Moment.js
+  const formattedDateTime = moment(dateTime).format('LLL');
 
-  return <Box>{formatted_string}</Box>;
+  return <Box>{formattedDateTime}</Box>;
 }
