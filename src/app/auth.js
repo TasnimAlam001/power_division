@@ -16,7 +16,7 @@ export const {
         const password = credential?.password;
 
         const userData = await fetch(
-          "http://172.17.0.87:16999/api/web-app/login",
+          "http://202.51.182.190:5412/api/web-app/login",
           {
             method: "POST",
             headers: {
@@ -34,7 +34,7 @@ export const {
 
         if (userData?.status === "ok") {
           return user;
-          
+
         } else return null;
       },
     }),
@@ -48,10 +48,10 @@ export const {
           token.type = user.user.type;
           token.token = user.token;
         }
-       
-    
+
+
         return token;
-     
+
     },
     async session({ session, token }) {
         if(token){
@@ -61,7 +61,7 @@ export const {
           session.user.token = token.token;
 
         }
-        
+
         return session;
     },
   },
