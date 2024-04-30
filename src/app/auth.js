@@ -61,7 +61,6 @@ export const {
           session.user.token = token.token;
 
         }
-        console.log(process.env.AUTH_SECRET)
 
         return session;
     },
@@ -69,6 +68,6 @@ export const {
 
   pages: {
     signIn: "/login",
-  },
-  secret: process.env.AUTH_SECRET,
+  }
+
 });
