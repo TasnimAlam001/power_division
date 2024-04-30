@@ -30,7 +30,7 @@ export default function Login() {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm();
 
@@ -188,6 +188,7 @@ export default function Login() {
               <Button
                 variant="contained"
                 type="submit"
+                disabled={isSubmitting}
                 sx={{
                   width: { xs: 280, sm: 350 },
                   backgroundColor: green[900],

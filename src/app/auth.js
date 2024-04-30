@@ -61,6 +61,7 @@ export const {
           session.user.token = token.token;
 
         }
+        console.log(process.env.AUTH_SECRET)
 
         return session;
     },

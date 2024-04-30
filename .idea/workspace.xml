@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c4aa1ed-4ab4-495e-aee1-28103fd087e0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecosystem.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/AxiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AxiosInstance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Hooks/useAxiousSecure.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Hooks/useAxiousSecure.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +72,8 @@
       <workItem from="1713885432491" duration="5971000" />
       <workItem from="1714199936594" duration="128000" />
       <workItem from="1714200086180" duration="217000" />
-      <workItem from="1714492762310" duration="866000" />
+      <workItem from="1714492762310" duration="2310000" />
+      <workItem from="1714497481877" duration="1849000" />
     </task>
     <servers />
   </component>
