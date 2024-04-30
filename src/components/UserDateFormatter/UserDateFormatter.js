@@ -8,12 +8,12 @@ export default function UserDateFormatter({ params }) {
   let formattedDate;
   try {
     if (dateString) {
-      formattedDate = moment(dateString).format('LLL');
+      formattedDate = moment(dateString).format('LT ll');
     } else {
-      formattedDate = 'Date , Year , -- AM/PM'; 
+      formattedDate = '  '; 
     }
   } catch (error) {
-    formattedDate = '✘'; 
+    formattedDate = ' '; 
   }
 
   return (

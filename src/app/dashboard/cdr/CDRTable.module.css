@@ -1,0 +1,14 @@
+/* CDRTable.module.css */
+
+/* CDRTable.module.css */
+
+.header-row .MuiDataGrid-cell {
+    background-color: green !important; /* Set background color for header row */
+  }
+  
+  
+  .extra-row {
+    background-color: "success.light" !important;
+    font-size: 19px;
+  }
+  

@@ -32,13 +32,14 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import Skeleton from "@mui/material/Skeleton";
 import ProfileSkeleton from "../Skeletons/ProfileSkeleton";
+import { TbReportSearch } from "react-icons/tb";
 
 const data = [
-  { id: 1, icon: <FaUser />, label: "Executive", route: "/dashboard" },
+  { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
   { id: 5, icon: <FaUsers />, label: "Users", route: "user" },
   { id: 6, icon: <GiWallet />, label: "All Tickets", route: "allTickets" },
+  { id: 7, icon: <TbReportSearch />, label: "CDR", route: "cdr" },
 ];
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
