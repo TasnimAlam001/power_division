@@ -69,11 +69,12 @@ export default function CDRTable() {
               return s? s.total_call: 0;
           }
 
-        monthlyTotalCallCount.forEach((item)=>{
+        monthlyTotalCallCount.forEach((item, index)=>{
             // console.log(item)
             row.push(
                 {
-                    monthYear: moment(item.month, 'M').format('MMM') + item.year,
+                    id: index+1,
+                    monthYear: moment(item.month, 'M').format('MMM') + ' ' + item.year,
                     total_call_at_16999: item.total_call,
                     dpdc: getValue(item.month, item.year, '16603'),
                     wpzdcl: getValue(item.month, item.year, '9610016120'),
@@ -89,23 +90,24 @@ export default function CDRTable() {
 
         // console.table(row);
 
-        return row.reduce((acc,curr)=> {
-            acc[curr.key] = curr.value;
-            return acc;
-        }, {})
+        return row;
+        // return row.reduce((acc,curr)=> {
+        //     acc[curr.key] = curr.value;
+        //     return acc;
+        // }, {})
 
     };
   
   const columns = [
     { field: 'monthYear', headerName: 'Month', width: 150 },
 
-    { field: 'total_call_at_16999', headerName: 'Monthly Total Call Count', width: 250 },
-    { field: 'dpdc', headerName: 'DPDC', width: 300 },
-    { field: 'wpzdcl', headerName: 'wpzdcl', width: 300 },
-    { field: 'nesco', headerName: 'nesco', width: 300 },
-    { field: 'desco', headerName: 'desco', width: 300 },
-    { field: 'bpdb', headerName: 'bpdb', width: 300 },
-    { field: 'breb', headerName: 'BREB', width: 300 },
+    { field: 'total_call_at_16999', headerName: 'Monthly Total Call Count', width: 120 },
+    { field: 'dpdc', headerName: 'DPDC', width: 120 },
+    { field: 'wpzdcl', headerName: 'wpzdcl', width: 120 },
+    { field: 'nesco', headerName: 'nesco', width: 120 },
+    { field: 'desco', headerName: 'desco', width: 120 },
+    { field: 'bpdb', headerName: 'bpdb', width: 120 },
+    { field: 'breb', headerName: 'BREB', width: 120 },
 
     { field: 'monthlyHangUpCallCount', headerName: 'Monthly Hang Up Call Count', width: 250 },
   ];
