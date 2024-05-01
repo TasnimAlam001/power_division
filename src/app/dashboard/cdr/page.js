@@ -99,17 +99,16 @@ export default function CDRTable() {
     };
   
   const columns = [
-    { field: 'monthYear', headerName: 'Month', width: 150 },
+    { field: 'monthYear', headerName: 'Month', minWidth: 100 },
+    { field: 'total_call_at_16999', headerName: 'Monthly Total Call Count', minWidth: 150 },
+    { field: 'dpdc', headerName: 'DPDC', minWidth: 100 },
+    { field: 'wpzdcl', headerName: 'wpzdcl', minWidth: 100 },
+    { field: 'nesco', headerName: 'nesco', minWidth: 100 },
+    { field: 'desco', headerName: 'desco', minWidth: 100 },
+    { field: 'bpdb', headerName: 'bpdb', minWidth: 100 },
+    { field: 'breb', headerName: 'BREB', minWidth: 100 },
 
-    { field: 'total_call_at_16999', headerName: 'Monthly Total Call Count', width: 120 },
-    { field: 'dpdc', headerName: 'DPDC', width: 120 },
-    { field: 'wpzdcl', headerName: 'wpzdcl', width: 120 },
-    { field: 'nesco', headerName: 'nesco', width: 120 },
-    { field: 'desco', headerName: 'desco', width: 120 },
-    { field: 'bpdb', headerName: 'bpdb', width: 120 },
-    { field: 'breb', headerName: 'BREB', width: 120 },
-
-    { field: 'monthlyHangUpCallCount', headerName: 'Monthly Hang Up Call Count', width: 250 },
+    { field: 'monthlyHangUpCallCount', headerName: 'Monthly Hang Up Call Count', minWidth: 250 },
   ];
   
 //   const rows = organizeData(data);
@@ -130,7 +129,7 @@ export default function CDRTable() {
         ) : (
           <Box
             sx={{
-              height: 500,
+              height: 600,
               width: "100%",
               "& .actions": {
                 color: "text.secondary",

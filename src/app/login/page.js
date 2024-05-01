@@ -47,19 +47,21 @@ export default function Login() {
 
         toast("Login Successful");
         localStorage.setItem("access-token", token);
-        redirect('/dashboard')
+        redirect("/dashboard");
       }
     } catch (error) {
-      if (error.response.status === 400) {
-        toast.error("Please check your email and password again!");
-      } else {
-        toast.error(
-          `${
-            error.response
-              ? error.response.data.message
-              : "Something went wrong!"
-          }`
-        );
+      if (error.response) {
+        if (error.response.status === 400) {
+          toast.error("Please check your email and password again!");
+        } else {
+          toast.error(
+            `${
+              error.response
+                ? error.response.data.message
+                : "Something went wrong!"
+            }`
+          );
+        }
       }
     }
   };
@@ -90,8 +92,14 @@ export default function Login() {
           alignItems: "center",
         }}
       >
-        <Grid item xs={12} md={5} >
-          <Stack sx={{ px: 2 }} direction="column" alignItems="center" justifyContent="center" spacing={3}>
+        <Grid item xs={12} md={5}>
+          <Stack
+            sx={{ px: 2 }}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            spacing={3}
+          >
             <Stack
               direction="column"
               alignItems="center"

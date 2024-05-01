@@ -16,7 +16,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export default function Profile({userSession}) {
+export default function Profile({ userSession }) {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [arrow, setArrow] = React.useState(false);
@@ -33,9 +33,9 @@ export default function Profile({userSession}) {
 
   const handleLogOut = async () => {
     try {
-      await localStorage.removeItem("access-token");
+      router.push("/login", { scroll: true });
+      localStorage.removeItem("access-token");
       await signOut({ redirect: false });
-      await router.push("/login", { scroll: true });
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -65,7 +65,7 @@ export default function Profile({userSession}) {
                 {arrow ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </Stack>
               <Typography variant="caption" component="">
-              {userSession.user.email}
+                {userSession.user.email}
               </Typography>
             </Box>
           </IconButton>
