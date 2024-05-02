@@ -33,6 +33,7 @@ export const {
 
         const user = userData.data;
 
+        console.log(userData)
         if (userData?.status === "ok") {
           return user;
 
@@ -46,8 +47,11 @@ export const {
         if(user){
           token.name = user.user.name;
           token.email = user.user.email;
-          token.type = user.user.type;
+          token.type = user.user;
           token.token = user.token;
+        
+          console.log("aaaaaa",token)
+
         }
 
 

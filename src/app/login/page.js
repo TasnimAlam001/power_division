@@ -40,6 +40,7 @@ export default function Login() {
 
     try {
       const res = await axiosSecure.post("login", { email, password });
+      console.log(res)
       await loginAction(data);
 
       if (res.data.message === "Login Successful") {
@@ -47,7 +48,7 @@ export default function Login() {
 
         toast("Login Successful");
         localStorage.setItem("access-token", token);
-        redirect("/dashboard");
+        // redirect("/dashboard");
       }
     } catch (error) {
       if (error.response) {
