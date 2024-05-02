@@ -34,12 +34,16 @@ import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import ProfileSkeleton from "../Skeletons/ProfileSkeleton";
 import { TbReportSearch } from "react-icons/tb";
+import { HiTicket } from "react-icons/hi2";
+import { BsFillTicketPerforatedFill } from "react-icons/bs";
 
 const data = [
   { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
   { id: 5, icon: <FaUsers />, label: "Users", route: "user" },
   { id: 6, icon: <GiWallet />, label: "All Tickets", route: "allTickets" },
-  { id: 7, icon: <TbReportSearch />, label: "CDR", route: "cdr" },
+  { id: 7, icon: <HiTicket />, label: "Category Report", route: "categoryReport" },
+  { id: 8, icon: <BsFillTicketPerforatedFill />, label: "Complain Report", route: "complainReport" },
+  { id: 9, icon: <TbReportSearch />, label: "CDR", route: "cdr" },
 ];
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
