@@ -1,27 +1,35 @@
 import { auth } from "@/app/auth";
 
-export default auth((req) => {
+export  default auth(async(req) => {
   console.log("auth in middleware", !!req.auth);
-  console.log("auth in middleware", req.auth.user.type.type);
+  // console.log("auth in middleware", req.auth.user.type.type);
   const isLoggedIn = !!req.auth;
   const { nextUrl } = req;
   if (nextUrl.pathname == "/login") return null;
-
-  if (!isLoggedIn && nextUrl.pathname != "/login")
+  if (!isLoggedIn && nextUrl.pathname !== "/login") {
     return Response.redirect(new URL("/login", nextUrl));
-  
+  }
+
+
   if (isLoggedIn && req.auth.user.type.type === "company") {
     const companyId = req.auth.user.type.company_id;
-    const allowedRoute = `/dashboard/utilities/${companyId}`;
 
-    if (nextUrl.pathname === allowedRoute) {
+    if (nextUrl.pathname.startsWith(`/dashboard/utilities/${companyId}`)) {
       return null;
-    } else {
-      // Redirect to the allowed route
-      return Response.redirect(new URL(allowedRoute, nextUrl));
     }
+    if (
+      nextUrl.pathname.startsWith("/dashboard/allTickets") ||
+      nextUrl.pathname.startsWith("/dashboard/allTickets/ticketId/")
+    ) {
+      return null;
+    }
+
+    // If not allowed, redirect to the utility dashboard
+    return Response.redirect(new URL(`/dashboard/utilities/${companyId}`, nextUrl));
   }
+
 });
+
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

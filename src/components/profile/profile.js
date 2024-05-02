@@ -14,7 +14,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Stack } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function Profile({ userSession }) {
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function Profile({ userSession }) {
     try {
       router.push("/login", { scroll: true });
       localStorage.removeItem("access-token");
-      await signOut({ redirect: false });
+      await signOut({ redirect: true });
     } catch (error) {
       console.error("Error logging out:", error);
     }

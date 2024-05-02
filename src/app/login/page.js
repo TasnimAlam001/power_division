@@ -40,15 +40,20 @@ export default function Login() {
 
     try {
       const res = await axiosSecure.post("login", { email, password });
-      console.log(res)
+      console.log(res);
       await loginAction(data);
+      const nUser = res.data.data.user;
 
       if (res.data.message === "Login Successful") {
         const token = res.data.data.token;
 
-        toast("Login Successful");
         localStorage.setItem("access-token", token);
-        // redirect("/dashboard");
+        toast("Login Successful");
+        if (nUser.type === "company") {
+          redirect(`/dashboard/utilities/${nUser.company_id}`);
+        } else {
+          redirect("/dashboard");
+        }
       }
     } catch (error) {
       if (error.response) {

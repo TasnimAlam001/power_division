@@ -36,15 +36,7 @@ import ProfileSkeleton from "../Skeletons/ProfileSkeleton";
 import { TbReportSearch } from "react-icons/tb";
 import { HiTicket } from "react-icons/hi2";
 import { BsFillTicketPerforatedFill } from "react-icons/bs";
-
-const data = [
-  { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
-  { id: 5, icon: <FaUsers />, label: "Users", route: "user" },
-  { id: 6, icon: <GiWallet />, label: "All Tickets", route: "allTickets" },
-  { id: 7, icon: <HiTicket />, label: "Category Report", route: "categoryReport" },
-  { id: 8, icon: <BsFillTicketPerforatedFill />, label: "Complain Report", route: "complainReport" },
-  { id: 9, icon: <TbReportSearch />, label: "CDR", route: "cdr" },
-];
+import NavbarSkeleton from "../Skeletons/NavbarSkeleton";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 60,
@@ -97,18 +89,60 @@ const drawerWidth = 200;
 
 export default function Navbar(props) {
   const theme = useTheme();
-  const [isLogin, setIsLogin] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { data: userSession, status } = useSession();
+  let data = [];
 
-  useEffect(() => {
-    const token = localStorage.getItem("access-token");
-    if (token) {
-      setIsLogin(true);
+  if (userSession) {
+    if (status === "loading") {
+      
+        return <NavbarSkeleton />;
+
+    } else {
+      if (userSession.user.type.type === "company") {
+        data = [
+          {
+            id: 1,
+            icon: <FaUser />,
+            label: "Company Dashboard",
+            route: `/dashboard/utilities/${userSession?.user?.type?.company_id}`,
+          },
+          {
+            id: 6,
+            icon: <GiWallet />,
+            label: "All Tickets",
+            route: "allTickets",
+          },
+        ];
+      } else {
+        data = [
+          { id: 1, icon: <FaUser />, label: "Executive", route: "/" },
+          { id: 5, icon: <FaUsers />, label: "Users", route: "user" },
+          {
+            id: 6,
+            icon: <GiWallet />,
+            label: "All Tickets",
+            route: "allTickets",
+          },
+          {
+            id: 7,
+            icon: <HiTicket />,
+            label: "Category Report",
+            route: "categoryReport",
+          },
+          {
+            id: 8,
+            icon: <BsFillTicketPerforatedFill />,
+            label: "Complain Report",
+            route: "complainReport",
+          },
+          { id: 9, icon: <TbReportSearch />, label: "CDR", route: "cdr" },
+        ];
+      }
     }
-  }, []);
+  }
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -261,11 +295,15 @@ export default function Navbar(props) {
                 />
               </Typography>
               {/* TODO : check isLogin as in middleware */}
-              {userSession
-                ? status === "loading"
-                  ? <ProfileSkeleton/>
-                  : <Profile  userSession={userSession}/>
-                : <ProfileSkeleton/>}
+              {userSession ? (
+                status === "loading" ? (
+                  <ProfileSkeleton />
+                ) : (
+                  <Profile userSession={userSession} />
+                )
+              ) : (
+                <ProfileSkeleton />
+              )}
               {/* {isLogin ? <Profile /> : <Button>SignIn</Button>} */}
               {/* {isLogin ? <Button>Log Out</Button> : <Button>SignIn</Button>} */}
             </Stack>

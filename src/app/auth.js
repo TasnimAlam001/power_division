@@ -48,13 +48,9 @@ export const {
           token.name = user.user.name;
           token.email = user.user.email;
           token.type = user.user;
-          token.token = user.token;
-        
-          console.log("aaaaaa",token)
+          token.token = user.token;       
 
         }
-
-
         return token;
 
     },
