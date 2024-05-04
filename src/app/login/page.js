@@ -13,6 +13,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 import Image from "next/image";
 import React, { useState } from "react";
 import { green, red } from "@mui/material/colors";
@@ -27,6 +28,7 @@ import { redirect } from "next/navigation";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [axiosSecure] = AxiosSecure();
+  const [isLoading, setLoading] = useState(false);
 
   const {
     register,
@@ -35,6 +37,7 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true)
     const email = data.email;
     const password = data.password;
 
@@ -50,12 +53,17 @@ export default function Login() {
         localStorage.setItem("access-token", token);
         toast("Login Successful");
         if (nUser.type === "company") {
+          setLoading(false)
           redirect(`/dashboard/utilities/${nUser.company_id}`);
         } else {
+          setLoading(false)
+
           redirect("/dashboard");
         }
       }
     } catch (error) {
+      setLoading(false)
+
       if (error.response) {
         if (error.response.status === 400) {
           toast.error("Please check your email and password again!");
@@ -199,7 +207,9 @@ export default function Login() {
                   Forget Password?
                 </Typography>
               </Stack>
-              <Button
+              <LoadingButton 
+              // isLoading ? loading= {true} : loading = {false}
+                loading = {isLoading}
                 variant="contained"
                 type="submit"
                 disabled={isSubmitting}
@@ -212,7 +222,7 @@ export default function Login() {
                 }}
               >
                 Sign In
-              </Button>
+              </LoadingButton>
             </form>
             <ToastContainer />
             <Typography variant="caption" sx={{ textAlign: "center" }}>
