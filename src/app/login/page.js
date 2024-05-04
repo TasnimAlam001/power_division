@@ -54,14 +54,15 @@ export default function Login() {
 
         localStorage.setItem("access-token", token);
         toast("Login Successful");
-        if (nUser.type === "company") {
-          setLoading(false)
-          redirect(`/dashboard/utilities/${nUser.company_id}`);
-        } else {
-          setLoading(false)
+        redirect("/dashboard");
+        // if (nUser.type === "company") {
+        //   setLoading(false)
+        //   redirect(`/dashboard/utilities/${nUser.company_id}`);
+        // } else {
+        //   setLoading(false)
 
-          redirect("/dashboard");
-        }
+         
+        // }
       }
     } catch (error) {
       setLoading(false)

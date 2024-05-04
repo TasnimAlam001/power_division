@@ -168,7 +168,15 @@ export default function CDRTable() {
                 toolbar: { showQuickFilter: true },
               }}
               rows={cdrData} columns={columns}
-              pageSizeOptions={false}
+              initialState={{
+                pagination: {
+                  paginationModel: {
+                    pageSize: 10,
+                  },
+                },
+              }}
+              pageSizeOptions={[10]}
+              disableRowSelectionOnClick  
             />
           </Box>
         )}

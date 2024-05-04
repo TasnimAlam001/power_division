@@ -12,6 +12,7 @@ export async function loginAction(formData) {
       email: formData.email,
       password: formData.password,
       redirectTo: "/dashboard",
+      redirect: true,
     });
 
     

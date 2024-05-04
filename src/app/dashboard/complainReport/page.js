@@ -132,9 +132,17 @@ export default function ComplainReport() {
               rows={cdrData}
               columns={columns}
               getRowId={(row) => row.company_id}
-              pagination={false}            
+              initialState={{
+                pagination: {
+                  paginationModel: {
+                    pageSize: 6,
+                  },
+                },
+              }}
+              pageSizeOptions={[6]}
+              disableRowSelectionOnClick          
               
-              pageSizeOptions={false}
+              
             />
           </Box>
         )}
