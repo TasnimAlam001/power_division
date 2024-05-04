@@ -20,33 +20,33 @@ export default function ComplainReport() {
 
   useEffect(() => {
     setLoading(true);
-    if(selectedDates){
+    if (selectedDates) {
       axiosSecure(`/report/company?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
-      .then((res) => {
-        setCdrData(res.data.data.companyTicketList);
-        setData(res.data.data)
-        setLoading(false);
+        .then((res) => {
+          setCdrData(res.data.data.companyTicketList);
+          setData(res.data.data)
+          setLoading(false);
 
 
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
+        })
+        .catch((e) => {
+          console.log(e);
+          setLoading(false);
+        });
 
     }
-    else{
+    else {
       axiosSecure(`/report/company`)
-      // 
-      .then((res) => {
-        setCdrData(res.data.data.companyTicketList);
-        setData(res.data.data)
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
+        // 
+        .then((res) => {
+          setCdrData(res.data.data.companyTicketList);
+          setData(res.data.data)
+          setLoading(false);
+        })
+        .catch((e) => {
+          console.log(e);
+          setLoading(false);
+        });
     }
   }, [axiosSecure, selectedDates]);
 
@@ -85,28 +85,28 @@ export default function ComplainReport() {
   return (
     <Paper >
       <Box style={{ width: "100%" }}>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        sx={{ pl: 3, pt: 3, pr: 3 }}
-      >
-        <Typography variant="h6" sx={{ color: "success.main" }}>
-          
-          Company wise Report
-        </Typography>
-        <TicketDate
-          onDatesSelected={setSelectedDates}
-          startDate={startDate}
-          endDate={endDate}
-        />
-      </Stack>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          sx={{ pl: 3, pt: 3, pr: 3 }}
+        >
+          <Typography variant="h6" sx={{ color: "success.main" }}>
+
+            Company wise Report
+          </Typography>
+          <TicketDate
+            onDatesSelected={setSelectedDates}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        </Stack>
         {loading ? (
           <UserSkeleton />
         ) : (
           <Box
             sx={{
-              p:3,
-              
+              p: 3,
+
               width: "100%",
               "& .actions": {
                 color: "text.secondary",
@@ -117,12 +117,12 @@ export default function ComplainReport() {
               pt: 5,
             }}
           >
-           
+
             <DataGrid
-             disableColumnFilter
-             disableColumnSelector
-             disableDensitySelector
-             
+              disableColumnFilter
+              disableColumnSelector
+              disableDensitySelector
+
               slots={{
                 toolbar: GridToolbar,
               }}
@@ -132,9 +132,9 @@ export default function ComplainReport() {
               rows={cdrData}
               columns={columns}
               getRowId={(row) => row.company_id}
-              pagination={false}            
-              
-              pageSizeOptions={false}
+              // pagination={false}            
+
+              pageSizeOptions={[]}
             />
           </Box>
         )}
