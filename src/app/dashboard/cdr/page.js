@@ -21,8 +21,8 @@ export default function CDRTable() {
   const [cdrData, setCdrData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const start_date =formatDate(data.startDate);
-  console.log("start_date", start_date)
+  // const start_date =formatDate(data.startDate);
+  // console.log("start_date", start_date)
   useEffect(() => {
     setLoading(true);
     axiosSecure("/cdr")

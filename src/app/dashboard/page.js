@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { auth } from "../auth";
 import DashboardComponent from "@/components/DashboardComponent/DashboardComponent";
 
+
 export default async function Dashboard() {
   // Getting session from auth
   const session = await auth();
@@ -13,7 +14,7 @@ export default async function Dashboard() {
 
 
   return (
-    <main>
+    <main>      
       <DashboardComponent />
     </main>
   );
