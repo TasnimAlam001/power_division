@@ -10,14 +10,14 @@ export const {
   providers: [
     Credentials({
       name: "credentials",
-        trustHost: true,
+      trustHost: true,
 
-        async authorize(credential) {
+      async authorize(credential) {
         const email = credential?.email;
         const password = credential?.password;
 
         const userData = await fetch(
-          "http://202.51.182.190:5412/api/web-app/login",
+          process.env.NEXT_PUBLIC_API_URL + "/login",
           {
             method: "POST",
             headers: {
@@ -44,26 +44,26 @@ export const {
   callbacks: {
     async jwt({ token, user }) {
 
-        if(user){
-          token.name = user.user.name;
-          token.email = user.user.email;
-          token.type = user.user;
-          token.token = user.token;       
+      if (user) {
+        token.name = user.user.name;
+        token.email = user.user.email;
+        token.type = user.user;
+        token.token = user.token;
 
-        }
-        return token;
+      }
+      return token;
 
     },
     async session({ session, token }) {
-        if(token){
-          session.user.name = token.name;
-          session.user.email = token.email;
-          session.user.type = token.type;
-          session.user.token = token.token;
+      if (token) {
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.type = token.type;
+        session.user.token = token.token;
 
-        }
+      }
 
-        return session;
+      return session;
     },
   },
 
