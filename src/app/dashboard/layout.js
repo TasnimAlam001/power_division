@@ -8,7 +8,7 @@ import {
   useDarkMode,
 } from "@/components/DarkModeProvider/DarkModeProvider";
 import { SessionProvider } from "next-auth/react";
-import NextTopLoader from "nextjs-toploader";
+// import NextTopLoader from "nextjs-toploader";
 
 const ContextConsumer = (props) => {
   let { children } = props;
@@ -16,7 +16,7 @@ const ContextConsumer = (props) => {
 
   return (
     <ThemeProvider theme={myTheme}>
-      <NextTopLoader
+      {/* <NextTopLoader
         color="#2299DD"
         initialPosition={0.08}
         // crawlSpeed={200}
@@ -27,7 +27,7 @@ const ContextConsumer = (props) => {
         speed={200}
         shadow="0 0 10px #2299DD,0 0 5px #2299DD"
         
-      />
+      /> */}
 
       {children}
     </ThemeProvider>
