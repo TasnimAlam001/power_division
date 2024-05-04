@@ -24,6 +24,7 @@ export const {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ email, password }),
+            redirect: "follow",
           }
         )
           .then((res) => res.json())
