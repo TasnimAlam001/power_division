@@ -2,16 +2,10 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React, { useState, useEffect } from "react";
-import UserData from "../../../../lib/UserData";
-import UserDateFormatter from "@/components/UserDateFormatter/UserDateFormatter";
-import UserSkeleton from "@/components/Skeletons/userSkeleton";
-import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
-import UserTableType from "@/components/UserTableType/UserTableType";
-import CdrDataFetching from "../../../../lib/CdrDataFetching";
+import UserSkeleton from "@/components/Skeletons/TableSkeleton";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import moment from "moment";
 import TicketDate from "@/components/TicketDate/TicketDate";
-import TicketFormatter from "@/components/TicketFormater/TicketFormatter";
 import { formatDate } from "@/components/TicketFormater/TicketFormatter";
 
 export default function CDRTable() {
@@ -152,7 +146,7 @@ export default function CDRTable() {
         ) : (
           <Box
             sx={{
-              height: 560,
+              width: "100%",
               "& .actions": {
                 color: "text.secondary",
               },
@@ -174,7 +168,7 @@ export default function CDRTable() {
                 toolbar: { showQuickFilter: true },
               }}
               rows={cdrData} columns={columns}
-              autoPageSize
+              pageSizeOptions={false}
             />
           </Box>
         )}

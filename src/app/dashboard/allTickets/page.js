@@ -7,8 +7,8 @@ import TimeDateFormate from "@/components/TicketColumn/TimeDateFormate";
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import TicketDate from "@/components/TicketDate/TicketDate";
-import TicketSkeleton from "@/components/Skeletons/ticketSkeleton";
 import useTicketData from "../../../../lib/useTicketData";
+import BigTableSkeleton from "@/components/Skeletons/BigTableSkeleton";
 
 export default function DataTable() {
   const [selectedDates, setSelectedDates] = useState(null);
@@ -62,7 +62,7 @@ export default function DataTable() {
   ];
 
   return (
-    <Paper sx={{ height: 780 }}>
+    <Paper>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -80,11 +80,11 @@ export default function DataTable() {
       </Stack>
       {loading ? (
         <>
-          <TicketSkeleton />
+          <BigTableSkeleton />
         </>
       ) : (
         <>
-          <Box sx={{ height: 710, width: "100%", overflow: "auto", p: 2 }}>
+          <Box sx={{  width: "100%", overflow: "auto", p: 3 }}>
             <DataGrid
               rows={rows}
               columns={columns}

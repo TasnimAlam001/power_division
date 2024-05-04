@@ -2,7 +2,6 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React, { useState, useEffect } from "react";
-import UserSkeleton from "@/components/Skeletons/userSkeleton";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import TicketCountHeader from "@/components/CategoryTable/TicketCountHeader";
 import PercentageHeader from "@/components/CategoryTable/PercentageHeader";
@@ -10,6 +9,7 @@ import CategoryName from "@/components/CategoryTable/CategoryName";
 import PercentageCell from "@/components/CategoryTable/PercentageCell";
 import TicketDate from "@/components/TicketDate/TicketDate";
 import { formatDate } from "@/components/TicketFormater/TicketFormatter";
+import TicketSkeleton from "@/components/Skeletons/BigTableSkeleton";
 
 export default function CategoryReport() {
   const [axiosSecure] = useAxiosSecure();
@@ -105,7 +105,7 @@ export default function CategoryReport() {
           />
         </Stack>
         {loading ? (
-          <UserSkeleton />
+          <TicketSkeleton />
         ) : (
           <Box
             sx={{
@@ -120,7 +120,7 @@ export default function CategoryReport() {
               p: 3,
             }}
           >
-            {/* {console.table(cdrData)} */}
+            
             <DataGrid
               disableColumnFilter
               disableColumnSelector

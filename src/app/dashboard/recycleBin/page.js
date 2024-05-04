@@ -27,7 +27,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
-import UserSkeleton from "@/components/Skeletons/userSkeleton";
+import UserSkeleton from "@/components/Skeletons/TableSkeleton";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import { useTheme } from "@emotion/react";
 import { useForm } from "react-hook-form";

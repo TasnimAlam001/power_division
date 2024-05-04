@@ -25,11 +25,9 @@ import {
   useMediaQuery,
   Grid,
   Stack,
-  CardHeader,
 } from "@mui/material";
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
 import { red } from "@mui/material/colors";
-import UserSkeleton from "@/components/Skeletons/userSkeleton";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
@@ -42,6 +40,7 @@ import "react-toastify/dist/ReactToastify.css";
 import UserData from "../../../../lib/UserData";
 import { useState } from "react";
 import UserDateFormatter from "@/components/UserDateFormatter/UserDateFormatter";
+import BigTableSkeleton from "@/components/Skeletons/BigTableSkeleton";
 
 export default function User() {
   const { userData, loading } = UserData();
@@ -214,10 +213,9 @@ export default function User() {
 
   return (
     <Paper >
-      <ToastContainer />
-      <Box sx={{ p: 4 }} style={{ width: "100%" }}>
-        < >
-          <Stack direction="row" justifyContent="space-between" sx={{ mb: 3 }}>
+      <ToastContainer />     
+       
+          <Stack direction="row" justifyContent="space-between" sx={{ pl: 3, pt: 3, pr: 3 }}>
             <Typography
               sx={{ fontSize: 19, fontWeight: 600, color: "success.main" }}
             >User List</Typography>
@@ -232,11 +230,11 @@ export default function User() {
             </Button>
 
           </Stack>
-        </>
+       
 
 
         {loading ? (
-          <UserSkeleton />
+          <BigTableSkeleton />
         ) : (
           <Box
             sx={{
@@ -247,7 +245,8 @@ export default function User() {
               "& .textPrimary": {
                 color: "text.primary",
               },
-
+              p: 3
+             
             }}
           >
 
@@ -423,7 +422,7 @@ export default function User() {
             />
           </Box>
         )}
-      </Box>
+      
     </Paper>
   );
 }

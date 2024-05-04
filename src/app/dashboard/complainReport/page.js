@@ -2,17 +2,12 @@
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React, { useState, useEffect } from "react";
-import UserData from "../../../../lib/UserData";
-import UserDateFormatter from "@/components/UserDateFormatter/UserDateFormatter";
-import UserSkeleton from "@/components/Skeletons/userSkeleton";
-import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
-import UserTableType from "@/components/UserTableType/UserTableType";
-import CdrDataFetching from "../../../../lib/CdrDataFetching";
+import UserSkeleton from "@/components/Skeletons/TableSkeleton";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
-import moment from "moment";
 import TotalTicketH from "@/components/ComplainTable/TotalTicketH";
 import TicketDate from "@/components/TicketDate/TicketDate";
 import { formatDate } from "@/components/TicketFormater/TicketFormatter";
+
 
 export default function ComplainReport() {
   const [axiosSecure] = useAxiosSecure();
@@ -25,51 +20,37 @@ export default function ComplainReport() {
 
   useEffect(() => {
     setLoading(true);
-    if (selectedDates) {
+    if(selectedDates){
       axiosSecure(`/report/company?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
-        .then((res) => {
-          setCdrData(res.data.data.companyTicketList);
-          setData(res.data.data)
-          setLoading(false);
+      .then((res) => {
+        setCdrData(res.data.data.companyTicketList);
+        setData(res.data.data)
+        setLoading(false);
 
 
-        })
-        .catch((e) => {
-          console.log(e);
-          setLoading(false);
-        });
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
 
     }
-    else {
+    else{
       axiosSecure(`/report/company`)
-        // 
-        .then((res) => {
-          setCdrData(res.data.data.companyTicketList);
-          setData(res.data.data)
-          setLoading(false);
-        })
-        .catch((e) => {
-          console.log(e);
-          setLoading(false);
-        });
+      // 
+      .then((res) => {
+        setCdrData(res.data.data.companyTicketList);
+        setData(res.data.data)
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
     }
   }, [axiosSecure, selectedDates]);
 
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   axiosSecure("/report/company")
-  //     // axiosSecure(`/report/category?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
-  //     .then((res) => {
-  //       setCdrData(res.data.data.companyTicketList);
-  //       setData(res.data.data)
-  //       setLoading(false);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //       setLoading(false);
-  //     });
-  // }, [axiosSecure]);
 
   const columns = [
     { field: "company_name", headerName: "Company Name", minWidth: 480 },
@@ -102,30 +83,30 @@ export default function ComplainReport() {
 
 
   return (
-    <Paper>
+    <Paper >
       <Box style={{ width: "100%" }}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          sx={{ pl: 3, pt: 3, pr: 3 }}
-        >
-          <Typography variant="h6" sx={{ color: "success.main" }}>
-            {" "}
-            Company wise Report
-          </Typography>
-          <TicketDate
-            onDatesSelected={setSelectedDates}
-            startDate={startDate}
-            endDate={endDate}
-          />
-        </Stack>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        sx={{ pl: 3, pt: 3, pr: 3 }}
+      >
+        <Typography variant="h6" sx={{ color: "success.main" }}>
+          
+          Company wise Report
+        </Typography>
+        <TicketDate
+          onDatesSelected={setSelectedDates}
+          startDate={startDate}
+          endDate={endDate}
+        />
+      </Stack>
         {loading ? (
           <UserSkeleton />
         ) : (
           <Box
             sx={{
-              p: 3,
-              height: 530,
+              p:3,
+              
               width: "100%",
               "& .actions": {
                 color: "text.secondary",
@@ -136,12 +117,12 @@ export default function ComplainReport() {
               pt: 5,
             }}
           >
-            {/* {console.table(cdrData)} */}
+           
             <DataGrid
-              disableColumnFilter
-              disableColumnSelector
-              disableDensitySelector
-
+             disableColumnFilter
+             disableColumnSelector
+             disableDensitySelector
+             
               slots={{
                 toolbar: GridToolbar,
               }}
@@ -151,9 +132,8 @@ export default function ComplainReport() {
               rows={cdrData}
               columns={columns}
               getRowId={(row) => row.company_id}
-              pagination={false}
-
-
+              pagination={false}            
+              
               pageSizeOptions={false}
             />
           </Box>
