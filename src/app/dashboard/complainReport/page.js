@@ -1,5 +1,5 @@
 "use client";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Stack, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React, { useState, useEffect } from "react";
 import UserData from "../../../../lib/UserData";
@@ -11,19 +11,39 @@ import CdrDataFetching from "../../../../lib/CdrDataFetching";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import moment from "moment";
 import TotalTicketH from "@/components/ComplainTable/TotalTicketH";
+import TicketDate from "@/components/TicketDate/TicketDate";
+import formatDate from "@/components/TicketFormater/TicketFormatter";
 
 export default function ComplainReport() {
   const [axiosSecure] = useAxiosSecure();
   const [cdrData, setCdrData] = useState([]);
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
+  const [selectedDates, setSelectedDates] = useState(null);
+  const startDate = formatDate(data?.startDate);
+  const endDate = formatDate(data?.endDate);
 
   useEffect(() => {
     setLoading(true);
-    axiosSecure("/report/company")
-      // axiosSecure(`/report/category?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
+    if(selectedDates){
+      axiosSecure(`/report/company?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
       .then((res) => {
-        console.log(res.data.data.companyTicketList);
+        setCdrData(res.data.data.companyTicketList);
+        setData(res.data.data)
+        setLoading(false);
+
+
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
+
+    }
+    else{
+      axiosSecure(`/report/company`)
+      // 
+      .then((res) => {
         setCdrData(res.data.data.companyTicketList);
         setData(res.data.data)
         setLoading(false);
@@ -32,7 +52,24 @@ export default function ComplainReport() {
         console.log(e);
         setLoading(false);
       });
-  }, [axiosSecure]);
+    }
+  }, [axiosSecure, selectedDates]);
+
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   axiosSecure("/report/company")
+  //     // axiosSecure(`/report/category?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
+  //     .then((res) => {
+  //       setCdrData(res.data.data.companyTicketList);
+  //       setData(res.data.data)
+  //       setLoading(false);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //       setLoading(false);
+  //     });
+  // }, [axiosSecure]);
 
   const columns = [
     { field: "company_name", headerName: "Company Name", minWidth: 480 },
@@ -66,18 +103,29 @@ export default function ComplainReport() {
 
   return (
     <Paper sx={{ height: 850 }}>
-      <Box sx={{ p: 4 }} style={{ height: 675, width: "100%" }}>
-        <Typography
-          sx={{ fontSize: 19, fontWeight: 600, color: "success.main" }}
-        >
+      <Box style={{ height: 675, width: "100%" }}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        sx={{ pl: 3, pt: 3, pr: 3 }}
+      >
+        <Typography variant="h6" sx={{ color: "success.main" }}>
+          {" "}
           Company wise Report
         </Typography>
+        <TicketDate
+          onDatesSelected={setSelectedDates}
+          startDate={startDate}
+          endDate={endDate}
+        />
+      </Stack>
         {loading ? (
           <UserSkeleton />
         ) : (
           <Box
             sx={{
-              height: 503,
+              p:3,
+              height: 530,
               width: "100%",
               "& .actions": {
                 color: "text.secondary",

@@ -20,25 +20,41 @@ export default function CDRTable() {
   const [data, setData] = useState();
   const [cdrData, setCdrData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const startDate = formatDate(data?.startDate);
+  const endDate = formatDate(data?.endDate);
 
-  // const start_date =formatDate(data.startDate);
-  // console.log("start_date", start_date)
+
   useEffect(() => {
     setLoading(true);
-    axiosSecure("/cdr")
+    if(selectedDates){
+      axiosSecure(`/cdr?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
       .then((res) => {
-        setData(res.data)
-        console.log(",,,,,,,,",res.data)
-        setCdrData(organizeData(res.data));
+        setCdrData(res.data.data.companyTicketList);
+        setData(res.data.data)
         setLoading(false);
 
-        
+
       })
       .catch((e) => {
         console.log(e);
         setLoading(false);
       });
-  }, [axiosSecure]);
+
+    }
+    else{
+      axiosSecure(`/cdr`)
+      // 
+      .then((res) => {
+        setData(res.data)
+        setCdrData(organizeData(res.data));
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
+    }
+  }, [axiosSecure, selectedDates]);
 
 
     const organizeData = (data) => {
@@ -114,8 +130,8 @@ export default function CDRTable() {
 
 
   return (
-    <Paper sx={{ height: 850 }}>
-      <Box sx={{ p: 4 }} style={{ height: 675, width: "100%" }}>
+    <Paper >
+      <Box style={{width: "100%" }}>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -127,8 +143,8 @@ export default function CDRTable() {
         </Typography>
         <TicketDate
           onDatesSelected={setSelectedDates}
-          // startDate={startDate}
-          // endDate={endDate}
+          startDate={startDate}
+          endDate={endDate}
         />
       </Stack>
         {loading ? (
@@ -143,7 +159,7 @@ export default function CDRTable() {
               "& .textPrimary": {
                 color: "text.primary",
               },
-              pt: 5,
+              p: 3,
             }}
           >
             <DataGrid
