@@ -21,6 +21,8 @@ import { useForm } from "react-hook-form";
 import { loginAction } from "@/components/loginAction/loginAction";
 import AxiosSecure from "@/app/Hooks/useAxiousSecure";
 
+
+
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -54,9 +56,8 @@ export default function Login() {
         toast.error("Please check your email and password again!");
       } else {
         toast.error(
-          `${
-            error.response? error.response.data.message
-              : "Something went wrong!"
+          `${error.response ? error.response.data.message
+            : "Something went wrong!"
           }`
         );
       }

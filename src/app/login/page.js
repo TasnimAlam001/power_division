@@ -25,6 +25,8 @@ import LoginSVG from "@/components/LoginSVG/LoginSVG";
 import AxiosSecure from "../Hooks/useAxiousSecure";
 import { redirect } from "next/navigation";
 
+import bdGovtLogo from "@/assets/images/bdGovtLogo.svg";
+
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [axiosSecure] = AxiosSecure();
@@ -69,10 +71,9 @@ export default function Login() {
           toast.error("Please check your email and password again!");
         } else {
           toast.error(
-            `${
-              error.response
-                ? error.response.data.message
-                : "Something went wrong!"
+            `${error.response
+              ? error.response.data.message
+              : "Something went wrong!"
             }`
           );
         }
@@ -122,7 +123,7 @@ export default function Login() {
               <Image
                 width={60}
                 height={60}
-                src="/bdLogo.svg"
+                src={bdGovtLogo}
                 spacing={2}
                 alt="ministry of power logo"
               />
@@ -199,17 +200,17 @@ export default function Login() {
                 <Typography variant="subtitle2">
                   <Checkbox size="small" /> Remember me
                 </Typography>
-                <Typography
+                {/* <Typography
                   fontWeight={550}
                   variant="subtitle2"
                   sx={{ color: green[900] }}
                 >
                   Forget Password?
-                </Typography>
+                </Typography> */}
               </Stack>
-              <LoadingButton 
-              // isLoading ? loading= {true} : loading = {false}
-                loading = {isLoading}
+              <LoadingButton
+                // isLoading ? loading= {true} : loading = {false}
+                loading={isLoading}
                 variant="contained"
                 type="submit"
                 disabled={isSubmitting}
@@ -225,12 +226,12 @@ export default function Login() {
               </LoadingButton>
             </form>
             <ToastContainer />
-            <Typography variant="caption" sx={{ textAlign: "center" }}>
+            {/* <Typography variant="caption" sx={{ textAlign: "center" }}>
               Don`t have an account?{" "}
               <span style={{ color: green[900], fontWeight: 600 }}>
                 Sign up
               </span>
-            </Typography>
+            </Typography> */}
           </Stack>
           <Typography sx={{ fontSize: 12, mt: 8, textAlign: "center" }}>
             © 2023, All Rights Reserved. Developed By{" "}

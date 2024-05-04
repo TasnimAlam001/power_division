@@ -3,7 +3,6 @@
 import {
   AppBar,
   Box,
-  Button,
   CssBaseline,
   Divider,
   Drawer,
@@ -30,13 +29,14 @@ import Profile from "../profile/profile";
 import { useDarkMode } from "../DarkModeProvider/DarkModeProvider";
 import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import ProfileSkeleton from "../Skeletons/ProfileSkeleton";
 import { TbReportSearch } from "react-icons/tb";
 import { HiTicket } from "react-icons/hi2";
 import { BsFillTicketPerforatedFill } from "react-icons/bs";
 import NavbarSkeleton from "../Skeletons/NavbarSkeleton";
+import bdGovtLogo from "@/assets/images/bdGovtLogo.svg";
+import { usePathname } from 'next/navigation'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 60,
@@ -89,6 +89,7 @@ const drawerWidth = 200;
 
 export default function Navbar(props) {
   const theme = useTheme();
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -97,8 +98,8 @@ export default function Navbar(props) {
 
   if (userSession) {
     if (status === "loading") {
-      
-        return <NavbarSkeleton />;
+
+      return <NavbarSkeleton />;
 
     } else {
       if (userSession.user.type.type === "company") {
@@ -169,16 +170,23 @@ export default function Navbar(props) {
     }
   }
 
+  let isActive = (route) => {
+    if (route === '/') {
+      return '/dashboard' === pathname;
+    }
+    return route === pathname.replace('/dashboard/', '');
+  }
+
   const drawer = (
     <div>
       <Link href="/dashboard" onClick={handleDrawerClose}>
         <Stack direction="row" height={70} pl={2} pt={4}>
           <Image
-            src="/bdLogo.svg"
+            src={bdGovtLogo}
             width={55}
             height={55}
             alt="ministry of power energy and mineral resources bangladesh logo"
-          ></Image>
+          />
           <Typography variant="caption" pl={1} component="h6">
             Ministry of Power Energy & Mineral Resources
           </Typography>
@@ -201,7 +209,7 @@ export default function Navbar(props) {
               href={`/dashboard/${item.route}`}
               onClick={handleDrawerClose}
             >
-              <ListItemButton sx={{ py: 0, minHeight: 38 }}>
+              <ListItemButton sx={{ py: 0, minHeight: 38 }} selected={isActive(item.route)}>
                 <ListItemIcon sx={{ color: "inherit" }}>
                   {item.icon}
                 </ListItemIcon>
