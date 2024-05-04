@@ -1,5 +1,5 @@
 import moment from 'moment';
 
 export default function formatDate(dateString) {
-  return moment(dateString).format('YYYY-MM-DD');
+  return moment.utc(dateString).format('YYYY-MM-DD');
 }

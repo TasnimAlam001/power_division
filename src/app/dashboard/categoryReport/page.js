@@ -1,47 +1,64 @@
 "use client";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Stack, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React, { useState, useEffect } from "react";
-import UserData from "../../../../lib/UserData";
-import UserDateFormatter from "@/components/UserDateFormatter/UserDateFormatter";
 import UserSkeleton from "@/components/Skeletons/userSkeleton";
-import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
-import UserTableType from "@/components/UserTableType/UserTableType";
-import CdrDataFetching from "../../../../lib/CdrDataFetching";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
-import moment from "moment";
-import { v4 as uuidv4 } from "uuid";
 import TicketCountHeader from "@/components/CategoryTable/TicketCountHeader";
 import PercentageHeader from "@/components/CategoryTable/PercentageHeader";
 import CategoryName from "@/components/CategoryTable/CategoryName";
 import PercentageCell from "@/components/CategoryTable/PercentageCell";
+import TicketDate from "@/components/TicketDate/TicketDate";
+import formatDate from "@/components/TicketFormater/TicketFormatter";
 
 export default function CategoryReport() {
   const [axiosSecure] = useAxiosSecure();
-  const [totalTicket, setTotalTicket] = useState(0)
+  const [reportData, setReportData] = useState(0)
   const [cdrData, setCdrData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedDates, setSelectedDates] = useState(null);
+  const startDate = formatDate(reportData?.startDate);
+  const endDate = formatDate(reportData?.endDate);
+
+  console.log(startDate, endDate)
 
   useEffect(() => {
     setLoading(true);
-    axiosSecure(`/report/category?start_date=2023-10-01&end_date=2024-03-01`)
-      // axiosSecure(`/report/category?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
+    if(selectedDates){
+      axiosSecure(`/report/category?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
       .then((res) => {
         setCdrData(res.data.data.categoryTicketList);
-        setTotalTicket(res.data.data.totalTicket)
+        setReportData(res.data.data)
+        setLoading(false);
+
+
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoading(false);
+      });
+
+    }
+    else{
+      axiosSecure(`/report/category`)
+      // 
+      .then((res) => {
+        setCdrData(res.data.data.categoryTicketList);
+        setReportData(res.data.data)
         setLoading(false);
       })
       .catch((e) => {
         console.log(e);
         setLoading(false);
       });
-  }, [axiosSecure]);
+    }
+  }, [axiosSecure, selectedDates]);
 
   const columns = [
     {
       field: "category_name",
       headerName: "Category Name",
-      renderHeader: (params) => <CategoryName data= {totalTicket} {...{ params }} />,
+      renderHeader: (params) => <CategoryName {...{ params }} />,
 
       minWidth: 430,
       headerAlign: "center",
@@ -50,7 +67,7 @@ export default function CategoryReport() {
     {
       field: "ticket_count",
       headerName: "Ticket Count",
-      renderHeader: (params) => <TicketCountHeader data= {totalTicket} {...{ params }} />,
+      renderHeader: (params) => <TicketCountHeader data= {reportData?.totalTicket} {...{ params }} />,
 
       minWidth: 420,
       align: "center",
@@ -71,18 +88,28 @@ export default function CategoryReport() {
 
   return (
     <Paper sx={{ height: 850 }}>
-      <Box sx={{ p: 4 }} style={{ height: 975, width: "100%" }}>
-        <Typography
-          sx={{ fontSize: 19, fontWeight: 600, color: "success.main" }}
-        >
+      <Box style={{ height: 975, width: "100%" }}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        sx={{ pl: 3, pt: 3, pr: 3 }}
+      >
+        <Typography variant="h6" sx={{ color: "success.main" }}>
+          {" "}
           Category Report
         </Typography>
+        <TicketDate
+          onDatesSelected={setSelectedDates}
+          startDate={startDate}
+          endDate={endDate}
+        />
+      </Stack>
         {loading ? (
           <UserSkeleton />
         ) : (
           <Box
             sx={{
-              height: 713,
+              height: 725,
               width: "100%",
               "& .actions": {
                 color: "text.secondary",
@@ -90,7 +117,7 @@ export default function CategoryReport() {
               "& .textPrimary": {
                 color: "text.primary",
               },
-              pt: 5,
+              p: 3,
             }}
           >
             {/* {console.table(cdrData)} */}
