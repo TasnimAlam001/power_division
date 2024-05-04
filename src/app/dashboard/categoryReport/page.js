@@ -9,7 +9,7 @@ import PercentageHeader from "@/components/CategoryTable/PercentageHeader";
 import CategoryName from "@/components/CategoryTable/CategoryName";
 import PercentageCell from "@/components/CategoryTable/PercentageCell";
 import TicketDate from "@/components/TicketDate/TicketDate";
-import formatDate from "@/components/TicketFormater/TicketFormatter";
+import { formatDate } from "@/components/TicketFormater/TicketFormatter";
 
 export default function CategoryReport() {
   const [axiosSecure] = useAxiosSecure();
@@ -24,33 +24,33 @@ export default function CategoryReport() {
 
   useEffect(() => {
     setLoading(true);
-    if(selectedDates){
+    if (selectedDates) {
       axiosSecure(`/report/category?start_date=${selectedDates.from}&end_date=${selectedDates.to}`)
-      .then((res) => {
-        setCdrData(res.data.data.categoryTicketList);
-        setReportData(res.data.data)
-        setLoading(false);
+        .then((res) => {
+          setCdrData(res.data.data.categoryTicketList);
+          setReportData(res.data.data)
+          setLoading(false);
 
 
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
+        })
+        .catch((e) => {
+          console.log(e);
+          setLoading(false);
+        });
 
     }
-    else{
+    else {
       axiosSecure(`/report/category`)
-      // 
-      .then((res) => {
-        setCdrData(res.data.data.categoryTicketList);
-        setReportData(res.data.data)
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
+        // 
+        .then((res) => {
+          setCdrData(res.data.data.categoryTicketList);
+          setReportData(res.data.data)
+          setLoading(false);
+        })
+        .catch((e) => {
+          console.log(e);
+          setLoading(false);
+        });
     }
   }, [axiosSecure, selectedDates]);
 
@@ -67,7 +67,7 @@ export default function CategoryReport() {
     {
       field: "ticket_count",
       headerName: "Ticket Count",
-      renderHeader: (params) => <TicketCountHeader data= {reportData?.totalTicket} {...{ params }} />,
+      renderHeader: (params) => <TicketCountHeader data={reportData?.totalTicket} {...{ params }} />,
 
       minWidth: 420,
       align: "center",
@@ -87,23 +87,23 @@ export default function CategoryReport() {
   ];
 
   return (
-    <Paper sx={{ height: 850 }}>
-      <Box style={{ height: 975, width: "100%" }}>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        sx={{ pl: 3, pt: 3, pr: 3 }}
-      >
-        <Typography variant="h6" sx={{ color: "success.main" }}>
-          {" "}
-          Category Report
-        </Typography>
-        <TicketDate
-          onDatesSelected={setSelectedDates}
-          startDate={startDate}
-          endDate={endDate}
-        />
-      </Stack>
+    <Paper>
+      <Box style={{ width: "100%" }}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          sx={{ pl: 3, pt: 3, pr: 3 }}
+        >
+          <Typography variant="h6" sx={{ color: "success.main" }}>
+            {" "}
+            Category Report
+          </Typography>
+          <TicketDate
+            onDatesSelected={setSelectedDates}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        </Stack>
         {loading ? (
           <UserSkeleton />
         ) : (
@@ -125,7 +125,7 @@ export default function CategoryReport() {
               disableColumnFilter
               disableColumnSelector
               disableDensitySelector
-              disableColumnMenu 
+              disableColumnMenu
               disableColumnSort
               disableColumnReorder
               slots={{

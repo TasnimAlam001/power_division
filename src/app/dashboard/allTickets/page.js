@@ -100,7 +100,7 @@ export default function DataTable() {
               pageSizeOptions={[10, 20]}
               slots={{ toolbar: GridToolbar }}
               slotProps={{ toolbar: { showQuickFilter: true } }}
-              checkboxSelection
+
             />
           </Box>
         </>

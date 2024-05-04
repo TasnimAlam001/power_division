@@ -91,7 +91,7 @@ export default function User() {
       width: 100,
       cellClassName: "actions",
       getActions: ({ id }) => {
-       
+
 
         return [
           <GridActionsCellItem
@@ -131,12 +131,12 @@ export default function User() {
               pt: 5,
             }}
           >
-           
+
             <DataGrid
               rows={rows}
               columns={columns}
-              
-              
+
+
 
               disableColumnFilter
               disableColumnSelector
@@ -154,7 +154,6 @@ export default function User() {
                 },
               }}
               pageSizeOptions={[5, 10]}
-              checkboxSelection
             />
           </Box>
         )}

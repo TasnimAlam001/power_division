@@ -5,6 +5,7 @@ import "aos/dist/aos.css";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { formatDateTime } from "../TicketFormater/TicketFormatter";
 
 export default function UtilityCard({ data, selectedDates }) {
   const router = useRouter();
@@ -161,7 +162,7 @@ export default function UtilityCard({ data, selectedDates }) {
               borderBottomRightRadius: 6,
             }}
           >
-            {data.last_connected_at}
+            {formatDateTime(data.last_connected_at)}
           </Box>
         </Paper>
       </div>

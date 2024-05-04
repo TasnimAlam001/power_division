@@ -24,6 +24,8 @@ import {
   Typography,
   useMediaQuery,
   Grid,
+  Stack,
+  CardHeader,
 } from "@mui/material";
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
 import { red } from "@mui/material/colors";
@@ -190,14 +192,14 @@ export default function User() {
         }
 
         return [
-          <GridActionsCellItem
-            key={`edit-${id}`}
-            icon={<EditIcon />}
-            label="Edit"
-            className="textPrimary"
-            onClick={handleEditClick(id)}
-            color="inherit"
-          />,
+          // <GridActionsCellItem
+          //   key={`edit-${id}`}
+          //   icon={<EditIcon />}
+          //   label="Edit"
+          //   className="textPrimary"
+          //   onClick={handleEditClick(id)}
+          //   color="inherit"
+          // />,
           <GridActionsCellItem
             key={`delete-${id}`}
             icon={<DeleteIcon />}
@@ -211,31 +213,15 @@ export default function User() {
   ];
 
   return (
-    <Paper sx={{ height: 850 }}>
-      <Box sx={{ p: 4 }} style={{ height: 675, width: "100%" }}>
-        <Typography
-          sx={{ fontSize: 19, fontWeight: 600, color: "success.main" }}
-        >
-          {" "}
-          User List
-        </Typography>
-        {loading ? (
-          <UserSkeleton />
-        ) : (
-          <Box
-            sx={{
-              height: 500,
-              width: "100%",
-              "& .actions": {
-                color: "text.secondary",
-              },
-              "& .textPrimary": {
-                color: "text.primary",
-              },
-              pt: 5,
-            }}
-          >
-            <ToastContainer />
+    <Paper >
+      <ToastContainer />
+      <Box sx={{ p: 4 }} style={{ width: "100%" }}>
+        < >
+          <Stack direction="row" justifyContent="space-between" sx={{ mb: 3 }}>
+            <Typography
+              sx={{ fontSize: 19, fontWeight: 600, color: "success.main" }}
+            >User List</Typography>
+
             <Button
               variant="outlined"
               sx={{ mb: 0.5 }}
@@ -244,6 +230,27 @@ export default function User() {
             >
               <AddIcon /> Add User
             </Button>
+
+          </Stack>
+        </>
+
+
+        {loading ? (
+          <UserSkeleton />
+        ) : (
+          <Box
+            sx={{
+              width: "100%",
+              "& .actions": {
+                color: "text.secondary",
+              },
+              "& .textPrimary": {
+                color: "text.primary",
+              },
+
+            }}
+          >
+
             <Dialog
               fullWidth
               maxWidth="md"
@@ -409,11 +416,10 @@ export default function User() {
               }}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
+                  paginationModel: { page: 0, pageSize: 10 },
                 },
               }}
               pageSizeOptions={[5, 10]}
-              checkboxSelection
             />
           </Box>
         )}

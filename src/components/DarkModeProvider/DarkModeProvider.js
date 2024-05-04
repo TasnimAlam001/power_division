@@ -94,7 +94,7 @@ export const DarkModeProvider = ({ children }) => {
         main: "#383838",
       },
       background: {
-        paper: "#282b33",
+        paper: "#151a29",
         default: "#121624",
       },
     },

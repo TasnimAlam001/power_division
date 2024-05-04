@@ -8,7 +8,7 @@ import {
   useDarkMode,
 } from "@/components/DarkModeProvider/DarkModeProvider";
 import { SessionProvider } from "next-auth/react";
-import NextNProgress from "nextjs-progressbar";
+
 
 const ContextConsumer = (props) => {
   let { children } = props;
@@ -22,13 +22,7 @@ export default function DashboardLayout({ children }) {
 
   return (
     <SessionProvider>
-      <NextNProgress
-        color="#29D"
-        startPosition={0.3}
-        stopDelayMs={200}
-        height={30}
-        
-      />
+
       <DarkModeProvider>
         <ContextConsumer>
           <CssBaseline />
