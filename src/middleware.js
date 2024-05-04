@@ -1,8 +1,9 @@
-import { auth } from "@/app/auth";
+import { auth, signOut } from "@/app/auth";
+
+
 
 export  default auth(async(req) => {
   console.log("auth in middleware", !!req.auth);
-  // console.log("auth in middleware", req.auth.user.type.type);
   const isLoggedIn = !!req.auth;
   const { nextUrl } = req;
   if (nextUrl.pathname == "/login") return null;
@@ -10,8 +11,7 @@ export  default auth(async(req) => {
     return Response.redirect(new URL("/login", nextUrl));
   }
 
-
-  if (isLoggedIn && req.auth.user.type.type === "company") {
+  if (isLoggedIn && req.auth.user?.type.type === "company") {
     const companyId = req.auth.user.type.company_id;
 
     if (nextUrl.pathname.startsWith(`/dashboard/utilities/${companyId}`)) {

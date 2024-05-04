@@ -5,12 +5,12 @@ import DashboardComponent from "@/components/DashboardComponent/DashboardCompone
 
 export default async function Dashboard() {
   // Getting session from auth
-  const session = await auth();
-  console.log("----------------------");
-  console.log("session: ", session);
-  console.log("----------------------");
+  // const session = await auth();
+  // console.log("----------------------");
+  // console.log("session: ", session);
+  // console.log("----------------------");
 
-  if (!session) redirect("/api/auth/signin");
+  // if (!session) redirect("/api/auth/signin");
 
 
   return (
