@@ -29,11 +29,11 @@ export default function DashboardLayout({ children }) {
         <DarkModeProvider>
           <ContextConsumer>
           
+            <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={200} height={3} showOnShallow={true} />
 
             <CssBaseline />
 
             <Navbar />
-            <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={200} height={3} showOnShallow={true} />
             <Box
               sx={{
                 pt: 10,
