@@ -87,7 +87,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 const drawerWidth = 200;
 
-export default function Navbar(props) {
+export default function Navbar() {
   const theme = useTheme();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
