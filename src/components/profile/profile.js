@@ -33,9 +33,11 @@ export default function Profile({ userSession }) {
 
   const handleLogOut = async () => {
     try {
-      router.push("/login", { scroll: true });
+      // router.push("/login", { scroll: true });
+      // await signOut({ callbackUrl: "/login" }); 
+      await signOut({ callbackUrl: "/login" }); 
       localStorage.removeItem("access-token");
-      await signOut({ redirect: true });
+      // await signOut({ redirect: true });
     } catch (error) {
       console.error("Error logging out:", error);
     }
