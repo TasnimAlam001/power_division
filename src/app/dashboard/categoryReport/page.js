@@ -1,5 +1,5 @@
 "use client";
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import { Box, Paper, Stack, Typography, useMediaQuery } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React, { useState, useEffect } from "react";
 import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
@@ -10,6 +10,7 @@ import PercentageCell from "@/components/CategoryTable/PercentageCell";
 import TicketDate from "@/components/TicketDate/TicketDate";
 import { formatDate } from "@/components/TicketFormater/TicketFormatter";
 import TicketSkeleton from "@/components/Skeletons/BigTableSkeleton";
+import { useTheme } from "@emotion/react";
 
 export default function CategoryReport() {
   const [axiosSecure] = useAxiosSecure();
@@ -19,8 +20,8 @@ export default function CategoryReport() {
   const [selectedDates, setSelectedDates] = useState(null);
   const startDate = formatDate(reportData?.startDate);
   const endDate = formatDate(reportData?.endDate);
-
-  console.log(startDate, endDate)
+  const theme = useTheme();
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     setLoading(true);
@@ -58,9 +59,10 @@ export default function CategoryReport() {
     {
       field: "category_name",
       headerName: "Category Name",
+        minWidth: isMediumScreen ? 220 : undefined,
+      flex: !isMediumScreen ? 1 : undefined,  
       renderHeader: (params) => <CategoryName {...{ params }} />,
-
-      minWidth: 430,
+     
       headerAlign: "center",
       align: "center",
     },
@@ -68,8 +70,9 @@ export default function CategoryReport() {
       field: "ticket_count",
       headerName: "Ticket Count",
       renderHeader: (params) => <TicketCountHeader data={reportData?.totalTicket} {...{ params }} />,
-
-      minWidth: 420,
+      minWidth: isMediumScreen ? 220 : undefined,
+      flex: !isMediumScreen ? 1 : undefined,  
+     
       align: "center",
       headerAlign: "center",
     },
@@ -79,8 +82,9 @@ export default function CategoryReport() {
       renderHeader: (params) => <PercentageHeader {...{ params }} />,
       renderCell: (params) => <PercentageCell {...{ params }} />,
 
-
-      minWidth: 370,
+      minWidth: isMediumScreen ? 220 : undefined,
+      flex: !isMediumScreen ? 1 : undefined,  
+      
       align: "center",
       headerAlign: "center",
     },

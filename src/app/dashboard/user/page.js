@@ -29,7 +29,6 @@ import {
 import UserTypeCell from "@/components/useTypeCell/UserTypeCell";
 import { red } from "@mui/material/colors";
 import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
@@ -65,7 +64,8 @@ export default function User() {
       reset();
       const { name, email, phone, password, type, company_id } = data;
 
-      await axiosSecure.post("/users", { name, email, phone, password, type, company_id })
+      await axiosSecure
+        .post("/users", { name, email, phone, password, type, company_id })
         .then((response) => {
           if (response) {
             setOpen(false);
@@ -140,13 +140,27 @@ export default function User() {
     setRowModesModel(newRowModesModel);
   };
   const columns = [
-    { field: "name", headerName: "Name", minWidth: 180, editable: true },
-    { field: "email", headerName: "Email", minWidth: 260, editable: true },
+    {
+      field: "name",
+      headerName: "Name",
+      minWidth: fullScreen ? 180 : undefined,
+      flex: !fullScreen ? 1 : undefined,
+      editable: true,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      minWidth: fullScreen ? 200 : undefined,
+      flex: !fullScreen ? 1 : undefined,
+      editable: true,
+    },
 
     {
       field: "type",
       headerName: "Type",
-      minWidth: 180,
+
+      minWidth: fullScreen ? 180 : undefined,
+      flex: !fullScreen ? 1 : undefined,
       renderCell: (params) => <UserTypeCell {...{ params }} />,
       editable: true,
       type: "singleSelect",
@@ -155,7 +169,8 @@ export default function User() {
     {
       field: "created_at",
       headerName: "Created At",
-      minWidth: 300,
+      minWidth: fullScreen ? 260 : undefined,
+      flex: !fullScreen ? 1 : undefined,
       renderCell: (params) => <UserDateFormatter {...{ params }} />,
       editable: true,
     },
@@ -163,7 +178,8 @@ export default function User() {
       field: "actions",
       type: "actions",
       headerName: "Actions",
-      width: 170,
+      minWidth: fullScreen ? 180 : undefined,
+      flex: !fullScreen ? 1 : undefined,
       cellClassName: "actions",
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
@@ -212,217 +228,215 @@ export default function User() {
   ];
 
   return (
-    <Paper >
-      <ToastContainer />     
-       
-          <Stack direction="row" justifyContent="space-between" sx={{ pl: 3, pt: 3, pr: 3 }}>
-            <Typography
-              sx={{ fontSize: 19, fontWeight: 600, color: "success.main" }}
-            >User List</Typography>
+    <Paper>
+      <ToastContainer />
 
-            <Button
-              variant="outlined"
-              sx={{ mb: 0.5 }}
-              color="success"
-              onClick={handleClickOpen}
-            >
-              <AddIcon /> Add User
-            </Button>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        sx={{ pl: 3, pt: 3, pr: 3 }}
+      >
+        <Typography
+          sx={{ fontSize: 19, fontWeight: 600, color: "success.main" }}
+        >
+          User List
+        </Typography>
 
-          </Stack>
-       
+        <Button
+          variant="outlined"
+          sx={{ mb: 0.5 }}
+          color="success"
+          onClick={handleClickOpen}
+        >
+          <AddIcon /> Add User
+        </Button>
+      </Stack>
 
-
-        {loading ? (
-          <BigTableSkeleton />
-        ) : (
-          <Box
-            sx={{
-              width: "100%",
-              "& .actions": {
-                color: "text.secondary",
-              },
-              "& .textPrimary": {
-                color: "text.primary",
-              },
-              p: 3
-             
-            }}
+      {loading ? (
+        <BigTableSkeleton />
+      ) : (
+        <Box
+          sx={{
+            width: "100%",
+            "& .actions": {
+              color: "text.secondary",
+            },
+            "& .textPrimary": {
+              color: "text.primary",
+            },
+            p: 3,
+          }}
+        >
+          <Dialog
+            fullWidth
+            maxWidth="md"
+            fullScreen={fullScreen}
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="responsive-dialog-title"
           >
-
-            <Dialog
-              fullWidth
-              maxWidth="md"
-              fullScreen={fullScreen}
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="responsive-dialog-title"
-            >
-              <DialogTitle id="responsive-dialog-title">
-                {"ADD USER"}
-              </DialogTitle>
-              <DialogContent sx={{ px: { md: 7 } }}>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <Grid container spacing={2} sx={{ mb: 3, mt: 3 }}>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        label="Name"
-                        fullWidth
-                        variant="outlined"
-                        autoComplete="name"
-                        color="success"
-                        {...register("name", { required: "Name is required" })}
-                        error={!!errors.name}
-                        helperText={errors.name ? errors.name.message : ""}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        label="Email"
-                        fullWidth
-                        variant="outlined"
-                        autoComplete="email"
-                        color="success"
-                        {...register("email", {
-                          required: "Email is required",
+            <DialogTitle id="responsive-dialog-title">{"ADD USER"}</DialogTitle>
+            <DialogContent sx={{ px: { md: 7 } }}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Grid container spacing={2} sx={{ mb: 3, mt: 3 }}>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      label="Name"
+                      fullWidth
+                      variant="outlined"
+                      autoComplete="name"
+                      color="success"
+                      {...register("name", { required: "Name is required" })}
+                      error={!!errors.name}
+                      helperText={errors.name ? errors.name.message : ""}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      label="Email"
+                      fullWidth
+                      variant="outlined"
+                      autoComplete="email"
+                      color="success"
+                      {...register("email", {
+                        required: "Email is required",
+                      })}
+                      error={!!errors.email}
+                      helperText={errors.email ? errors.email.message : ""}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      label="Phone"
+                      fullWidth
+                      variant="outlined"
+                      autoComplete="phone"
+                      color="success"
+                      {...register("phone", {
+                        required: "Phone number is required",
+                      })}
+                      error={!!errors.phone}
+                      helperText={errors.phone ? errors.phone.message : ""}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      label="Password"
+                      fullWidth
+                      variant="outlined"
+                      autoComplete="current-password"
+                      type="password"
+                      color="success"
+                      {...register("password", {
+                        required: "Password is required",
+                        minLength: 6,
+                      })}
+                      error={!!errors.password}
+                      helperText={
+                        errors.password ? errors.password.message : ""
+                      }
+                    />
+                    {errors.password?.type === "minLength" && (
+                      <Typography sx={{ color: red[600], mt: 1 }}>
+                        Password must be at least 6 characters
+                      </Typography>
+                    )}
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <FormControl
+                      fullWidth
+                      variant="outlined"
+                      color="success"
+                      error={!!errors.type}
+                    >
+                      <InputLabel>Type</InputLabel>
+                      <Select
+                        {...register("type", {
+                          required: "Type is required",
                         })}
-                        error={!!errors.email}
-                        helperText={errors.email ? errors.email.message : ""}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        label="Phone"
-                        fullWidth
-                        variant="outlined"
-                        autoComplete="phone"
-                        color="success"
-                        {...register("phone", {
-                          required: "Phone number is required",
-                        })}
-                        error={!!errors.phone}
-                        helperText={errors.phone ? errors.phone.message : ""}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        label="Password"
-                        fullWidth
-                        variant="outlined"
-                        autoComplete="current-password"
-                        type="password"
-                        color="success"
-                        {...register("password", {
-                          required: "Password is required",
-                          minLength: 6,
-                        })}
-                        error={!!errors.password}
-                        helperText={
-                          errors.password ? errors.password.message : ""
-                        }
-                      />
-                      {errors.password?.type === "minLength" && (
-                        <Typography sx={{ color: red[600], mt: 1 }}>
-                          Password must be at least 6 characters
-                        </Typography>
-                      )}
-                    </Grid>
+                        label="Type"
+                        onChange={(e) => setType(e.target.value)}
+                      >
+                        <MenuItem value="admin">Admin</MenuItem>
+                        <MenuItem value="company">Company</MenuItem>
+                        <MenuItem value="customer">Customer</MenuItem>
+                      </Select>
+                    </FormControl>
+                    {errors.type && (
+                      <Typography sx={{ color: red[600], mt: 1 }}>
+                        {errors.type.message}
+                      </Typography>
+                    )}
+                  </Grid>
+                  {type === "company" && (
                     <Grid item xs={12} md={6}>
                       <FormControl
                         fullWidth
                         variant="outlined"
                         color="success"
-                        error={!!errors.type}
+                        error={!!errors.company}
                       >
-                        <InputLabel>Type</InputLabel>
+                        <InputLabel>Company Name</InputLabel>
                         <Select
-                          {...register("type", {
-                            required: "Type is required",
+                          {...register("company_id", {
+                            required: "Company is required",
                           })}
-                          label="Type"
-                          onChange={(e) => setType(e.target.value)}
+                          label="Company Name"
                         >
-                          <MenuItem value="admin">Admin</MenuItem>
-                          <MenuItem value="company">Company</MenuItem>
-                          <MenuItem value="customer">Customer</MenuItem>
+                          <MenuItem value="1">BPDB</MenuItem>
+                          <MenuItem value="2">BREB</MenuItem>
+                          <MenuItem value="3">DESCO</MenuItem>
+                          <MenuItem value="4">DPDC</MenuItem>
+                          <MenuItem value="5">WZPDCL</MenuItem>
+                          <MenuItem value="6">NESCO</MenuItem>
                         </Select>
                       </FormControl>
-                      {errors.type && (
+                      {errors.company_id && (
                         <Typography sx={{ color: red[600], mt: 1 }}>
-                          {errors.type.message}
+                          {errors.company_id.message}
                         </Typography>
                       )}
                     </Grid>
-                    {type === "company" && (
-                      <Grid item xs={12} md={6}>
-                        <FormControl
-                          fullWidth
-                          variant="outlined"
-                          color="success"
-                          error={!!errors.company}
-                        >
-                          <InputLabel>Company Name</InputLabel>
-                          <Select
-                            {...register("company_id", {
-                              required: "Company is required",
-                            })}
-                            label="Company Name"
-                          >
-                            <MenuItem value="1">BPDB</MenuItem>
-                            <MenuItem value="2">BREB</MenuItem>
-                            <MenuItem value="3">DESCO</MenuItem>
-                            <MenuItem value="4">DPDC</MenuItem>
-                            <MenuItem value="5">WZPDCL</MenuItem>
-                            <MenuItem value="6">NESCO</MenuItem>
-                          </Select>
-                        </FormControl>
-                        {errors.company_id && (
-                          <Typography sx={{ color: red[600], mt: 1 }}>
-                            {errors.company_id.message}
-                          </Typography>
-                        )}
-                      </Grid>
-                    )}
-                  </Grid>
-                  <DialogActions>
-                    <Button onClick={handleClose} color="error">
-                      Cancel
-                    </Button>
-                    <Button type="submit" variant="outlined" color="success">
-                      Add User
-                    </Button>
-                  </DialogActions>
-                </form>
-              </DialogContent>
-            </Dialog>
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              editMode="row"
-              rowModesModel={rowModesModel}
-              onRowModesModelChange={handleRowModesModelChange}
-              onRowEditStop={handleRowEditStop}
-              processRowUpdate={processRowUpdate}
-              disableColumnFilter
-              disableColumnSelector
-              disableDensitySelector
-              disableRowSelectionOnClick
-              slots={{
-                toolbar: GridToolbar,
-              }}
-              slotProps={{
-                toolbar: { showQuickFilter: true },
-              }}
-              initialState={{
-                pagination: {
-                  paginationModel: { page: 0, pageSize: 10 },
-                },
-              }}
-              pageSizeOptions={[5, 10]}
-            />
-          </Box>
-        )}
-      
+                  )}
+                </Grid>
+                <DialogActions>
+                  <Button onClick={handleClose} color="error">
+                    Cancel
+                  </Button>
+                  <Button type="submit" variant="outlined" color="success">
+                    Add User
+                  </Button>
+                </DialogActions>
+              </form>
+            </DialogContent>
+          </Dialog>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            editMode="row"
+            rowModesModel={rowModesModel}
+            onRowModesModelChange={handleRowModesModelChange}
+            onRowEditStop={handleRowEditStop}
+            processRowUpdate={processRowUpdate}
+            disableColumnFilter
+            disableColumnSelector
+            disableDensitySelector
+            disableRowSelectionOnClick
+            slots={{
+              toolbar: GridToolbar,
+            }}
+            slotProps={{
+              toolbar: { showQuickFilter: true },
+            }}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+          />
+        </Box>
+      )}
     </Paper>
   );
 }

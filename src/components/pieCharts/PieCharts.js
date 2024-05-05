@@ -49,6 +49,7 @@ export default function PieChars(params) {
 
   //-----------------------Responsive breakpoints
   const theme = useTheme();
+  console.log(theme)
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
   const isLgScreen = useMediaQuery(theme.breakpoints.down("lg"));

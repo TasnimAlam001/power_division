@@ -1,5 +1,5 @@
 "use client";
-import { Box, Paper, Stack, Typography } from "@mui/material";
+import { Box, Paper, Stack, Typography, useMediaQuery } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React, { useState, useEffect } from "react";
 import UserSkeleton from "@/components/Skeletons/TableSkeleton";
@@ -7,6 +7,7 @@ import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
 import TotalTicketH from "@/components/ComplainTable/TotalTicketH";
 import TicketDate from "@/components/TicketDate/TicketDate";
 import { formatDate } from "@/components/TicketFormater/TicketFormatter";
+import { useTheme } from "@emotion/react";
 
 
 export default function ComplainReport() {
@@ -17,6 +18,8 @@ export default function ComplainReport() {
   const [selectedDates, setSelectedDates] = useState(null);
   const startDate = formatDate(data?.startDate);
   const endDate = formatDate(data?.endDate);
+  const theme = useTheme();
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     setLoading(true);
@@ -53,18 +56,25 @@ export default function ComplainReport() {
 
 
   const columns = [
-    { field: "company_name", headerName: "Company Name", minWidth: 480 },
+    { field: "company_name", headerName: "Company Name",  minWidth: isMediumScreen ? 350 : undefined,
+    flex: !isMediumScreen ? 1 : undefined,  
+   },
     {
       field: "total_ticket",
       headerName: "Total Ticket",
       renderHeader: (params) => <TotalTicketH data={data.totalTicket} {...{ params }} />,
-
-      minWidth: 210, align: "center", headerAlign: "center",
+      minWidth: isMediumScreen ? 220 : undefined,
+      flex: !isMediumScreen ? 1 : undefined,  
+     
+      align: "center", headerAlign: "center",
     },
     {
       field: "pending_ticket",
       headerName: "Pending Ticket",
-      minWidth: 210,
+      
+      minWidth: isMediumScreen ? 230 : undefined,
+      flex: !isMediumScreen ? 1 : undefined,  
+     
       align: "center",
       renderHeader: (params) => <TotalTicketH data={data.totalPendingTicket} {...{ params }} />,
 
@@ -73,7 +83,10 @@ export default function ComplainReport() {
     {
       field: "completed_ticket",
       headerName: "Completed Ticket",
-      minWidth: 240,
+     
+      minWidth: isMediumScreen ? 260 : undefined,
+      flex: !isMediumScreen ? 1 : undefined,  
+     
       renderHeader: (params) => <TotalTicketH data={data.totalCompletedTicket} {...{ params }} />,
 
       align: "center",

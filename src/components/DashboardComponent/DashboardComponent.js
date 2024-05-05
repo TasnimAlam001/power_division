@@ -9,7 +9,6 @@ import DashboardDate from "../Dates/DashboardDate";
 import { useRouter } from "next/navigation";
 
 const DashboardComponent = () => {
-  const router = useRouter();
   const [axiosSecure] = useAxiosSecure();
   const [dashboardData, setDashboardData] = useState([]);
   const [loading, setLoading] = useState(true);
