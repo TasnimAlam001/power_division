@@ -8,12 +8,10 @@ import {
   FormLabel,
   Grid,
   InputAdornment,
-  InputLabel,
   MenuItem,
   Paper,
   Radio,
   RadioGroup,
-  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -121,7 +119,8 @@ export default function Form() {
                     label="Select"
                     value={selectedOrganization}
                     onChange={(event) => setOrganization(event.target.value)}
-                    variant="outlined"                    
+                    variant="outlined"  
+                    // size="small"                  
                   >
                     <MenuItem value="1">DPDC</MenuItem>
                     <MenuItem value="2">DESCO</MenuItem>
@@ -179,7 +178,7 @@ export default function Form() {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container spacing={3}>
+            <Grid container spacing={3} sx={{mt:2}}>
               
               <Grid item xs={3}>
                 <FormControl fullWidth>
@@ -301,7 +300,7 @@ export default function Form() {
               </Grid>
             </Grid>
             <FileAttachment onFileChange={handleFileChange}/>
-            <Button type="submit" variant="contained">
+            <Button color="success" type="submit" variant="contained">
               Submit
             </Button>
           </Box>

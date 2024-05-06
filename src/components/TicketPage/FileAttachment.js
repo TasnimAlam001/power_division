@@ -40,12 +40,12 @@ const FileAttachment = ({ onFileChange }) => {
   return (
     <div>
       <Button
-        variant="contained"
-        size="small"
+        variant="outlined"
+        size="medium"
         onClick={handleAddAttachment}
         startIcon={<AddIcon />}
-        color="primary"
-        style={{ marginBottom: "10px" }}
+        color="success"
+        // style={{ marginBottom: "10px" }}
       >
         Add More
       </Button>
@@ -70,8 +70,9 @@ const FileAttachment = ({ onFileChange }) => {
             )}
           </Grid>
           <Grid item xs={12}>
-            <FormControl>
+            <FormControl fullWidth>
               <TextField
+              
                 type="file"
                 id={attachment.name}
                 name={attachment.name}
