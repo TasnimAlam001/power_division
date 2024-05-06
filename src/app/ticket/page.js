@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function page() {
   return (
-    <Box>
+    <Box sx={{ display:"flex" , alignItems:"center", flexDirection:"column", bgcolor: "background.paper", mb:8}}>
       <TicketNavbar/>
       <Form/>
     </Box>

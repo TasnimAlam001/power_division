@@ -12,8 +12,8 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 export default function TicketNavbar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="inherit">
+    <Box sx={{ flexGrow: 1, width:'100%' }}>
+      <AppBar position="static" color="inherit" variant="none" sx={{boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.1)', }}>
         <Toolbar sx={{display:"flex", justifyContent:"space-between"}}>          
             <Stack
               direction="row"

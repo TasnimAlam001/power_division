@@ -4,9 +4,9 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
-import { FormControl, Grid, InputLabel, Typography } from "@mui/material";
+import { FormControl, Grid, Typography } from "@mui/material";
 
-const FileAttachment = () => {
+const FileAttachment = ({ onFileChange }) => {
   const [attachments, setAttachments] = useState([{ id: 1, name: "file1" }]);
 
   const handleAddAttachment = () => {
@@ -22,6 +22,8 @@ const FileAttachment = () => {
       (attachment) => attachment.id !== id
     );
     setAttachments(updatedAttachments);
+    
+    onFileChange(updatedAttachments.map((attachment) => attachment.file));
   };
 
   const handleFileChange = (event, id) => {
@@ -31,6 +33,8 @@ const FileAttachment = () => {
         : attachment
     );
     setAttachments(updatedAttachments);
+    
+    onFileChange(updatedAttachments.map((attachment) => attachment.file));
   };
 
   return (
@@ -66,7 +70,7 @@ const FileAttachment = () => {
             )}
           </Grid>
           <Grid item xs={12}>
-            <FormControl fullWidth>
+            <FormControl>
               <TextField
                 type="file"
                 id={attachment.name}
