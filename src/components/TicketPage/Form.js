@@ -20,30 +20,135 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useState } from "react";
 import FileAttachment from "./FileAttachment";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import Link from "next/link";
 
 export default function Form() {
-  const [selectedOrganization, setOrganization] = useState("1");
-  const [selectedAMCName, setAMCName] = useState("1");
-  const [selectedAria, setAria] = useState("Aria1");
-  const [selectedOffice, setOffice] = useState("office1");
-  const [selectedService, setService] = useState("s1");
+  const [selectedOrganization, setOrganization] = useState(null);
+  const [organizations, setOrganizations] = useState({ data: [] });
+  const [areas, setAreas] = useState([]);
+  const [offices, setOffices] = useState([]);
+  const [services, setServices] = useState([]);
+  const [selectedArea, setSelectedArea] = useState("");
+  const [selectedOffice, setSelectedOffice] = useState("");
+  const [selectedService, setService] = useState("");
   const [attachedFiles, setAttachedFiles] = useState([]);
-  
+  const [selectedAMCName, setAMCName] = useState("");
+
   const {
     register,
-    handleSubmit,    
+    reset,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    fetchOrganizations();
+    fetchServiceType();
+  }, []);
+
+  const fetchServiceType = async () => {
+    try {
+      const response = await fetch("http://202.51.182.190:5412/api/request-sub-category", {
+        method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": 'Bearer 10903|cpDoDOB9FMyXk8QoIku7v6SaOt9sbF8B7KBleU7d79acf52e'
+            },
+      });
+      const data = await response.json();
+      setServices(data.data);
+    } catch (error) {
+      console.error("Error fetching organizations:", error);
+    }
+  };
+  const fetchOrganizations = async () => {
+    try {
+      const response = await fetch("http://202.51.182.190:5412/api/company", {
+        method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": 'Bearer 10903|cpDoDOB9FMyXk8QoIku7v6SaOt9sbF8B7KBleU7d79acf52e'
+            },
+      });
+      const data = await response.json();
+      setOrganizations(data);
+    } catch (error) {
+      console.error("Error fetching organizations:", error);
+    }
+  };
+
+  const fetchAreas = async (organizationId) => {
+    try {
+      const response = await fetch(
+        `http://202.51.182.190:5412/api/company-zone?company_id=${organizationId}`, {
+          method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer 10903|cpDoDOB9FMyXk8QoIku7v6SaOt9sbF8B7KBleU7d79acf52e'
+              },
+        }
+      );
+      const data = await response.json();
+      setAreas(data.data);
+    } catch (error) {
+      console.error("Error fetching areas:", error);
+    }
+  };
+
+  const fetchOffices = async (organizationId, areaId) => {
+    try {
+      // supply-and-distribution/?company_zone_id=1&company_id=1
+      const response = await fetch("http://202.51.182.190:5412/api/supply-and-distribution/?company_zone_id=1&company_id=1"
+        , {
+          method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer 10903|cpDoDOB9FMyXk8QoIku7v6SaOt9sbF8B7KBleU7d79acf52e'
+              },
+        }
+      );
+      const data = await response.json();
+
+      console.log('.......s',data)
+      setOffices(data.data);
+    } catch (error) {
+      console.error("Error fetching offices:", error);
+    }
+  };
+
+  const handleOrganizationChange = (event) => {
+    const organizationId = event.target.value;
+    setOrganization(organizationId);
+    fetchAreas(organizationId);
+  };
+
+  const handleAreaChange = (event) => {
+    const areaId = event.target.value;
+    setSelectedArea(areaId);
+    fetchOffices(selectedOrganization, areaId);
+  };
+
+  const handleOfficeChange = (event) => {
+    const officeId = event.target.value;
+    setSelectedOffice(officeId);
+  };
+  const handleService = (event) => {
+    setService(event.target.value);
+  };
   const onSubmit = (data) => {
     const formDataWithFiles = { ...data, files: attachedFiles };
+    toast("Form submitted")
+    reset();
     console.log(formDataWithFiles);
   };
+
   const handleFileChange = (files) => {
     setAttachedFiles(files);
   };
-
   return (
+
     <Paper
       elevation={0}
       sx={{
@@ -65,19 +170,11 @@ export default function Form() {
           <Typography variant="h5">
             Fill the form below to get electricity service.
           </Typography>
-          <TextField
-            label="Search Complains"
-            sx={{ m: 1, width: "25ch" }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <SearchOutlinedIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
+          
+          <Link href="/ticket/track"><Button variant="contained">Find Complains <SearchOutlinedIcon /></Button></Link>
         </Box>
         <Divider variant="middle" />
+        <ToastContainer/>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box sx={{ pt: 3 }}>
             <Grid container spacing={3}>
@@ -118,13 +215,14 @@ export default function Form() {
                     select
                     label="Select"
                     value={selectedOrganization}
-                    onChange={(event) => setOrganization(event.target.value)}
-                    variant="outlined"  
-                    // size="small"                  
+                    onChange={handleOrganizationChange}
+                    variant="outlined"
+                    // size="small"
                   >
-                    <MenuItem value="1">DPDC</MenuItem>
-                    <MenuItem value="2">DESCO</MenuItem>
-                    <MenuItem value="3">NESCO</MenuItem>
+                    {organizations?.data.map((company) => (<MenuItem key={company.id} value={company.id}>
+                        {company.short_name}-{company.name}
+                      </MenuItem>
+                    ))}
                   </TextField>
                 </FormControl>
               </Grid>
@@ -133,16 +231,15 @@ export default function Form() {
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
                     Enter account/meter/customer number *
                   </FormLabel>
-                  <Box sx={{display:"flex"}}>
+                  <Box sx={{ display: "flex" }}>
                     <TextField
-                    fullWidth
+                      fullWidth
                       {...register("AMCName")}
                       select
                       label="Select"
-                      value={selectedAMCName}                     
-                      variant="outlined"  
-                    onChange={(event) => setAMCName(event.target.value)}                                  
-                     
+                      value={selectedAMCName}
+                      variant="outlined"
+                      onChange={(event) => setAMCName(event.target.value)}
                     >
                       <MenuItem value="1">Account Number </MenuItem>
                       <MenuItem value="2">Meter Number</MenuItem>
@@ -151,9 +248,8 @@ export default function Form() {
                     <TextField
                       fullWidth
                       label="Enter number"
-                      variant="outlined"                     
-                      {...register("amc_number", { required: true })}                    
-                      
+                      variant="outlined"
+                      {...register("amc_number", { required: true })}
                     />
                   </Box>
                   {errors.amc_number && (
@@ -169,7 +265,10 @@ export default function Form() {
                     Enter the phone number*
                   </FormLabel>
 
-                  <TextField  {...register("phoneNumber", { required: true })} label="+880 " />
+                  <TextField
+                    {...register("phoneNumber", { required: true })}
+                    label="+880 "
+                  />
                   {errors.phoneNumber && (
                     <Typography variant="body2" color="error">
                       Phone number is required
@@ -178,84 +277,85 @@ export default function Form() {
                 </FormControl>
               </Grid>
             </Grid>
-            <Grid container spacing={3} sx={{mt:2}}>
-              
+            <Grid container spacing={3} sx={{ mt: 2 }}>
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                  Select the delivery region/area  *
+                    Select the delivery region/area *
                   </FormLabel>
                   <TextField
-                  {...register("Area")}
+                    {...register("Area")}
                     fullWidth
                     select
                     label="Select"
-                    value={selectedAria}
-                    onChange={(event)=>setAria(event.target.value)}
+                    value={selectedArea}
+                    onChange={handleAreaChange}
                     variant="outlined"
-                   
                   >
-                    <MenuItem value="Aria1">Aria1</MenuItem>
-                    <MenuItem value="Aria2">Aria2</MenuItem>
-                    <MenuItem value="Aria3">Aria3</MenuItem>
+                    {areas.map((area) => (
+                      <MenuItem key={area.id} value={area.id}>
+                        {area.name}
+                      </MenuItem>
+                    ))}
                   </TextField>
                 </FormControl>
               </Grid>
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                  Select the nearest electricity office *
+                    Select the nearest electricity office *
                   </FormLabel>
                   <TextField
-                  {...register("office")}
+                    {...register("office")}
                     fullWidth
                     select
                     label="Select"
                     value={selectedOffice}
-                    onChange={(event)=>setOffice(event.target.value)}
+                    onChange={handleOfficeChange}
                     variant="outlined"
-                    
                   >
-                    <MenuItem value="office1">office1</MenuItem>
-                    <MenuItem value="office2">office2</MenuItem>
-                    <MenuItem value="office3">office3</MenuItem>
-                  
+                    {offices?.map((office) => (
+                      <MenuItem key={office.id} value={office.id}>
+                        {office.name}
+                      </MenuItem>
+                    ))}
                   </TextField>
                 </FormControl>
               </Grid>
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                  Select the type of service *
+                    Select the type of service *
                   </FormLabel>
-                  <Box sx={{display:"flex"}}>
+                  <Box sx={{ display: "flex" }}>
                     <TextField
-                    {...register("Service")}
+                      {...register("Service")}
                       fullWidth
                       select
                       label="Select"
                       value={selectedService}
-                      onChange={(e)=>setService(e.target.value)}                     
-                      variant="outlined"  
-                      
+                      onChange={handleService}
+                      variant="outlined"
                     >
-                      <MenuItem value="s1">service1</MenuItem>
-                      <MenuItem value="s2">service2</MenuItem>
-                      <MenuItem value="s3">service3</MenuItem>
-                      
+                      {services?.map((service) => (
+                      <MenuItem key={service.id} value={service.id}>
+                        {service.name}
+                      </MenuItem>
+                    ))}
                     </TextField>
-                    
                   </Box>
-                  
                 </FormControl>
               </Grid>
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                  Complainant`s Name*
+                    Complainant`s Name*
                   </FormLabel>
 
-                  <TextField  {...register("complainName", { required: true })} label="Write Complain Name" />
+                  <TextField
+                    {...register("complainName", { required: true })}
+                    label="Write Complain Name"
+                  />
                   {errors.complainName && (
                     <Typography variant="body2" color="error">
                       Complain Name number is required
@@ -264,11 +364,11 @@ export default function Form() {
                 </FormControl>
               </Grid>
             </Grid>
-           
+
             <Grid container spacing={2} sx={{ my: 3 }}>
               <Grid item xs={5}>
                 <TextField
-                {...register("address", { required: true })}
+                  {...register("address", { required: true })}
                   multiline
                   minRows={4}
                   maxRows={10}
@@ -284,7 +384,7 @@ export default function Form() {
               </Grid>
               <Grid item xs={7}>
                 <TextField
-                {...register("complaintDetails", { required: true })}
+                  {...register("complaintDetails", { required: true })}
                   multiline
                   minRows={4}
                   maxRows={10}
@@ -299,7 +399,7 @@ export default function Form() {
                 )}
               </Grid>
             </Grid>
-            <FileAttachment onFileChange={handleFileChange}/>
+            <FileAttachment onFileChange={handleFileChange} />
             <Button color="success" type="submit" variant="contained">
               Submit
             </Button>
