@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -8,13 +7,20 @@ import bdGovtLogo from "@/assets/images/bdGovtLogo.svg";
 import { InputAdornment, Stack, TextField } from "@mui/material";
 import Image from "next/image";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-
+import Link from "next/link";
+import Call from "../../assets/images/Call.svg"
 
 export default function TicketNavbar() {
   return (
-    <Box sx={{ flexGrow: 1, width:'100%' }}>
-      <AppBar position="static" color="inherit" variant="none" sx={{boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.1)', }}>
-        <Toolbar sx={{display:"flex", justifyContent:"space-between"}}>          
+    <Box sx={{ flexGrow: 1, width: "100%" }}>
+      <AppBar
+        position="static"
+        color="inherit"
+        variant="none"
+        sx={{ boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)" }}
+      >
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Link href="/login">
             <Stack
               direction="row"
               justifyContent="center"
@@ -34,20 +40,10 @@ export default function TicketNavbar() {
                 Ministry of Power Energy & Mineral Resources
               </Typography>
             </Stack>
-            <Box>
-              <TextField
-                label="Search Complains"
-                sx={{ m: 1, width: "25ch" }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <SearchOutlinedIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Box>
-         
+          </Link>
+          <Box>
+            <Image src={Call} alt="" width={50} height={50}></Image>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

@@ -95,7 +95,7 @@ export default function Form() {
   const fetchOffices = async (organizationId, areaId) => {
     try {
       axiosSecure(
-        `/wrap-up/supply-and-distribution?company_zone_id=${organizationId}&company_id=${areaId}`
+        `/wrap-up/supply-and-distribution?company_id=${organizationId}&company_zone_id=${areaId}`
       )
         .then((res) => {
           setOffices(res.data.data);
@@ -128,27 +128,69 @@ export default function Form() {
     setService(event.target.value);
   };
   const onSubmit = (data) => {
-    const formDataWithFiles = { ...data, files: attachedFiles };
-    // reset();
-    const complaintID = "PD0801464941"; // Dynamic complaint ID
-
-    Swal.fire({
-      title: "আপনার অভিযোগটি গৃহীত হয়েছে",
-      html: `
-        <div>
-          <p>অভিযোগ অনুসন্ধান আইডি : <strong id="complaintID">${complaintID}</strong></p>
-          <p style="font-size: 12px; margin-bottom: 10px;">খুব শীগ্রই অভিযোগটি পর্যালোচনা করে সমাধান করা হবে।</p>
-          <p>ধন্যবাদ</p>
-        </div>`,
-      icon: "success",
-      showCancelButton: false,
-      showConfirmButton: true,
-      confirmButtonText: "Okay",
-      confirmButtonColor: "#3085d6",
+    const filesObject = {};
+  
+    attachedFiles.forEach((file, index) => {
+      filesObject[`file_${index + 1}`] = file;
     });
-    
+  
+    const formDataWithFiles = Object.assign({}, data, filesObject);
+    reset();
+    const {
+      account_type_id,
+      address,
+      company_id,
+      company_zone_id,
+      complain,
+      identity_number,
+      identity_number_type_id,
+      name,
+      phone,
+      request_sub_category_id,
+      supply_and_distribution_id,
+     
+    } = formDataWithFiles;
+    console.log(formDataWithFiles)
 
-    console.log(formDataWithFiles);
+    axiosSecure.post("/create-ticket", {
+        account_type_id,
+        address,
+        company_id,
+        company_zone_id,
+        complain,
+        identity_number,
+        identity_number_type_id,
+        name,
+        phone,
+        request_sub_category_id,
+        supply_and_distribution_id,
+        
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          const complaintID = res.data.data.ticket_id;
+
+          Swal.fire({
+            title: "আপনার অভিযোগটি গৃহীত হয়েছে",
+            html: `
+            <div>
+              <p>অভিযোগ অনুসন্ধান আইডি : <strong id="complaintID">${complaintID}</strong></p>
+              <p style="font-size: 12px; margin-bottom: 10px;">খুব শীগ্রই অভিযোগটি পর্যালোচনা করে সমাধান করা হবে।</p>
+              <p>ধন্যবাদ</p>
+            </div>`,
+            icon: "success",
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonText: "Okay",
+            confirmButtonColor: "#3085d6",
+          });
+
+          console.log(res);
+        }
+      })
+      .catch((e) => {
+        console.log(",,,,,,,,,,", e);
+      });
   };
 
   const handleFileChange = (files) => {

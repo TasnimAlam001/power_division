@@ -3,21 +3,9 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
 import { FormControl, Grid, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
 
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
+
 const FileAttachment = ({ onFileChange }) => {
   const [attachments, setAttachments] = useState([{ id: 1, name: "file1" }]);
 
@@ -39,15 +27,15 @@ const FileAttachment = ({ onFileChange }) => {
   };
 
   const handleFileChange = (event, id) => {
+    const file = event.target.files[0]; 
     const updatedAttachments = attachments.map((attachment) =>
-      attachment.id === id
-        ? { ...attachment, file: event.target.files[0] }
-        : attachment
+      attachment.id === id ? { ...attachment, file } : attachment
     );
     setAttachments(updatedAttachments);
-
+  
     onFileChange(updatedAttachments.map((attachment) => attachment.file));
   };
+  
 
   return (
     <div>

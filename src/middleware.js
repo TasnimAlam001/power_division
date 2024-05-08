@@ -9,6 +9,7 @@ export  default auth(async(req) => {
   if (nextUrl.pathname == "/login") return null;
   if (nextUrl.pathname == "/ticket") return null;
   if (nextUrl.pathname == "/ticket/track") return null;
+  if (nextUrl.pathname.startsWith("/ticket/track/")) return null;
   if (!isLoggedIn && nextUrl.pathname !== "/login") {
     return Response.redirect(new URL("/login", nextUrl));
   }
