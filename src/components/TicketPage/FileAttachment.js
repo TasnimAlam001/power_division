@@ -5,7 +5,19 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { FormControl, Grid, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 const FileAttachment = ({ onFileChange }) => {
   const [attachments, setAttachments] = useState([{ id: 1, name: "file1" }]);
 
@@ -22,7 +34,7 @@ const FileAttachment = ({ onFileChange }) => {
       (attachment) => attachment.id !== id
     );
     setAttachments(updatedAttachments);
-    
+
     onFileChange(updatedAttachments.map((attachment) => attachment.file));
   };
 
@@ -33,33 +45,33 @@ const FileAttachment = ({ onFileChange }) => {
         : attachment
     );
     setAttachments(updatedAttachments);
-    
+
     onFileChange(updatedAttachments.map((attachment) => attachment.file));
   };
 
   return (
     <div>
-      <Button
-        variant="outlined"
-        size="medium"
-        onClick={handleAddAttachment}
-        startIcon={<AddIcon />}
-        color="success"
-        // style={{ marginBottom: "10px" }}
-      >
-        Add More
-      </Button>
-
       {attachments.map((attachment, index) => (
         <Grid container key={attachment.id} style={{ marginBottom: "10px" }}>
           <Grid item xs={11}>
             <Typography variant="subtitle1">
-              Attach complaint documents - {attachment.id} (if any)
+              অভিযোগ সংক্রান্ত নথি সংযুক্ত করুন - {attachment.id} (যদি থাকে)
             </Typography>
           </Grid>
 
           <Grid item xs={1} style={{ textAlign: "right" }}>
-            {index > 0 && (
+            {index == 0 ? (
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={handleAddAttachment}
+                // startIcon={<AddIcon />}
+                color="success"
+                style={{ marginBottom: "2px" }}
+              >
+                Add More
+              </Button>
+            ) : (
               <IconButton
                 onClick={() => handleDeleteAttachment(attachment.id)}
                 style={{ marginLeft: "auto" }}
@@ -72,7 +84,7 @@ const FileAttachment = ({ onFileChange }) => {
           <Grid item xs={12}>
             <FormControl fullWidth>
               <TextField
-              
+                size="small"
                 type="file"
                 id={attachment.name}
                 name={attachment.name}

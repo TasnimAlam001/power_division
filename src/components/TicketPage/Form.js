@@ -23,9 +23,11 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Link from "next/link";
+import useAxiosSecure from "@/app/Hooks/useAxiousSecure";
+import Swal from "sweetalert2";
 
 export default function Form() {
-  const [selectedOrganization, setOrganization] = useState(null);
+  const [selectedOrganization, setOrganization] = useState("");
   const [organizations, setOrganizations] = useState({ data: [] });
   const [areas, setAreas] = useState([]);
   const [offices, setOffices] = useState([]);
@@ -35,6 +37,7 @@ export default function Form() {
   const [selectedService, setService] = useState("");
   const [attachedFiles, setAttachedFiles] = useState([]);
   const [selectedAMCName, setAMCName] = useState("");
+  const [axiosSecure] = useAxiosSecure();
 
   const {
     register,
@@ -50,30 +53,26 @@ export default function Form() {
 
   const fetchServiceType = async () => {
     try {
-      const response = await fetch("http://202.51.182.190:5412/api/request-sub-category", {
-        method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": 'Bearer 10903|cpDoDOB9FMyXk8QoIku7v6SaOt9sbF8B7KBleU7d79acf52e'
-            },
-      });
-      const data = await response.json();
-      setServices(data.data);
+      axiosSecure("/wrap-up/request-sub-category")
+        .then((res) => {
+          setServices(res.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } catch (error) {
       console.error("Error fetching organizations:", error);
     }
   };
   const fetchOrganizations = async () => {
     try {
-      const response = await fetch("http://202.51.182.190:5412/api/company", {
-        method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": 'Bearer 10903|cpDoDOB9FMyXk8QoIku7v6SaOt9sbF8B7KBleU7d79acf52e'
-            },
-      });
-      const data = await response.json();
-      setOrganizations(data);
+      axiosSecure("/wrap-up/company")
+        .then((res) => {
+          setOrganizations(res.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } catch (error) {
       console.error("Error fetching organizations:", error);
     }
@@ -81,17 +80,13 @@ export default function Form() {
 
   const fetchAreas = async (organizationId) => {
     try {
-      const response = await fetch(
-        `http://202.51.182.190:5412/api/company-zone?company_id=${organizationId}`, {
-          method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": 'Bearer 10903|cpDoDOB9FMyXk8QoIku7v6SaOt9sbF8B7KBleU7d79acf52e'
-              },
-        }
-      );
-      const data = await response.json();
-      setAreas(data.data);
+      axiosSecure(`/wrap-up/company-zone?company_id=${organizationId}`)
+        .then((res) => {
+          setAreas(res.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } catch (error) {
       console.error("Error fetching areas:", error);
     }
@@ -99,20 +94,15 @@ export default function Form() {
 
   const fetchOffices = async (organizationId, areaId) => {
     try {
-      // supply-and-distribution/?company_zone_id=1&company_id=1
-      const response = await fetch("http://202.51.182.190:5412/api/supply-and-distribution/?company_zone_id=1&company_id=1"
-        , {
-          method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": 'Bearer 10903|cpDoDOB9FMyXk8QoIku7v6SaOt9sbF8B7KBleU7d79acf52e'
-              },
-        }
-      );
-      const data = await response.json();
-
-      console.log('.......s',data)
-      setOffices(data.data);
+      axiosSecure(
+        `/wrap-up/supply-and-distribution?company_zone_id=${organizationId}&company_id=${areaId}`
+      )
+        .then((res) => {
+          setOffices(res.data.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } catch (error) {
       console.error("Error fetching offices:", error);
     }
@@ -139,8 +129,25 @@ export default function Form() {
   };
   const onSubmit = (data) => {
     const formDataWithFiles = { ...data, files: attachedFiles };
-    toast("Form submitted")
-    reset();
+    // reset();
+    const complaintID = "PD0801464941"; // Dynamic complaint ID
+
+    Swal.fire({
+      title: "আপনার অভিযোগটি গৃহীত হয়েছে",
+      html: `
+        <div>
+          <p>অভিযোগ অনুসন্ধান আইডি : <strong id="complaintID">${complaintID}</strong></p>
+          <p style="font-size: 12px; margin-bottom: 10px;">খুব শীগ্রই অভিযোগটি পর্যালোচনা করে সমাধান করা হবে।</p>
+          <p>ধন্যবাদ</p>
+        </div>`,
+      icon: "success",
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: "Okay",
+      confirmButtonColor: "#3085d6",
+    });
+    
+
     console.log(formDataWithFiles);
   };
 
@@ -148,7 +155,6 @@ export default function Form() {
     setAttachedFiles(files);
   };
   return (
-
     <Paper
       elevation={0}
       sx={{
@@ -168,39 +174,43 @@ export default function Form() {
           }}
         >
           <Typography variant="h5">
-            Fill the form below to get electricity service.
+            বিদ্যুৎ সেবা পেতে নিচের ফরমটি পূরণ করুন।
           </Typography>
-          
-          <Link href="/ticket/track"><Button variant="contained">Find Complains <SearchOutlinedIcon /></Button></Link>
+
+          <Link href="/ticket/track">
+            <Button variant="contained">
+              অভিযোগ সন্ধান করুন <SearchOutlinedIcon />
+            </Button>
+          </Link>
         </Box>
         <Divider variant="middle" />
-        <ToastContainer/>
+        <ToastContainer />
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box sx={{ pt: 3 }}>
             <Grid container spacing={3}>
-              <Grid item xs={2}>
+              <Grid item xs={3}>
                 <FormControl component="fieldset">
                   <FormLabel component="legend">
-                    Select the meter type *
+                    মিটারের ধরণ নির্বাচন করুন *
                   </FormLabel>
-                  <RadioGroup defaultValue="prepaid" name="meter-type">
+                  <RadioGroup defaultValue="1" name="account_type_id">
                     <FormControlLabel
-                      value="prepaid"
-                      control={<Radio />}
-                      label="Prepaid"
-                      {...register("meter-type")}
+                      value="1"
+                      control={<Radio size="small" />}
+                      label="প্রিপেইড"
+                      {...register("account_type_id")}
                     />
                     <FormControlLabel
-                      value="postpaid"
-                      control={<Radio />}
-                      label="Postpaid"
-                      {...register("meter-type")}
+                      value="2"
+                      control={<Radio size="small" />}
+                      label="পোস্টপেইড"
+                      {...register("account_type_id")}
                     />
                     <FormControlLabel
-                      value="other"
-                      control={<Radio />}
-                      label="Other"
-                      {...register("meter-type")}
+                      value="3"
+                      control={<Radio size="small" />}
+                      label="অন্যান্য"
+                      {...register("account_type_id")}
                     />
                   </RadioGroup>
                 </FormControl>
@@ -208,68 +218,77 @@ export default function Form() {
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                    Select Organization / Company *
+                    সংস্থা / কোম্পানী নির্বাচন করুন *
                   </FormLabel>
                   <TextField
-                    {...register("Organization")}
+                    {...register("company_id", { required: true })}
                     select
                     label="Select"
                     value={selectedOrganization}
                     onChange={handleOrganizationChange}
                     variant="outlined"
-                    // size="small"
+                    size="small"
                   >
-                    {organizations?.data.map((company) => (<MenuItem key={company.id} value={company.id}>
+                    {organizations?.data.map((company) => (
+                      <MenuItem key={company.id} value={company.id}>
                         {company.short_name}-{company.name}
                       </MenuItem>
                     ))}
                   </TextField>
+                  {errors.Organization && (
+                    <Typography variant="body2" color="error">
+                      Please choose an organization
+                    </Typography>
+                  )}
                 </FormControl>
               </Grid>
               <Grid item xs={4}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                    Enter account/meter/customer number *
+                    অ্যাকাউন্ট / মিটার / গ্রাহক নাম্বার লিখুন *
                   </FormLabel>
                   <Box sx={{ display: "flex" }}>
                     <TextField
                       fullWidth
-                      {...register("AMCName")}
+                      {...register("identity_number_type_id")}
                       select
                       label="Select"
                       value={selectedAMCName}
                       variant="outlined"
                       onChange={(event) => setAMCName(event.target.value)}
+                      size="small"
                     >
-                      <MenuItem value="1">Account Number </MenuItem>
-                      <MenuItem value="2">Meter Number</MenuItem>
-                      <MenuItem value="3">Customer Number</MenuItem>
+                      <MenuItem value="1">অ্যাকাউন্ট নাম্বার </MenuItem>
+                      <MenuItem value="2">মিটার নাম্বার</MenuItem>
+                      <MenuItem value="3">গ্রাহক নাম্বার</MenuItem>
                     </TextField>
                     <TextField
                       fullWidth
                       label="Enter number"
                       variant="outlined"
-                      {...register("amc_number", { required: true })}
+                      {...register("identity_number", { required: true })}
+                      size="small"
                     />
                   </Box>
-                  {errors.amc_number && (
+                  {errors.identity_number && (
                     <Typography variant="body2" color="error">
                       Account name and number is required
                     </Typography>
                   )}
                 </FormControl>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={2}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                    Enter the phone number*
+                    ফোন নম্বর লিখুন *
                   </FormLabel>
 
                   <TextField
-                    {...register("phoneNumber", { required: true })}
+                    size="small"
+                    {...register("phone", { required: true })}
                     label="+880 "
                   />
-                  {errors.phoneNumber && (
+                  {errors.phone && (
                     <Typography variant="body2" color="error">
                       Phone number is required
                     </Typography>
@@ -281,16 +300,17 @@ export default function Form() {
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                    Select the delivery region/area *
+                    বিতরণ অঞ্চল / এলাকা নির্বাচন করুন *
                   </FormLabel>
                   <TextField
-                    {...register("Area")}
+                    {...register("company_zone_id")}
                     fullWidth
                     select
                     label="Select"
                     value={selectedArea}
                     onChange={handleAreaChange}
                     variant="outlined"
+                    size="small"
                   >
                     {areas.map((area) => (
                       <MenuItem key={area.id} value={area.id}>
@@ -303,10 +323,11 @@ export default function Form() {
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                    Select the nearest electricity office *
+                    নিকটস্থ বিদ্যুৎ অফিস নির্বাচন করুন *
                   </FormLabel>
                   <TextField
-                    {...register("office")}
+                    size="small"
+                    {...register("supply_and_distribution_id")}
                     fullWidth
                     select
                     label="Select"
@@ -325,11 +346,12 @@ export default function Form() {
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                    Select the type of service *
+                    সেবার ধরণ নির্বাচন করুন *
                   </FormLabel>
                   <Box sx={{ display: "flex" }}>
                     <TextField
-                      {...register("Service")}
+                      size="small"
+                      {...register("request_sub_category_id")}
                       fullWidth
                       select
                       label="Select"
@@ -338,10 +360,10 @@ export default function Form() {
                       variant="outlined"
                     >
                       {services?.map((service) => (
-                      <MenuItem key={service.id} value={service.id}>
-                        {service.name}
-                      </MenuItem>
-                    ))}
+                        <MenuItem key={service.id} value={service.id}>
+                          {service.name}
+                        </MenuItem>
+                      ))}
                     </TextField>
                   </Box>
                 </FormControl>
@@ -349,14 +371,15 @@ export default function Form() {
               <Grid item xs={3}>
                 <FormControl fullWidth>
                   <FormLabel sx={{ pb: 2 }} id="demo-radio-buttons-group-label">
-                    Complainant`s Name*
+                    অভিযোগকারীর নাম *
                   </FormLabel>
 
                   <TextField
-                    {...register("complainName", { required: true })}
-                    label="Write Complain Name"
+                    size="small"
+                    {...register("name", { required: true })}
+                    label="Write Your Name"
                   />
-                  {errors.complainName && (
+                  {errors.name && (
                     <Typography variant="body2" color="error">
                       Complain Name number is required
                     </Typography>
@@ -372,7 +395,7 @@ export default function Form() {
                   multiline
                   minRows={4}
                   maxRows={10}
-                  label="Enter your address"
+                  label="আপনার ঠিকানা লিখুন"
                   variant="outlined"
                   fullWidth
                 />
@@ -384,17 +407,17 @@ export default function Form() {
               </Grid>
               <Grid item xs={7}>
                 <TextField
-                  {...register("complaintDetails", { required: true })}
+                  {...register("complain", { required: true })}
                   multiline
                   minRows={4}
                   maxRows={10}
-                  label="Comment / Enter details of your complaint"
+                  label="মন্তব্য / আপনার অভিযোগের বিস্তারিত লিখুন"
                   variant="outlined"
                   fullWidth
                 />
-                {errors.complaintDetails && (
+                {errors.complain && (
                   <Typography variant="body2" color="error">
-                    Complaint details are required
+                    Complaint is required
                   </Typography>
                 )}
               </Grid>

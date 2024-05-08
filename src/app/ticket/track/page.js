@@ -1,6 +1,7 @@
 import TicketNavbar from "@/components/TicketPage/TicketNavbar";
 import {
   Box,
+  Button,
   FormControl,
   InputAdornment,
   Paper,
@@ -23,7 +24,7 @@ export default function page() {
       <Box sx={{display: "flex",
         alignItems: "center",
         flexDirection: "column",}}>
-        <Paper
+        {/* <Paper
           elevation={4}
           sx={{
             mt: 5,
@@ -31,15 +32,22 @@ export default function page() {
             p: 4,
             // boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
           }}
-        >
-          <Typography variant="h5" sx={{ textAlign: "center" }}>
+        > */}
+          <Typography variant="h5" sx={{ textAlign: "center", mt:10 }}>
             অভিযোগ অনুসন্ধান
           </Typography>
-          <FormControl fullWidth>
+          <FormControl sx={{width:"50%"}}>
             <TextField
               fullWidth
-              label="Search Complains by ID or Phone Number"
-              sx={{ m: 2 }}
+              color="success"
+              placeholder="Search Complains by ID or Phone Number"
+              sx={{
+                m: 2,
+            
+                "& .MuiInputBase-root": {
+                  borderRadius: "40px", 
+                },
+              }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -49,7 +57,8 @@ export default function page() {
               }}
             />
           </FormControl>
-        </Paper>
+          <Button variant="contained" color="success">Search</Button>
+        {/* </Paper> */}
       </Box>
     </Box>
   );
